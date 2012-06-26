@@ -1,49 +1,59 @@
 " vim: set ts=2 sts=2 sw=2 expandtab smarttab:
 "this file works with unix.  you should too.
 "
-" TODO: learn more about tags, quickfix...
+" TODO: learn more about tabs, tags, quickfix, loc list, plugins...
+" things to remember: tildeop...
+
+set nocompatible   " set this first as it can change other things
 
 if version < 700
   echoerr "this vimrc requires vim 7"
 endif
+
+" this should be the default (with LANG=en_US.utf-8)
 setglobal fileencodings=ucs-bom,utf-8,default,latin1
 
-"options
-set autoindent
-set backspace=indent,start
-set background=dark
-set foldcolumn=2
-set hidden
+" [options]
+set   autoindent
+set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
+set   background=dark
+set   foldcolumn=2 " width
+set noequalalways  " don't resize windows when i split, just split
+set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
+set nogdefault     " disable this, but it's an interesting option to remember
+set   hidden       " when closing a window hide it instead of unloading it
 "set history=100
-set hlsearch
-set ignorecase
-"set incsearch
-set joinspaces
-set laststatus=2
-"too bad there's no set verymagic
-set magic
-set matchpairs+=<:>
-"set noautoindent
-set nocompatible
-set noequalalways
-set esckeys " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
-set noexpandtab
-set nosmarttab
-set nostartofline
-set nrformats=octal,hex,alpha
-set number
-set ruler
-"set rulerformat=%17(%c%V\ %p%%\ %o%)
-set scrolloff=2
-"ignorecase + smartcase = searching for lowercase is case-insensitive (use \c \C to override)
-set smartcase
-set tags+=~/.vim/tags/ptags
-set textwidth=0
-set timeout timeoutlen=3000 ttimeoutlen=100
-set wildmenu
-set wildmode=longest:full,full
+set   hlsearch     " hightlight matches when searching
+set noincsearch    " too jumpy
+set   joinspaces   " 2 spaces after punctuation when joining lines
+set   laststatus=2 " always show statusline
+set   list         " show invisible chars ('listchars')
+set   listchars=tab:▸\ ,extends:⇢,precedes:⇠,nbsp:☐,trail:⬚ "eol:¬, " hooray for unicode
+set   magic        " too bad there's no set verymagic (but good for compatibility)
+set   matchpairs+=<:>
+set   nrformats=octal,hex,alpha
+set   number       " show line numbers
+set   scrolloff=2  " show lines of context around cursor at top or bottom of screen
+set nostartofline  " keep column position when jumping
+set   shiftround   " >> to even numbered columns
+set   showcmd      " show unfinished command in the command line (right side)
+set   showmode     " show vim mode at the bottom (insert/replace/visual)
+set   tags+=~/.vim/tags/ptags " CPAN: Vim::Tags
+set   textwidth=0  " don't wrap automatically
+set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
+set   wildmenu     " completion menu
+set   wildmode=longest:full,full " complete 'til longest common string, then open menu
+
+" combo options
+set noexpandtab nosmarttab " off by default, enabled by filetype plugins
+set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
+
+" currently undecided on 'formatoptions'
+
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
+
+" [misc]
 
 "use this to keep screen from hanging on load, but set it back so i can use mouse wheel and click to select windows (hooray for hacks)
 "set ttymouse=xterm2
