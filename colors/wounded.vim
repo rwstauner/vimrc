@@ -35,7 +35,7 @@ hi Todo         ctermfg=white ctermbg=blue
 "hi DiffText    diff mode: Changed text within a changed line |diff.txt|
 hi ErrorMsg     cterm=bold ctermfg=white ctermbg=red
 "hi VertSplit   the column separating vertically split windows
-hi Folded       ctermfg=cyan ctermbg=darkgrey
+hi Folded       ctermfg=black ctermbg=darkcyan
 hi FoldColumn   ctermfg=cyan ctermbg=darkgrey
 "hi SignColumn  column where |signs| are displayed
 "hi IncSearch   'incsearch' highlighting; also used for the text replaced with
