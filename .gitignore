@@ -1,0 +1,4 @@
+/bundle/*
+/tags/ptags
+.netrwhist
+.VimballRecord
