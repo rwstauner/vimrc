@@ -140,6 +140,13 @@ let g:statline_rbenv = 0
 Bundle 'millermedeiros/vim-statline'
 " }}}2
 
+" [ slime ] pass vim text to a repl via terminal multiplexer {{{2
+if $MULTIPLEXER != ""
+  let g:slime_target = $MULTIPLEXER
+  let g:slime_paste_file = tempname() | " my tmux has issues with pipes
+  Bundle 'jpalardy/vim-slime'
+endif
+" }}}2
 " }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
