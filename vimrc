@@ -78,11 +78,29 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" TODO: consider these:
+" https://github.com/zaiste/vimified
+" https://github.com/mutewinter/dot_vim
+" vimscripts: 'L9' + 'FuzzyFinder'
+
+" enable repeating certain plugin actions with .
+Bundle 'tpope/vim-repeat'
+
+" view images
+Bundle 'tpope/vim-afterimage'
+" toggle comment state with \\
+Bundle 'tpope/vim-commentary'
+" navigate various things back and forth with [x and ]x (t,l,q...)
+Bundle 'tpope/vim-unimpaired'
+
+" cursor jump selection with \\w or \\f
+Bundle 'Lokaltog/vim-easymotion'
+
 " file browser
 Bundle 'scrooloose/nerdtree'
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
 "autocmd VimEnter * call StartUp()
-"
+
 " [ git ] {{{2
 " get the latest fixes for vim files
 Bundle 'tpope/vim-git'
