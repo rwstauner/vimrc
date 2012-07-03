@@ -233,7 +233,8 @@ highlight Search 		ctermbg=yellow 		ctermfg=black 	cterm=none
 "highlight todo cterm=bold,underline term=bold,underline ctermfg=red
 
 "now that I've set my colors, do i have my colorscheme?
-if $SOLARIZED > 0 && filereadable(expand("~/.vim/colors/solarized.vim"))
+if $SOLARIZED > 0
+  Bundle 'altercation/vim-colors-solarized'
   let g:solarized_termtrans=1
   if $SOLARIZED == 256
     let g:solarized_termcolors=256
