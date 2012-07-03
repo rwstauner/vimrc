@@ -89,6 +89,22 @@ Bundle 'tpope/vim-git'
 " powerful git integration
 Bundle 'tpope/vim-fugitive'
 " }}}2
+
+" [ syntastic ] automatic syntax check into location list {{{2
+let g:syntastic_check_on_open=0 " avoid start-up delay; check on save, not open
+let g:syntastic_auto_jump=0
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=5
+"let g:syntastic_mode_map = { 'mode': 'active', \ 'active_filetypes': ['ruby', 'php'], \ 'passive_filetypes': ['puppet'] }
+let g:syntastic_quiet_warnings=0
+let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+Bundle 'scrooloose/syntastic'
+" }}}2
+
 " }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
