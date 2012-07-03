@@ -47,7 +47,6 @@ set   shiftround   " >> to even numbered columns
 set   shortmess=atToO " shorten file info messages
 set   showcmd      " show unfinished command in the command line (right side)
 set   showmode     " show vim mode at the bottom (insert/replace/visual)
-set   tags+=~/.vim/tags/ptags " CPAN: Vim::Tags
 "set   switchbuf=   " default is blank, but usetab could be interesting
 set   textwidth=0  " don't wrap automatically
 set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
@@ -171,7 +170,18 @@ endif
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
-" [misc]
+" [ tags ] {{{1
+"set tags+=~/.vim/tags/ptags " cpan: Vim::Tags
+command -nargs=1 -complete=tag SpTag new | tag <args>
+nmap <Leader>[t :sp +tN<CR>
+nmap <Leader>]t :sp +tn<CR>
+" I'd like a plugin that explores my whole tags file, but these only operate
+" on the current buffer (which I haven't found useful yet)
+"Bundle 'taglist.vim'
+"Bundle 'majutsushi/tagbar'
+" }}}1
+
+" [ misc ]
 
 "use this to keep screen from hanging on load, but set it back so i can use mouse wheel and click to select windows (hooray for hacks)
 "set ttymouse=xterm2
@@ -341,7 +351,6 @@ command -nargs=+ -complete=custom,XMLargumentCompletion		Xa	call XMLattr(<f-args
 
 command SynStack for id in synstack(line("."), col(".")) | echo synIDattr(id, "name") . " => " . synIDattr(synIDtrans(id), "name") | endfor
 command XMLmode call XMLmode()
-command -nargs=1 -complete=tag SpTag new | tag <args>
 
 command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e '$t = Text::ASCIITable->new; $t->setCols(split(/\t/, scalar <STDIN>)); $t->addRow(split(/\t/)) for <STDIN>; print $t'
 
