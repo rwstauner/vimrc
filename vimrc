@@ -1,4 +1,4 @@
-" vim: set ts=2 sts=2 sw=2 expandtab smarttab:
+" vim: set ts=2 sts=2 sw=2 expandtab smarttab fdm=marker:
 "this file works with unix.  you should too.
 "
 " TODO: learn more about tabs, tags, quickfix, loc list, plugins...
@@ -10,13 +10,18 @@ if version < 700
   echoerr "this vimrc requires vim 7"
 endif
 
+set     encoding=utf-8
+set termencoding=utf-8
+
 " this should be the default (with LANG=en_US.utf-8)
 setglobal fileencodings=ucs-bom,utf-8,default,latin1
 
-" [options]
+" [ options ] {{{1
 set   autoindent
+set noautowrite    " i should probably turn this on
 set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
 set   background=dark
+set   completeopt=menuone,preview " show menu even with only one match
 set   foldcolumn=2 " width
 set noequalalways  " don't resize windows when i split, just split
 set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
@@ -27,18 +32,23 @@ set   hlsearch     " hightlight matches when searching
 set noincsearch    " too jumpy
 set   joinspaces   " 2 spaces after punctuation when joining lines
 set   laststatus=2 " always show statusline
+set nolazyredraw   " TODO: reconsider this
 set   list         " show invisible chars ('listchars')
 set   listchars=tab:▸\ ,extends:⇢,precedes:⇠,nbsp:☐,trail:⬚ "eol:¬, " hooray for unicode
 set   magic        " too bad there's no set verymagic (but good for compatibility)
 set   matchpairs+=<:>
+set nomore         " don't give more-style prompts, i use tmux
 set   nrformats=octal,hex,alpha
 set   number       " show line numbers
+set   report=0     " show number of lines changed by a command
 set   scrolloff=2  " show lines of context around cursor at top or bottom of screen
 set nostartofline  " keep column position when jumping
 set   shiftround   " >> to even numbered columns
+set   shortmess=atToO " shorten file info messages
 set   showcmd      " show unfinished command in the command line (right side)
 set   showmode     " show vim mode at the bottom (insert/replace/visual)
 set   tags+=~/.vim/tags/ptags " CPAN: Vim::Tags
+"set   switchbuf=   " default is blank, but usetab could be interesting
 set   textwidth=0  " don't wrap automatically
 set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
 set   wildmenu     " completion menu
@@ -47,9 +57,10 @@ set   wildmode=longest:full,full " complete 'til longest common string, then ope
 " combo options
 set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
+set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
-" currently undecided on 'formatoptions'
-
+" currently undecided on 'formatoptions' and 'cpoptions'
+}}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
