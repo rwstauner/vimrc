@@ -60,7 +60,16 @@ set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \
 set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
 " currently undecided on 'formatoptions' and 'cpoptions'
-}}}1
+
+" customize statusline {{{2
+function! StatusLineFileAttr()
+  return "(ft=" . &filetype . " fenc=" . &fileencoding . (&fileformat != "unix" ? " ff=" . &fileformat : "") . ")"
+endfunction
+" don't want stl=%!func() b/c it re-evaluates with each C-W (and vars get confused)
+set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l/%L,%c%V%)\ %P
+" }}}2
+" }}}1
+
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
