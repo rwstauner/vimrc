@@ -73,12 +73,11 @@ set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l
 filetype off " turn off to load plugins (we turn it on later)
 
 " [ plugins ] {{{1
-" store plugin settings in separate conf files
-runtime! plugin-conf/*.vim
+" git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
 
-" pathogen: https://github.com/tpope/vim-pathogen
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
 " }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
