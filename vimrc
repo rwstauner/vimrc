@@ -105,6 +105,23 @@ set statusline+=%*
 Bundle 'scrooloose/syntastic'
 " }}}2
 
+" [ statline ] override statusline with something more powerful {{{2
+" TODO: compare to https://github.com/Lokaltog/vim-powerline
+let g:statline_syntastic = 1
+let g:statline_fugitive = 1
+let g:statline_show_n_buffers = 1
+let g:statline_show_encoding = 1
+let g:statline_no_encoding_string = 'ascii'
+let g:statline_filename_relative = 1
+let g:statline_trailing_space = 1
+let g:statline_mixed_indent = 1
+" someday i might actually want these (for $work) but we're not using them yet
+" could add something similar for perlbrew but I don't know what I'd want yet
+let g:statline_rvm = 0
+let g:statline_rbenv = 0
+Bundle 'millermedeiros/vim-statline'
+" }}}2
+
 " }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
