@@ -78,6 +78,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" file browser
+Bundle 'scrooloose/nerdtree'
+"function StartUp() | if 0 == argc() | NERDTree | end | endfunction
+"autocmd VimEnter * call StartUp()
 " }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
@@ -172,8 +176,6 @@ if $SOLARIZED > 0 && filereadable(expand("~/.vim/colors/solarized.vim"))
   colorscheme solarized
 elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded | endif
 
-"function StartUp() | if 0 == argc() | NERDTree | end | endfunction
-"autocmd VimEnter * call StartUp()
 syntax enable
 filetype indent plugin on
 
