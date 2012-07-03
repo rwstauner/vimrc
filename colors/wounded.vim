@@ -45,6 +45,10 @@ hi MatchParen   cterm=bold ctermfg=black ctermbg=darkblue
 "hi MoreMsg     |more-prompt|
 hi NonText      ctermfg=darkgrey ctermbg=none cterm=bold
 "hi Normal
+hi Pmenu        ctermfg=black ctermbg=green   cterm=bold
+hi PmenuSel     ctermfg=black ctermbg=magenta cterm=bold
+"hi PmenuSbar
+"hi PmenuThumb
 "hi Question    |hit-enter| prompt and yes/no questions
 "hi Search      ctermfg=white ctermbg=magenta cterm=underline,bold
 hi Search       ctermfg=black ctermbg=brown
