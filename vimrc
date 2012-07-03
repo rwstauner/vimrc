@@ -82,6 +82,13 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
 "autocmd VimEnter * call StartUp()
+"
+" [ git ] {{{2
+" get the latest fixes for vim files
+Bundle 'tpope/vim-git'
+" powerful git integration
+Bundle 'tpope/vim-fugitive'
+" }}}2
 " }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
