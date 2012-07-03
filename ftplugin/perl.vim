@@ -1,3 +1,6 @@
+" configure &makeprg and &errorformat
+compiler perl
+
 command! CoverageReport so cover_db/coverage.vim
 
 " what's a good default range for perltidy?
