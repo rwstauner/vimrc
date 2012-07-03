@@ -70,6 +70,16 @@ set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l
 " }}}2
 " }}}1
 
+filetype off " turn off to load plugins (we turn it on later)
+
+" [ plugins ] {{{1
+" store plugin settings in separate conf files
+runtime! plugin-conf/*.vim
+
+" pathogen: https://github.com/tpope/vim-pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+" }}}1
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
@@ -119,8 +129,6 @@ set t_ti= t_te=
 "	endif
 "endif
 
-"filetype plugin on
-
 "give me the Man command (but I'll just use the one that comes with)
 if exists(":Man") != 2
 	com -nargs=+ Man call ManDelay(<f-args>)
@@ -167,9 +175,9 @@ elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded |
 
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
 "autocmd VimEnter * call StartUp()
-
-filetype indent plugin on
 syntax enable
+filetype indent plugin on
+
 "syntax keyword extra_todos EXPERIMENTAL NOTE
 "highlight link extra_todos Todo
 
