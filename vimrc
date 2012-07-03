@@ -198,6 +198,17 @@ let s:historyLength=100
 "let s:TabWidthVal=2
 let s:dynamicHighlight=0
 
+" [ term ] {{{1
+" fix ctrl-arrow to work in command line mode (:help term.txt)
+" vim doesn't have t_XX codes for C-arrow but S-arrow performs the same function
+set t_#4=[1;5D
+set t_%i=[1;5C
+" make ctrl-pg up/down cycle tabs like they're supposed to
+"set t_K3=[5;5~
+"set t_K5=[6;5~
+"nmap <kPageUp>   gT
+"nmap <kPageDown> gt
+
 " don't clear the screen (no termcap) when exiting vim or executing external commands
 set t_ti= t_te=
 
@@ -226,6 +237,7 @@ set t_ti= t_te=
 "		set t_Sb=[4%dm
 "	endif
 "endif
+" }}}1
 
 "give me the Man command (but I'll just use the one that comes with)
 if exists(":Man") != 2
