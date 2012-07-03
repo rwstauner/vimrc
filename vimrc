@@ -108,6 +108,26 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-fugitive'
 " }}}2
 
+" [ perl ] {{{2
+" use ack as &grepprg
+Bundle 'mileszs/ack.vim'
+
+" syntax and ftplugin files for perl (plus pod, tt2...)
+Bundle 'petdance/vim-perl'
+" syntax files for CPAN::Changes
+Bundle 'rwstauner/vim-cpanchanges'
+
+" enable :Perldoc command (via Pod::Simple::Vim)
+"let g:Perldoc_path = expand("~/.vim/cache/perldoc/")
+"Bundle 'PERLDOC2'
+
+" prove the current file and put colored results in a special window
+"Bundle 'motemen/tap-vim'
+" enable :make to run prove and put test failures in the quickfix
+Bundle 'perlprove.vim'
+  au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
+" }}}2
+
 " [ syntastic ] automatic syntax check into location list {{{2
 let g:syntastic_check_on_open=0 " avoid start-up delay; check on save, not open
 let g:syntastic_auto_jump=0
