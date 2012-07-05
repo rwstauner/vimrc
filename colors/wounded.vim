@@ -23,7 +23,7 @@ hi SpecialChar  ctermfg=magenta
 hi Underlined   cterm=underline
 hi Ignore       ctermfg=grey
 hi Error        ctermfg=white ctermbg=red cterm=bold
-hi Todo         ctermfg=white ctermbg=blue
+hi Todo         cterm=bold  ctermfg=white  ctermbg=blue
 
 " regular highlight groups
 "hi Cursor      the character under the cursor
@@ -51,7 +51,7 @@ hi PmenuSel     ctermfg=black ctermbg=magenta cterm=bold
 "hi PmenuThumb
 "hi Question    |hit-enter| prompt and yes/no questions
 "hi Search      ctermfg=white ctermbg=magenta cterm=underline,bold
-hi Search       ctermfg=black ctermbg=brown
+hi Search       cterm=none  ctermfg=black  ctermbg=yellow
 hi SpecialKey   ctermfg=darkgrey ctermbg=none cterm=bold
 hi StatusLine   ctermfg=green ctermbg=darkgrey cterm=bold
 hi StatusLineNC ctermfg=magenta ctermbg=darkgrey cterm=bold

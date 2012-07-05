@@ -267,14 +267,11 @@ map <S-Up> 		V<Up>
 ":map ]] j0[[%/{<CR>
 ":map [] k$][%?}<CR>
 
-highlight Folded 		ctermbg=darkgrey 	ctermfg=white
-highlight FoldColumn 	ctermbg=darkgrey 	ctermfg=white
-highlight LineNr 		ctermbg=none 		ctermfg=yellow 	cterm=bold
-highlight MatchParen 	ctermbg=darkblue 	ctermfg=black 	cterm=bold
-highlight Search 		ctermbg=yellow 		ctermfg=black 	cterm=none
-"highlight todo cterm=bold,underline term=bold,underline ctermfg=red
+" highlight conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+" highlight todo messages in any syntax
+match ToDo "\c\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)"
 
-"now that I've set my colors, do i have my colorscheme?
 if $SOLARIZED > 0
   Bundle 'altercation/vim-colors-solarized'
   let g:solarized_termtrans=1
@@ -286,12 +283,6 @@ elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded |
 
 syntax enable
 filetype indent plugin on
-
-"syntax keyword extra_todos EXPERIMENTAL NOTE
-"highlight link extra_todos Todo
-
-"i don't need italic to look reversed, thank you
-highlight htmlItalic cterm=bold,underline term=bold,underline
 
 let perl_include_pod = 1
 let perl_extended_vars = 1
