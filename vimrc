@@ -2,7 +2,6 @@
 "this file works with unix.  you should too.
 "
 " TODO: learn more about tabs, tags, quickfix, loc list, plugins...
-" things to remember: tildeop...
 
 set nocompatible   " set this first as it can change other things
 
@@ -50,6 +49,7 @@ set   showmode     " show vim mode at the bottom (insert/replace/visual)
 "set   switchbuf=   " default is blank, but usetab could be interesting
 set   textwidth=0  " don't wrap automatically
 set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
+set   tildeop      " make ~ an operator (that expects a motion command)
 set   wildmenu     " completion menu
 set   wildmode=longest:full,full " complete 'til longest common string, then open menu
 
