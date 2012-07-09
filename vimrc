@@ -364,9 +364,9 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 "goto file by adding it to the argument list
 nmap <Leader>f 			:call ArgeCfile()<CR>
 nmap <Leader>F 			:99arge <cfile><CR>
-"space a line
-nmap <Leader>o			:call <SID>DoubleSpace("n")<CR>
-vmap <Leader>o			<Esc>:call <SID>DoubleSpace("v")<CR>
+
+map <Leader>o :call <SID>SpaceLines()<CR>
+
 nmap <Leader>J			gJkgJ
 "CamelCase -> underscore
 nmap <silent> <Leader>_ 	i_gu2l
@@ -546,17 +546,11 @@ function CommentSection(section, ...) range
 	exe "norm '<O" . comment_start . " "   . section . " {" . comment_end
 endfunction
 
-function <SID>DoubleSpace(mode)
-	let leader_o_col = col(".")
-	if a:mode == "v"
-		" it's consistent to simply end up at the top
-		norm '>o'<Oj0
-	else
-		norm    okOj0
-	end
-	if leader_o_col > 1
-		exe "norm " . (leader_o_col - 1) . "l"
-	endif
+function <SID>SpaceLines() range
+  let l:pos = getpos(".")
+  exe "norm " . a:firstline . "GO" . (a:lastline + 1) . "Go"
+  let l:pos[1] += 1
+  call setpos(".", l:pos)
 endfunction
 
 function MaxLineLength(...) " default 80 characters
