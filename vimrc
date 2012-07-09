@@ -52,6 +52,8 @@ set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give
 set   tildeop      " make ~ an operator (that expects a motion command)
 set   wildmenu     " completion menu
 set   wildmode=longest:full,full " complete 'til longest common string, then open menu
+set   winminheight=1 " leave x lines showing when shrinking windows
+set   winminwidth=3  " ditto for columns: show more than foldcolumn
 
 " combo options
 set noexpandtab nosmarttab " off by default, enabled by filetype plugins
