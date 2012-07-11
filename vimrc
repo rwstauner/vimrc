@@ -298,9 +298,9 @@ let python_highlight_all = 1
 "autocommands for specific file types
 "when i set textwidth to 0, i want it to be 0!
 autocmd! BufRead *.txt
-	"back to the line where i was last time, please
-autocmd  BufReadPost * 	if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal g'\"" | endif
 
+" restore previous cursor position (:help last-position-jump)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 "autocmd  BufNewFile,BufNew * 								call TabWidth(4)
 "autocmd  BufNewFile,BufRead *								call TabWidth(4)
 "autocmd  BufNewFile,BufRead crontab,crontab.* 				call TabWidth(8)
