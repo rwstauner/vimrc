@@ -308,6 +308,15 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 autocmd  Syntax,FileType *.pl 								let perl_sync_dist = 2000
 "au! FileType perl :noremap <leader>w \ :!time perl -Mwarnings::unused -MVi::QuickFix -c %<cr>
 
+" open (or close) the quickfix window after make/grep commands
+autocmd  QuickFixCmdPost *make*,*grep* cwindow
+
+"let s:do_lwindow = 0
+"autocmd  QuickFixCmdPost *lmake*,*lgrep* let s:do_lwindow = 1
+"autocmd  BufWinEnter * if s:do_lwindow | lwindow | let s:do_lwindow = 0 | endif
+
+"autocmd  BufWinEnter * if !empty(getloclist(0)) | lwindow | endif
+
 " Readline, please
 cnoremap <C-A>		<Home>
 "cnoremap <C-D>		<Del>
