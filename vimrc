@@ -170,6 +170,10 @@ endif
 " }}}2
 " }}}1
 
+" keep ~/.vim ahead of bundles in the list
+set rtp-=$HOME/.vim
+set rtp^=$HOME/.vim
+
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
 " [ tags ] {{{1
@@ -285,15 +289,6 @@ elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded |
 
 syntax enable
 filetype indent plugin on
-
-let perl_include_pod = 1
-let perl_extended_vars = 1
-let perl_string_as_statement = 1
-let perl_want_scope_in_variables = 1
-"let perl_fold = 1
-"let perl_fold_blocks = 1
-let python_highlight_all = 1
-
 
 "autocommands for specific file types
 "when i set textwidth to 0, i want it to be 0!
