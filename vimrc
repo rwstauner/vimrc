@@ -405,11 +405,6 @@ vmap <silent> <Leader>s 	:call SurroundSelection()<CR>
 nmap <silent> <Leader>p 	:<C-U>call SurroundCword(0,"<",">","F<i".toupper(nr2char(getchar())))<CR>
 nmap <silent> <Leader>P 	:<C-U>call SurroundCword(1,"<",">","F<i".toupper(nr2char(getchar())))<CR>
 vmap <silent> <Leader>p 	:call SurroundSelection("<",">","i".toupper(nr2char(getchar())))<CR>
-"C-style multiline comments
-nmap <Leader>* 			A */<Esc>I/* <Esc>l
-vmap <silent> <Leader>* 	:call SurroundSelection( "/* ", " */" )<CR>
-nmap <silent> <Leader>8 	:call UnComment( 1, "/*", "*/" )<CR>
-vmap <silent> <Leader>8 	:call UnComment( 0, "/*", "*/" )<CR>
 "POD
 nmap <silent> <Leader>= 	:call Pod("n")<CR>
 vmap <silent> <Leader>= 	:call Pod("v")<CR>
@@ -446,9 +441,6 @@ nmap <Leader>hR 		A<lt>br /><Esc>
 nmap <Leader>hh 		i<lt>hr /><Esc>
 nmap <Leader>hH 		A<lt>hr /><Esc>
 nmap <Leader>h! 		A --><Esc>I<!-- <Esc>l
-vmap <silent> <Leader>h!	:call SurroundSelection( "<!-- ", " -->" )<CR>
-nmap <silent> <Leader>h1	:call UnComment( 1, "<!--", "-->" )<CR>
-vmap <silent> <Leader>h1	:call UnComment( 0, "<!--", "-->" )<CR>
 "upper and lower case current word or selection
 nmap <Leader>u 			wgUbe
 nmap <Leader>l 			wgube
@@ -532,27 +524,11 @@ function Cword(...) "unrestrictive boundaries
 	return expand( "<c" . ( a:0 && a:1 ? "WORD" : "word" ) . ">" )
 endfunction
 
-function CommentSection(section, ...) range
-	if a:0 >= 1
-		let comment_start = a:1
-	elseif &filetype == "sql"
-		let comment_start = "--"
-	elseif &filetype == "vim"
-		let comment_start = "\""
-	elseif &filetype == "javascript" || &filetype == "c" || &filetype == "cpp"
-		let comment_start = "//"
-	else
-		let comment_start = "#"
-	endif
-	if a:0 >= 2
-		let comment_end = " " . a:2
-	else
-		let comment_end = ""
-	endif
-
-	let section = "[" . a:section . "]"
-	exe "norm '>o" . comment_start . " } " . section .        comment_end
-	exe "norm '<O" . comment_start . " "   . section . " {" . comment_end
+" wrap visual selection in a commented [section] block
+function CommentSection(section) range
+  let section = "[ " . a:section . " ]"
+  exe "norm '>o" . printf(&commentstring, " } " . section)
+  exe "norm '<O" . printf(&commentstring, " "   . section . " {")
 endfunction
 
 function <SID>SpaceLines() range
@@ -819,38 +795,6 @@ function TabWidth(width) "change tab display width
 	execute ":set shiftwidth=" . a:width
 	execute ":set softtabstop=" . a:width
 	execute ":set tabstop=" . a:width
-endfunction
-
-function UnComment(force, cstart, cend) range "forceall, comment start, comment end
-	if a:force
-		execute ":" . a:firstline . "," . a:lastline . "sno@\\( \\?" . a:cstart . " \\?\\| \\?" . a:cend . " \\?\\)@@ge"
-	else
-		let i = a:firstline
-		let removedstart = 0
-		let removedend = 0
-		while i <= a:lastline
-			let commentindex = stridx( getline(i), a:cstart )
-			if commentindex > -1 && commentindex >= ( col("'<") - 1 )
-				"setline()
-				execute ":" . i . "sno@ \\?" . a:cstart . " \\?@@e"
-				let removedstart = 1
-			endif
-			let commentindex = stridx( getline(i), a:cend )
-			if commentindex > -1 && commentindex <= col("'>")
-				execute ":" . i . "sno@ \\?" . a:cend . " \\?@@e"
-				return
-				let removedend = 1
-			endif
-			let i = ( i + 1 )
-		endwhile
-		if ! removedend
-			execute "normal `>a " . a:cstart . " \e"
-		endif
-		if ! removedstart
-			execute "normal  `<i " . a:cend . " \e"
-		endif
-	endif
-	silent noh
 endfunction
 
 function XMLmode()
