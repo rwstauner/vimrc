@@ -26,13 +26,17 @@ hi Error        ctermfg=white ctermbg=red cterm=bold
 hi Todo         cterm=bold  ctermfg=white  ctermbg=blue
 
 " regular highlight groups
+
 "hi Cursor      the character under the cursor
 "hi CursorIM
+
 "hi Directory   directory names (and other special names in listings)
+
 "hi DiffAdd     diff mode: Added line |diff.txt|
 "hi DiffChange  diff mode: Changed line |diff.txt|
 "hi DiffDelete  diff mode: Deleted line |diff.txt|
 "hi DiffText    diff mode: Changed text within a changed line |diff.txt|
+
 hi ErrorMsg     cterm=bold ctermfg=white ctermbg=red
 "hi VertSplit   the column separating vertically split windows
 hi Folded       ctermfg=black ctermbg=darkcyan
@@ -45,16 +49,25 @@ hi MatchParen   cterm=bold ctermfg=black ctermbg=darkblue
 "hi MoreMsg     |more-prompt|
 hi NonText      ctermfg=darkgrey ctermbg=none cterm=bold
 "hi Normal
+
 hi Pmenu        ctermfg=black ctermbg=green   cterm=bold
 hi PmenuSel     ctermfg=black ctermbg=magenta cterm=bold
 "hi PmenuSbar
 "hi PmenuThumb
 "hi Question    |hit-enter| prompt and yes/no questions
+
 "hi Search      ctermfg=white ctermbg=magenta cterm=underline,bold
 hi Search       cterm=none  ctermfg=black  ctermbg=yellow
 hi SpecialKey   ctermfg=darkgrey ctermbg=none cterm=bold
+
+hi SpellBad     cterm=bold  ctermfg=black  ctermbg=red
+hi SpellCap     cterm=bold  ctermfg=black  ctermbg=magenta
+hi SpellRare    cterm=bold  ctermfg=black  ctermbg=cyan
+hi SpellLocal   cterm=bold  ctermfg=black  ctermbg=green
+
 hi StatusLine   ctermfg=green ctermbg=darkgrey cterm=bold
 hi StatusLineNC ctermfg=magenta ctermbg=darkgrey cterm=bold
+
 "hi Title       titles for output from ":set all", ":autocmd" etc.
 hi Visual       ctermfg=white ctermbg=magenta cterm=bold
 "hi VisualNOS   Visual mode selection when vim is "Not Owning the Selection".  Only X11 Gui's |gui-x11| and |xterm-clipboard| supports this.
