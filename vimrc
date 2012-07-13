@@ -202,7 +202,6 @@ let html_no_pre = 1
 "my variables
 let s:historyLength=100
 "let s:TabWidthVal=2
-let s:dynamicHighlight=0
 
 " [ term ] {{{1
 " fix ctrl-arrow to work in command line mode (:help term.txt)
@@ -274,9 +273,9 @@ map <S-Up> 		V<Up>
 ":map [] k$][%?}<CR>
 
 " highlight conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+au BufReadPost * call matchadd("ErrorMsg", '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$')
 " highlight todo messages in any syntax
-match ToDo "\c\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)"
+au BufReadPost * call matchadd("ToDo", '\c\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)')
 
 if $SOLARIZED > 0
   Bundle 'altercation/vim-colors-solarized'
@@ -347,8 +346,8 @@ command -nargs=1 -complete=file 	Rename 	call RenameCurrent(<q-args>)
 command -nargs=+ -range 			CommentSection call CommentSection(<f-args>)
 
 command -nargs=1 FoldComments	call FoldComments(<f-args>)
-command -nargs=+ Highlight		call Highlight(<f-args>)
 command -nargs=1 TabWidth 		call TabWidth(<f-args>)
+
 if exists("+cursorline")
 	command HighlightPosition 	set cursorcolumn! | set cursorline!
 endif
@@ -541,14 +540,16 @@ function FoldComments(singleline) "Create folds of consecutive commented lines b
 	set foldmethod=expr
 	execute "set foldexpr=getline(v:lnum)=~\\\"^" . a:singleline . "\\\""
 endfunction
-function Highlight(hl, ...)
-	let s:dynamicHighlight = s:dynamicHighlight + 1
-	let dhlmatch = "dynamicHighlight" . s:dynamicHighlight
-	exe "syn match " . dhlmatch . " \"" . (&ignorecase ? "\\c" : "") . a:hl . "\""
-	exe "hi! link  " . dhlmatch . " " . ( a:0 >= 1 ? a:1 : "Identifier" )
 
-	"pretty much just an argument swap
-	"exe "match " . ( a:0 >= 1 ? a:1 : "Identifier" ) . " /" . a:hl . "/"
+" highlight arbitrary matches in the file with a different color each time
+command -nargs=+  Highlight  call Highlight(<q-args>)
+let s:dynamicHighlight=0
+function Highlight(hl)
+  let s:dynamicHighlight = s:dynamicHighlight + 1
+  let l:dhlmatch = "dynamicHighlight" . s:dynamicHighlight
+  let l:hl = (&ignorecase ? "\\c" : "") . a:hl
+  exe "highlight " . l:dhlmatch . " cterm=bold,underline ctermbg=white ctermfg=" . s:dynamicHighlight
+  call matchadd(l:dhlmatch, l:hl)
 endfunction
 
 "html
