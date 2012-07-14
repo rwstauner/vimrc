@@ -16,8 +16,7 @@ set termencoding=utf-8
 setglobal fileencodings=ucs-bom,utf-8,default,latin1
 
 " [ options ] {{{1
-set   autoindent
-set noautowrite    " i should probably turn this on
+set noautowriteall " i should probably turn this on
 set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
 set   background=dark
 set   completeopt=menuone,preview " show menu even with only one match
@@ -67,7 +66,17 @@ set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
 set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
+" [ formatting ] {{{2
+" indenting
+set   autoindent   " use previous line's indentation
+set nosmartindent  " braces sound ok but i use # for comments more often than #ifdef
+" 'cindent' is off by default, but may be useful to turn on for some filetypes
+" we call "filetype indent on" later so 'indentexpr' can be customized by ft ($VIMRUNTIME/indent/)
+
 " currently undecided on 'formatoptions' and 'cpoptions'
+" TODO: learn gq
+"set   formatprg=fmt " better gq c-indent formatting
+" }}}2
 
 " customize statusline {{{2
 function! StatusLineFileAttr()
