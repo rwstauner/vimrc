@@ -55,6 +55,13 @@ set   wildmode=longest:full,full " complete 'til longest common string, then ope
 set   winminheight=1 " leave x lines showing when shrinking windows
 set   winminwidth=3  " ditto for columns: show more than foldcolumn
 
+" undo-persistence
+if exists("+undofile")
+  set undofile
+  set undodir=~/.vim/.cache/.undo " dir must already exist
+  au BufWritePre /tmp/* setlocal noundofile
+endif
+
 " combo options
 set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
@@ -119,7 +126,7 @@ Bundle 'petdance/vim-perl'
 Bundle 'rwstauner/vim-cpanchanges'
 
 " enable :Perldoc command (via Pod::Simple::Vim)
-"let g:Perldoc_path = expand("~/.vim/cache/perldoc/")
+"let g:Perldoc_path = expand("~/.vim/.cache/perldoc/")
 "Bundle 'PERLDOC2'
 
 " prove the current file and put colored results in a special window
