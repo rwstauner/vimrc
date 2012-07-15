@@ -46,7 +46,6 @@ set   shortmess=atToO " shorten file info messages
 set   showcmd      " show unfinished command in the command line (right side)
 set   showmode     " show vim mode at the bottom (insert/replace/visual)
 "set   switchbuf=   " default is blank, but usetab could be interesting
-set   textwidth=0  " don't wrap automatically
 set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
 set   tildeop      " make ~ an operator (that expects a motion command)
 set   wildmenu     " completion menu
@@ -66,17 +65,25 @@ set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
 set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
-" [ formatting ] {{{2
-" indenting
+" TODO: investigate 'cpoptions'
+
+" [ formatting ] {{{
+
 set   autoindent   " use previous line's indentation
 set nosmartindent  " braces sound ok but i use # for comments more often than #ifdef
 " 'cindent' is off by default, but may be useful to turn on for some filetypes
 " we call "filetype indent on" later so 'indentexpr' can be customized by ft ($VIMRUNTIME/indent/)
 
-" currently undecided on 'formatoptions' and 'cpoptions'
-" TODO: learn gq
+set   textwidth=0  " don't wrap text by default (though many filetypes set this)
+
+" see fo-table for descriptions of tcroqwan2vblmMB1
+set  formatoptions +=crqbl  formatoptions -=towa
+" i usually find 'o' more annoying than helpful
+autocmd BufWinEnter * setlocal formatoptions -=o
+
 "set   formatprg=fmt " better gq c-indent formatting
-" }}}2
+
+" }}}
 
 " customize statusline {{{2
 function! StatusLineFileAttr()
