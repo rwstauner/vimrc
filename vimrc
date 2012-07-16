@@ -9,13 +9,17 @@ if version < 700
   echoerr "this vimrc requires vim 7"
 endif
 
+" [ encoding ] {{{
+
 set     encoding=utf-8
 set termencoding=utf-8
 
 " this should be the default (with LANG=en_US.utf-8)
 setglobal fileencodings=ucs-bom,utf-8,default,latin1
 
-" [ options ] {{{1
+" }}}
+" [ options ] {{{
+
 set noautowriteall " i should probably turn this on
 set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
 set   background=dark
@@ -67,6 +71,7 @@ set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x secon
 
 " TODO: investigate 'cpoptions'
 
+" }}}
 " [ formatting ] {{{
 
 set   autoindent   " use previous line's indentation
@@ -84,19 +89,19 @@ autocmd BufWinEnter * setlocal formatoptions -=o
 "set   formatprg=fmt " better gq c-indent formatting
 
 " }}}
+" [ statusline ] {{{
 
-" customize statusline {{{2
 function! StatusLineFileAttr()
   return "(ft=" . &filetype . " fenc=" . &fileencoding . (&fileformat != "unix" ? " ff=" . &fileformat : "") . ")"
 endfunction
 " don't want stl=%!func() b/c it re-evaluates with each C-W (and vars get confused)
 set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l/%L,%c%V%)\ %P
-" }}}2
-" }}}1
+
+" }}}
+" [ plugins ] {{{
 
 filetype off " turn off to load plugins (we turn it on later)
 
-" [ plugins ] {{{1
 " git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle/
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -125,14 +130,16 @@ Bundle 'scrooloose/nerdtree'
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
 "autocmd VimEnter * call StartUp()
 
-" [ git ] {{{2
+" [ git ] {{{
+
 " get the latest fixes for vim files
 Bundle 'tpope/vim-git'
 " powerful git integration
 Bundle 'tpope/vim-fugitive'
-" }}}2
 
-" [ perl ] {{{2
+" }}}
+" [ perl ] {{{
+
 " use ack as &grepprg
 Bundle 'mileszs/ack.vim'
 
@@ -150,9 +157,10 @@ Bundle 'rwstauner/vim-cpanchanges'
 " enable :make to run prove and put test failures in the quickfix
 Bundle 'perlprove.vim'
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
-" }}}2
 
-" [ syntastic ] automatic syntax check into location list {{{2
+" }}}
+" [ syntastic ] automatic syntax check into location list {{{
+
 let g:syntastic_check_on_open=0 " avoid start-up delay; check on save, not open
 let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=1
@@ -165,9 +173,10 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 Bundle 'scrooloose/syntastic'
-" }}}2
 
-" [ statline ] override statusline with something more powerful {{{2
+" }}}
+" [ statline ] override statusline with something more powerful {{{
+
 " TODO: compare to https://github.com/Lokaltog/vim-powerline
 let g:statline_syntastic = 1
 let g:statline_fugitive = 1
@@ -182,16 +191,19 @@ let g:statline_mixed_indent = 1
 let g:statline_rvm = 0
 let g:statline_rbenv = 0
 Bundle 'millermedeiros/vim-statline'
-" }}}2
 
-" [ slime ] pass vim text to a repl via terminal multiplexer {{{2
+" }}}
+" [ slime ] pass vim text to a repl via terminal multiplexer {{{
+
 if $MULTIPLEXER != ""
   let g:slime_target = $MULTIPLEXER
   let g:slime_paste_file = tempname() | " my tmux has issues with pipes
   Bundle 'jpalardy/vim-slime'
 endif
-" }}}2
-" }}}1
+
+" }}}
+
+" }}}
 
 " keep ~/.vim ahead of bundles in the list
 set rtp-=$HOME/.vim
@@ -199,7 +211,8 @@ set rtp^=$HOME/.vim
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
-" [ tags ] {{{1
+" [ tags ] {{{
+
 "set tags+=~/.vim/tags/ptags " cpan: Vim::Tags
 command -nargs=1 -complete=tag SpTag new | tag <args>
 nmap <Leader>[t :sp +tN<CR>
@@ -208,8 +221,8 @@ nmap <Leader>]t :sp +tn<CR>
 " on the current buffer (which I haven't found useful yet)
 "Bundle 'taglist.vim'
 "Bundle 'majutsushi/tagbar'
-" }}}1
 
+" }}}
 " [ misc ]
 
 "use this to keep screen from hanging on load, but set it back so i can use mouse wheel and click to select windows (hooray for hacks)
@@ -226,7 +239,8 @@ let html_no_pre = 1
 let s:historyLength=100
 "let s:TabWidthVal=2
 
-" [ term ] {{{1
+" [ term ] {{{
+
 " fix ctrl-arrow to work in command line mode (:help term.txt)
 " vim doesn't have t_XX codes for C-arrow but S-arrow performs the same function
 set t_#4=[1;5D
@@ -265,7 +279,8 @@ set t_ti= t_te=
 "		set t_Sb=[4%dm
 "	endif
 "endif
-" }}}1
+
+" }}}
 
 "give me the Man command (but I'll just use the one that comes with)
 if exists(":Man") != 2
