@@ -1,3 +1,6 @@
+" TODO: use $PERL5OPT=-Mwarnings::unused to get this sort of functionality into syntastic:
+"au! FileType perl :noremap <leader>w \ :!time perl -Mwarnings::unused -MVi::QuickFix -c %<cr>
+
 " configure &makeprg and &errorformat
 compiler perl
 

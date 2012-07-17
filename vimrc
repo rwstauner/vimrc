@@ -333,12 +333,6 @@ autocmd! BufRead *.txt
 
 " restore previous cursor position (:help last-position-jump)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-"autocmd  BufNewFile,BufNew * 								call TabWidth(4)
-"autocmd  BufNewFile,BufRead *								call TabWidth(4)
-"autocmd  BufNewFile,BufRead crontab,crontab.* 				call TabWidth(8)
-"autocmd  BufRead * 											if &filetype == "xinetd" | call TabWidth(8) | endif
-autocmd  Syntax,FileType *.pl 								let perl_sync_dist = 2000
-"au! FileType perl :noremap <leader>w \ :!time perl -Mwarnings::unused -MVi::QuickFix -c %<cr>
 
 " open (or close) the quickfix window after make/grep commands
 autocmd  QuickFixCmdPost *make*,*grep* cwindow
