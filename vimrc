@@ -235,10 +235,6 @@ let use_xhtml = 1
 let html_use_css = 1
 let html_no_pre = 1
 
-"my variables
-let s:historyLength=100
-"let s:TabWidthVal=2
-
 " [ term ] {{{
 
 " fix ctrl-arrow to work in command line mode (:help term.txt)
@@ -879,9 +875,6 @@ endfunction
 "	function ArgumentCompletion(which, ArgLead, CmdLine, CursorPos)
 "		return "a\nb\ninput\nspan\ntable"
 "	endfunction
-
-"call TabWidth(s:TabWidthVal)
-exe "set history=" . s:historyLength
 
 " load project-specific vimrc
 "if getcwd() != "/home/rando"
