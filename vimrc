@@ -196,9 +196,33 @@ Bundle 'millermedeiros/vim-statline'
 " [ slime ] pass vim text to a repl via terminal multiplexer {{{
 
 if $MULTIPLEXER != ""
-  let g:slime_target = $MULTIPLEXER
-  let g:slime_paste_file = tempname() | " my tmux has issues with pipes
-  Bundle 'jpalardy/vim-slime'
+  " do we want to autoload via the mappings?
+  "nmap <C-c><C-c> :SlimeREPL<CR>
+
+  command SlimeREPL call SlimeREPL()
+  function SlimeREPL()
+    " configure and load plugin
+    if !exists("g:slime_paste_file")
+      let g:slime_target = $MULTIPLEXER
+      let g:slime_paste_file = tempname() | " my tmux has issues with pipes
+      Bundle 'jpalardy/vim-slime'
+      " in case it isn't installed yet
+      "BundleInstall 'jpalardy/vim-slime'
+      FixRunTimePath
+      " plugin won't be automatically loaded at this point, so do it manually
+      runtime plugin/slime.vim
+    endif
+
+    if $MULTIPLEXER == "tmux"
+      " split to put repl below
+      call system("tmux split-window -v")
+      " move focus back to original
+      call system("tmux select-pane -t :.-1")
+    endif
+
+    " slime mappings should be installed
+    "normal <C-c><C-c>
+  endfunction
 endif
 
 " }}}
