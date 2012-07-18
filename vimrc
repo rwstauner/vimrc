@@ -103,7 +103,7 @@ set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l
 filetype off " turn off to load plugins (we turn it on later)
 
 " git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle/
-set rtp+=~/.vim/bundle/vundle/
+set rtp +=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
@@ -205,9 +205,16 @@ endif
 
 " }}}
 
+" [ runtimepath ] {{{
+
 " keep ~/.vim ahead of bundles in the list
-set rtp-=$HOME/.vim
-set rtp^=$HOME/.vim
+command! FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
+FixRunTimePath
+
+" make it easier to inspect rtp
+command! ShowRunTimePath echo substitute(&rtp, ',', "\n", 'g')
+
+" }}}
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
