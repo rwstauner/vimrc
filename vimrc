@@ -108,6 +108,17 @@ set rtp +=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" BundleInstall opens a vsplit to show progress (which we don't want here)
+command! -nargs=+ LazyBundle exe "Bundle " . <q-args> | FixRunTimePath
+
+" use function so we can split up the arguments
+command! -nargs=+ FTBundle call FTBundle(<args>)
+function! FTBundle(ft, bundle)
+  " NOTE: BufReadPre can be used because it occurs before ftplugins are looked up
+  exe "au BufReadPre,BufNewFile " . a:ft . " LazyBundle '" . a:bundle . "'"
+" exe "au BufReadPre,BufNewFile " . a:ft . " LazyBundle " . join(a:000, ' ')
+endfunction
+
 " TODO: consider these:
 " https://github.com/zaiste/vimified
 " https://github.com/mutewinter/dot_vim
@@ -155,8 +166,9 @@ Bundle 'rwstauner/vim-cpanchanges'
 
 " prove the current file and put colored results in a special window
 "Bundle 'motemen/tap-vim'
+
 " enable :make to run prove and put test failures in the quickfix
-Bundle 'perlprove.vim'
+FTBundle '*.t', 'perlprove.vim'
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
 " }}}
