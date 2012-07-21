@@ -29,7 +29,7 @@ set noequalalways  " don't resize windows when i split, just split
 set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
 set nogdefault     " disable this, but it's an interesting option to remember
 set   hidden       " when closing a window hide it instead of unloading it
-"set history=100
+set   history=500  " number of items to rememeber for ex commands and searches
 set   hlsearch     " hightlight matches when searching
 set noincsearch    " too jumpy
 set   joinspaces   " 2 spaces after punctuation when joining lines
@@ -56,6 +56,7 @@ set   wildmenu     " completion menu
 set   wildmode=longest:full,full " complete 'til longest common string, then open menu
 set   winminheight=1 " leave x lines showing when shrinking windows
 set   winminwidth=3  " ditto for columns: show more than foldcolumn
+set   viminfo+=f1 " store file marks
 
 " undo-persistence
 if exists("+undofile")
