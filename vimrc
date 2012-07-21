@@ -225,10 +225,7 @@ if $MULTIPLEXER != ""
     if !exists("g:slime_paste_file")
       let g:slime_target = $MULTIPLEXER
       let g:slime_paste_file = tempname() | " my tmux has issues with pipes
-      Bundle 'jpalardy/vim-slime'
-      " in case it isn't installed yet
-      "BundleInstall 'jpalardy/vim-slime'
-      FixRunTimePath
+      LazyBundle 'jpalardy/vim-slime'
       " plugin won't be automatically loaded at this point, so do it manually
       runtime plugin/slime.vim
     endif
