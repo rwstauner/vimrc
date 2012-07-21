@@ -172,6 +172,13 @@ FTBundle '*.t', 'perlprove.vim'
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
 " }}}
+" [ filetypes ] {{{
+
+let g:csv_hiGroup = 'CSVHiColumn'
+let g:csv_highlight_column = 'y'
+FTBundle '*.csv', 'csv.vim'
+
+" }}}
 " [ syntastic ] automatic syntax check into location list {{{
 
 let g:syntastic_check_on_open=0 " avoid start-up delay; check on save, not open
