@@ -427,8 +427,8 @@ command -nargs=? MaxLineLength call MaxLineLength(<args>)
 command ModeLine exe "norm O" . printf(&cms, " vim: set ts=2 sts=2 sw=2 expandtab smarttab:")
 "
 " using named register ("p) is easier than escaping expr reg ("=)
-"command! -nargs=1 -complete=expression Put let @p = <args> | put p
-command! -nargs=1 -complete=expression Put call append(".", <args>)
+"command! -nargs=1 -bang -complete=expression Put let @p = <args> | put<bang> p
+command! -nargs=1 -bang -complete=expression Put call append(line(".") - ('<bang>' == '!' ? 1 : 0), <args>)
 
 command -nargs=1 -complete=option 	Set 	set <args>
 command -nargs=1 -complete=file 	Echo 	echo <q-args>
