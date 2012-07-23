@@ -58,19 +58,34 @@ set   winminheight=1 " leave x lines showing when shrinking windows
 set   winminwidth=3  " ditto for columns: show more than foldcolumn
 set   viminfo+=f1 " store file marks
 
-" undo-persistence
-if exists("+undofile")
-  set undofile
-  set undodir=~/.vim/.cache/.undo " dir must already exist
-  au BufWritePre /tmp/* setlocal noundofile
-endif
-
 " combo options
 set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
 set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
 " TODO: investigate 'cpoptions'
+
+" }}}
+" [ undo ] {{{
+
+" remember :display and redo-register
+
+" :help undo-persistence
+if exists("+undofile")
+  set undofile
+  set undodir=~/.vim/.cache/.undo " dir must already exist
+  au BufWritePre /tmp/* setlocal noundofile
+endif
+
+" :help clear-undo
+command! ClearUndo call ClearUndo()
+function! ClearUndo()
+  let old_undolevels = &undolevels
+  set undolevels=-1
+  exe "normal a \<BS>\<Esc>"
+  let &undolevels = old_undolevels
+  unlet old_undolevels
+endfunction
 
 " }}}
 " [ formatting ] {{{
