@@ -437,7 +437,7 @@ command -nargs=1 -complete=file 	Rename 	call RenameCurrent(<q-args>)
 command -nargs=+ -range 			CommentSection call CommentSection(<f-args>)
 
 command -nargs=1 FoldComments	call FoldComments(<f-args>)
-command -nargs=1 TabWidth 		call TabWidth(<f-args>)
+command! -nargs=1 TabWidth exe "setlocal ts=" . <args> . " sts=" . <args> . " sw=" . <args>
 
 if exists("+cursorline")
 	command HighlightPosition 	set cursorcolumn! | set cursorline!
@@ -876,12 +876,6 @@ function SurroundTill(r, ...) range "replace, tilloutside(farther), till, leftsi
 		call cursor(0, startpos)
 		execute tillleftcmd
 	endif
-endfunction
-
-function TabWidth(width) "change tab display width
-	execute ":set shiftwidth=" . a:width
-	execute ":set softtabstop=" . a:width
-	execute ":set tabstop=" . a:width
 endfunction
 
 function XMLmode()
