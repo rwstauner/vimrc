@@ -937,3 +937,11 @@ endfunction
 "if getcwd() != "/home/rando"
 "  exe "source " . getcwd() . "/.vimrc"
 "endif
+
+" [ see also ] {{{
+" http://vim.wikia.com/wiki/Vim_Tips_Wiki
+" https://github.com/derekwyatt/vim-config
+" https://github.com/paradigm/dotfiles/blob/master/.vimrc#L215
+" https://github.com/sunaku/vim-unbundle
+" https://github.com/sartak/conf/blob/master/vimrc (nopaste, alignassignments)
+" }}}
