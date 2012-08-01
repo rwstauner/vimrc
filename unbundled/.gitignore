@@ -1,0 +1,4 @@
+# ignore everything
+*
+# but commit this file to preserve the directory
+!.gitignore

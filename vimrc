@@ -114,12 +114,24 @@ endfunction
 set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l/%L,%c%V%)\ %P
 
 " }}}
+" [ runtimepath ] {{{
+
+" keep ~/.vim ahead of bundles in the list
+command! -bar FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
+
+" make it easier to inspect rtp
+command! ShowRunTimePath echo substitute(&rtp, ',', "\n", 'g')
+
+" dump misc. downloaded files in here instead of $HOME/.vim
+set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
+
+" }}}
 " [ plugins ] {{{
 
 filetype off " turn off to load plugins (we turn it on later)
 
 " git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle/
-set rtp +=~/.vim/bundle/vundle/
+set rtp +=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
@@ -258,18 +270,7 @@ if $MULTIPLEXER != ""
 endif
 
 " }}}
-
-" }}}
-
-" [ runtimepath ] {{{
-
-" keep ~/.vim ahead of bundles in the list
-command! FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
 FixRunTimePath
-
-" make it easier to inspect rtp
-command! ShowRunTimePath echo substitute(&rtp, ',', "\n", 'g')
-
 " }}}
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
