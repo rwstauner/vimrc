@@ -34,11 +34,13 @@ set   hlsearch     " hightlight matches when searching
 set noincsearch    " too jumpy
 set   joinspaces   " 2 spaces after punctuation when joining lines
 set   laststatus=2 " always show statusline
-set nolazyredraw   " TODO: reconsider this
+set   lazyredraw   " don't redraw screen during macros
+"set   linebreak    " has no effect when list is on
 set   list         " show invisible chars ('listchars')
 set   listchars=tab:▸\ ,extends:⇢,precedes:⇠,nbsp:☐,trail:⬚ "eol:¬, " hooray for unicode
 set   magic        " too bad there's no set verymagic (but good for compatibility)
 set   matchpairs+=<:>
+set   modeline     " ensure modelines are honored
 set nomore         " don't give more-style prompts, i use tmux
 set   nrformats=octal,hex,alpha
 set   number       " show line numbers
@@ -47,13 +49,16 @@ set   scrolloff=2  " show lines of context around cursor at top or bottom of scr
 set nostartofline  " keep column position when jumping
 set   shiftround   " >> to even numbered columns
 set   shortmess=atToO " shorten file info messages
+set   showbreak=⦉  " show start of wrapped lines
 set   showcmd      " show unfinished command in the command line (right side)
 set   showmode     " show vim mode at the bottom (insert/replace/visual)
 "set   switchbuf=   " default is blank, but usetab could be interesting
 set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
 set   tildeop      " make ~ an operator (that expects a motion command)
+set   updatetime=2000 " ms to wait before CursorHold and writing swap to disk
 set   wildmenu     " completion menu
 set   wildmode=longest:full,full " complete 'til longest common string, then open menu
+"set   wildignore+= " extra globs to ignore when doing file completion
 set   winminheight=1 " leave x lines showing when shrinking windows
 set   winminwidth=3  " ditto for columns: show more than foldcolumn
 set   viminfo+=f1 " store file marks
@@ -103,6 +108,7 @@ set  formatoptions +=crqbl  formatoptions -=towa
 autocmd BufWinEnter * setlocal formatoptions -=o
 
 "set   formatprg=fmt " better gq c-indent formatting
+" cinoptions+=l1
 
 " }}}
 " [ statusline ] {{{
