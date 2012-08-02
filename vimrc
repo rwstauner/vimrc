@@ -122,9 +122,6 @@ set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l
 " }}}
 " [ runtimepath ] {{{
 
-" keep ~/.vim ahead of bundles in the list
-command! -bar FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
-
 " make it easier to inspect rtp
 command! ShowRunTimePath echo substitute(&rtp, ',', "\n", 'g')
 
@@ -141,16 +138,8 @@ set rtp +=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-" BundleInstall opens a vsplit to show progress (which we don't want here)
-command! -nargs=+ LazyBundle exe "Bundle " . <q-args> | FixRunTimePath
-
-" use function so we can split up the arguments
-command! -nargs=+ FTBundle call FTBundle(<args>)
-function! FTBundle(ft, bundle)
-  " NOTE: BufReadPre can be used because it occurs before ftplugins are looked up
-  exe "au BufReadPre,BufNewFile " . a:ft . " LazyBundle '" . a:bundle . "'"
-" exe "au BufReadPre,BufNewFile " . a:ft . " LazyBundle " . join(a:000, ' ')
-endfunction
+" define some vundle helper commands
+runtime macros/lazy_bundle.vim
 
 " TODO: consider these:
 " https://github.com/zaiste/vimified
@@ -162,7 +151,8 @@ Bundle 'tpope/vim-repeat'
 
 " view images
 Bundle 'tpope/vim-afterimage'
-" toggle comment state with \\
+
+" toggle comment state with \\\
 Bundle 'tpope/vim-commentary'
 " navigate various things back and forth with [x and ]x (t,l,q...)
 Bundle 'tpope/vim-unimpaired'
@@ -186,12 +176,12 @@ Bundle 'tpope/vim-fugitive'
 " [ perl ] {{{
 
 " use ack as &grepprg
-Bundle 'mileszs/ack.vim'
+LazyCommand Ack 'mileszs/ack.vim'
 
 " syntax and ftplugin files for perl (plus pod, tt2...)
-Bundle 'petdance/vim-perl'
+FTBundle ft=perl 'petdance/vim-perl'
 " syntax files for CPAN::Changes
-Bundle 'rwstauner/vim-cpanchanges'
+FTBundle name=Changes 'rwstauner/vim-cpanchanges'
 
 " enable :Perldoc command (via Pod::Simple::Vim)
 "let g:Perldoc_path = expand("~/.vim/.cache/perldoc/")
@@ -201,7 +191,7 @@ Bundle 'rwstauner/vim-cpanchanges'
 "Bundle 'motemen/tap-vim'
 
 " enable :make to run prove and put test failures in the quickfix
-FTBundle '*.t', 'perlprove.vim'
+FTBundle name=*.t 'perlprove.vim'
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
 " }}}
@@ -209,7 +199,7 @@ FTBundle '*.t', 'perlprove.vim'
 
 let g:csv_hiGroup = 'CSVHiColumn'
 let g:csv_highlight_column = 'y'
-FTBundle '*.csv', 'csv.vim'
+FTBundle ft=csv 'csv.vim'
 
 " }}}
 " [ syntastic ] automatic syntax check into location list {{{
