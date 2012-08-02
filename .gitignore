@@ -1,4 +1,5 @@
 /bundle/*
 /tags/ptags
+.cache/install-bundles.vim
 .netrwhist
 .VimballRecord
