@@ -160,6 +160,10 @@ Bundle 'tpope/vim-unimpaired'
 " cursor jump selection with \\w or \\f
 Bundle 'Lokaltog/vim-easymotion'
 
+" visual undo browser
+LazyCommand GundoToggle 'sjl/gundo.vim'
+nnoremap <F12> :GundoToggle<CR>
+
 " file browser
 Bundle 'scrooloose/nerdtree'
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
@@ -171,6 +175,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-git'
 " powerful git integration
 Bundle 'tpope/vim-fugitive'
+" gitk inside vim (http://www.gregsexton.org/portfolio/gitv/)
+LazyCommand Gitv 'gregsexton/gitv'
 
 " }}}
 " [ perl ] {{{
