@@ -14,9 +14,7 @@ autocmd  BufNewFile,BufRead *.as                                        setf act
 autocmd  BufNewFile,BufRead *.bashrc,.bashrc*                           call SetFileTypeSH("bash")
 autocmd  BufNewFile,BufRead .bash_completion*,bash_completion           call SetFileTypeSH("bash")
 autocmd  BufNewFile,BufRead Changes                                     setf cpanchanges
-autocmd  BufNewFile,BufRead *.csv                                       setf csv
 autocmd  BufNewFile,BufRead *.json                                      setf json
-autocmd  BufNewFile,BufRead *.less                                      setf less
 autocmd  BufNewFile,BufRead *.imap                                      setf mail
 autocmd  BufNewFile,BufRead *.inputrc,.inputrc*                         setf readline
 autocmd  BufNewFile,BufRead *.pshrc,*.psgi                              setf perl
