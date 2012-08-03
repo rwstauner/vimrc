@@ -185,7 +185,9 @@ LazyCommand Gitv 'gregsexton/gitv'
 LazyCommand Ack 'mileszs/ack.vim'
 
 " syntax and ftplugin files for perl (plus pod, tt2...)
-FTBundle ft=perl 'petdance/vim-perl'
+" include sql for tt2 queries
+FTBundle ft=perl,sql 'petdance/vim-perl'
+
 " syntax files for CPAN::Changes
 FTBundle name=Changes 'rwstauner/vim-cpanchanges'
 
