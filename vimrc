@@ -207,6 +207,9 @@ let g:csv_hiGroup = 'CSVHiColumn'
 let g:csv_highlight_column = 'y'
 FTBundle ft=csv 'csv.vim'
 
+" less css
+FTBundle ft=less 'groenewege/vim-less'
+
 " }}}
 " [ syntastic ] automatic syntax check into location list {{{
 
