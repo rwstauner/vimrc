@@ -367,10 +367,6 @@ if exists(":Man") != 2
 	endfunction
 end
 
-"remap things i don't like (although aterm doesn't let me use these anyway)
-map <S-Down> 	V<Down>
-map <S-Up> 		V<Up>
-
 " suggested by motion.txt
 ":map [[ ?{<CR>w99[{
 ":map ][ /}<CR>b99]}
@@ -470,6 +466,14 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 " [ mappings ] {{{
 " <Leader> == 'mapleader' (default: "\")
 
+" ctrl-up/down (like ctrl-e/y but with one hand)
+nnoremap [1;5A <C-y>
+nnoremap [1;5B <C-e>
+" shift-up/down
+nnoremap [1;2A <C-y>
+nnoremap [1;2B <C-e>
+
+
 " thanks to sartak for these (https://github.com/sartak/conf/blob/master/vimrc): {{{
 
 " Hit <C-a> in insert mode after a bad paste (thanks absolon) {{{
@@ -521,8 +525,18 @@ imap <F11> <C-o>:call <SID>spell()<CR>
 " }}}
 " }}}
 
-"all hail the glorious mappings
-"<Leader> == mapleader (default"\")
+" re-highlight last search without moving cursor
+nmap <Leader>/h :set hlsearch<CR>
+" unhighlight last search
+nmap <Leader>/n   :nohlsearch<CR>
+
+" retab (remove the tabs from) the current line
+nnoremap <Leader><Tab> :.retab<CR>
+vnoremap <Leader><Tab> :retab<CR>gv
+
+" maximize current window
+nmap <C-w>* <C-w>_<C-w>\|
+
 "goto file by adding it to the argument list
 nmap <Leader>f 			:call ArgeCfile()<CR>
 nmap <Leader>F 			:99arge <cfile><CR>
@@ -594,6 +608,8 @@ nmap <Leader>hR 		A<lt>br /><Esc>
 nmap <Leader>hh 		i<lt>hr /><Esc>
 nmap <Leader>hH 		A<lt>hr /><Esc>
 nmap <Leader>h! 		A --><Esc>I<!-- <Esc>l
+
+" TODO: fix these to use text objects
 "upper and lower case current word or selection
 nmap <Leader>u 			wgUbe
 nmap <Leader>l 			wgube
@@ -601,6 +617,7 @@ nmap <Leader>U 			WgUBE
 nmap <Leader>L 			WguBE
 vmap <Leader>u 			<Esc>`>gUlgU`<
 vmap <Leader>l 			<Esc>`>gulgu`<
+
 "surround character/selection with spaces
 nmap <Leader><space> 		i <Esc>la <Esc>
 vmap <Leader><space> 		`>a <Esc>`<i <Esc>
@@ -611,7 +628,6 @@ nmap <Leader>gW			WByWEp
 vmap <Leader>g 			y`>p
 "search for the current selection ('as is')
 vmap <Leader>/ 			yq/p0i\V
-
 
 " Ovid: show first commit where term under cursor was added
 " http://twitter.com/OvidPerl/status/28395223746875392
