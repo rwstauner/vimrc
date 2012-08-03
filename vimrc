@@ -401,6 +401,9 @@ autocmd! BufRead *.txt
 " restore previous cursor position (:help last-position-jump)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+" open the fold if the initial position is inside one
+au BufWinEnter * if !exists("b:did_zv") | exe "normal zv" | let b:did_zv = 1 | endif
+
 " open (or close) the quickfix window after make/grep commands
 autocmd  QuickFixCmdPost *make*,*grep* cwindow
 
