@@ -470,6 +470,57 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 " [ mappings ] {{{
 " <Leader> == 'mapleader' (default: "\")
 
+" thanks to sartak for these (https://github.com/sartak/conf/blob/master/vimrc): {{{
+
+" Hit <C-a> in insert mode after a bad paste (thanks absolon) {{{
+inoremap <silent> <C-a> <ESC>u:set paste<CR>.:set nopaste<CR>gi
+" }}}
+" spacebar (in command mode) inserts a single character before the cursor
+nmap <Space> i <Esc>r
+" up and down move by virtual line
+nmap <Up>   gk
+nmap <Down> gj
+" keep visual selection on in/out-dent
+xnoremap < <gv
+xnoremap > >gv
+
+" Swap ` (preserves which column the cursor was in) and ' (which does not)
+nnoremap ' `
+nnoremap ` '
+
+" }}}
+
+" borrow idea from sartak and add 'zv' to auto-open folds with search results:
+" now search commands will re-center the screen
+nmap n nzzzv
+nmap N Nzzzv
+nmap * *zzzv
+nmap # #zzzv
+nmap g* g*zzzv
+nmap g# g#zzzv
+
+" thanks to doy for these (https://github.com/doy/conf/blob/master/vimrc): {{{
+" F5 to :make {{{
+map  <F5> :make<CR><CR><C-W>k
+imap <F5> <C-O>:make<CR><CR><C-O><C-W>k
+" }}}
+" Painless spell checking (F11) {{{
+function! s:spell()
+    if !exists("s:spell_check") || s:spell_check == 0
+        echo "Spell check on"
+        let s:spell_check = 1
+        setlocal spell spelllang=en_us
+    else
+        echo "Spell check off"
+        let s:spell_check = 0
+        setlocal spell spelllang=
+    endif
+endfunction
+map <F11> :call <SID>spell()<CR>
+imap <F11> <C-o>:call <SID>spell()<CR>
+" }}}
+" }}}
+
 "all hail the glorious mappings
 "<Leader> == mapleader (default"\")
 "goto file by adding it to the argument list
