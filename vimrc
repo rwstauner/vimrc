@@ -382,6 +382,8 @@ au BufReadPost * call matchadd("ErrorMsg", '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$')
 " highlight todo messages in any syntax
 au BufReadPost * call matchadd("ToDo", '\c\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)')
 
+" [ colorscheme ] {{{
+
 if $SOLARIZED > 0
   Bundle 'altercation/vim-colors-solarized'
   let g:solarized_termtrans=1
@@ -390,6 +392,8 @@ if $SOLARIZED > 0
   endif
   colorscheme solarized
 elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded | endif
+
+" }}}
 
 syntax enable
 filetype indent plugin on
@@ -415,8 +419,9 @@ cnoremap <C-A>		<Home>
 "cnoremap <C-D>		<Del>
 cnoremap <C-E>		<End>
 
-"command aliases
-"stupid fingers (either too fast or too slow...)
+" [ commands ] {{{
+
+" stupid fingers (either too fast or too slow...)
 command -nargs=? -complete=dir -complete=file W w <args>
 command -nargs=+ -complete=dir -complete=file Grep execute "grep " . (<q-args>) | copen
 command -bang Q q<bang>
@@ -460,6 +465,10 @@ command SynStack for id in synstack(line("."), col(".")) | echo synIDattr(id, "n
 command XMLmode call XMLmode()
 
 command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e '$t = Text::ASCIITable->new; $t->setCols(split(/\t/, scalar <STDIN>)); $t->addRow(split(/\t/)) for <STDIN>; print $t'
+" }}}
+
+" [ mappings ] {{{
+" <Leader> == 'mapleader' (default: "\")
 
 "all hail the glorious mappings
 "<Leader> == mapleader (default"\")
@@ -560,7 +569,10 @@ nmap <leader>1 :!git log --reverse -p -S<cword> %<cr>
 " http://twitter.com/OvidPerl/status/28076709865586688
 vnoremap <leader>un :!perl -MURI::Escape -e 'print URI::Escape::uri_unescape(do { local $/; <STDIN> })'<cr>
 
-"and the almighty functions
+" }}}
+
+" [ functions ] {{{
+
 function ArgeCfile() "open filename under cursor at the end of the current argument list.
 	let edit_cmd = ":99arge "
 	"allow all the coolness of the gf command, but don't go losing files
@@ -940,6 +952,8 @@ endfunction
 "	function ArgumentCompletion(which, ArgLead, CmdLine, CursorPos)
 "		return "a\nb\ninput\nspan\ntable"
 "	endfunction
+
+" }}}
 
 " load project-specific vimrc
 "if getcwd() != "/home/rando"
