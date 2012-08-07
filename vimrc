@@ -413,11 +413,16 @@ autocmd  QuickFixCmdPost *make*,*grep* cwindow
 
 "autocmd  BufWinEnter * if !empty(getloclist(0)) | lwindow | endif
 
-" Readline, please
-cnoremap <C-A>		<Home>
-"cnoremap <C-D>		<Del>
-cnoremap <C-E>		<End>
+" simulate readline in command mode {{{
 
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+" make alt-D delete the next word by moving over and then deleting back
+cnoremap <A-D> <C-Right><C-W>
+" my terminal makes it an escape
+cmap d <A-D>
+
+" }}}
 " [ commands ] {{{
 
 " stupid fingers (either too fast or too slow...)
