@@ -61,7 +61,7 @@ set   wildmode=longest:full,full " complete 'til longest common string, then ope
 "set   wildignore+= " extra globs to ignore when doing file completion
 set   winminheight=1 " leave x lines showing when shrinking windows
 set   winminwidth=3  " ditto for columns: show more than foldcolumn
-set   viminfo+=f1 " store file marks
+set   viminfo +=!,f1 " global (uppercase) vars, file marks
 
 " combo options
 set noexpandtab nosmarttab " off by default, enabled by filetype plugins
@@ -159,6 +159,25 @@ Bundle 'tpope/vim-unimpaired'
 
 " cursor jump selection with \\w or \\f
 Bundle 'Lokaltog/vim-easymotion'
+
+" [ yankring ] save a list of previously yanked text {{{
+
+let g:yankring_history_dir = '$HOME/.vim/.cache'
+let g:yankring_manage_numbered_reg = 1
+
+" my terminal sends Esc when I press Alt
+let g:yankring_replace_n_pkey = '<Esc>,'
+let g:yankring_replace_n_nkey = '<Esc>.'
+
+function! YRRunAfterMaps()
+  " make Y yank to the end of the line like D
+  nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
+Bundle 'YankRing.vim'
+nnoremap <silent> yr :YRShow<CR>
+
+" }}}
 
 " visual undo browser
 LazyCommand GundoToggle 'sjl/gundo.vim'

@@ -1,5 +1,6 @@
 /bundle/*
 /tags/ptags
 .cache/install-bundles.vim
+.cache/yankring_history*
 .netrwhist
 .VimballRecord
