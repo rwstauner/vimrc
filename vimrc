@@ -160,6 +160,17 @@ Bundle 'tpope/vim-unimpaired'
 " cursor jump selection with \\w or \\f
 Bundle 'Lokaltog/vim-easymotion'
 
+" custom text objects {{{
+
+" better than just T/vt/ because it works across lines
+let g:Textobj_defs = [
+  \['/',     'Textobj_paired', '/'],
+  \['!',     'Textobj_paired', '!'],
+  \['<Bar>', 'Textobj_paired', '<Bar>'],
+\]
+Bundle 'doy/vim-textobj'
+
+" }}}
 " [ yankring ] save a list of previously yanked text {{{
 
 let g:yankring_history_dir = '$HOME/.vim/.cache'
