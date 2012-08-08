@@ -9,5 +9,6 @@ setlocal display-=uhex
 " why does this default to shiftwidth * 3?
 let g:vim_indent_cont = &sw
 
-" execute command under cursor (single line only)
-nmap <Leader>:      yyq:p
+" execute command(s) under cursor
+nnoremap <Leader>: yyq:p<CR>
+vnoremap <Leader>: "vy:exe getreg('v')<CR>
