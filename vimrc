@@ -534,12 +534,16 @@ nnoremap ` '
 
 " borrow idea from sartak and add 'zv' to auto-open folds with search results:
 " now search commands will re-center the screen
-nmap n nzzzv
-nmap N Nzzzv
-nmap * *zzzv
-nmap # #zzzv
-nmap g* g*zzzv
-nmap g# g#zzzv
+if 0
+  nmap n   nzzzv
+  nmap N   Nzzzv
+  nmap *   *zzzv
+  nmap #   #zzzv
+  nmap g* g*zzzv
+  nmap g# g#zzzv
+endif
+
+" TODO: consider swapping '*' and 'g*' (and '#' and 'g#')
 
 " thanks to doy for these (https://github.com/doy/conf/blob/master/vimrc): {{{
 " F5 to :make {{{
