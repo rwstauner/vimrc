@@ -183,10 +183,15 @@ let g:yankring_replace_n_nkey = '<Esc>.'
 function! YRRunAfterMaps()
   " make Y yank to the end of the line like D
   nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+  " yr overrides 'p' on a visual selection but it pastes what was selected rather
+  " than the previous item in the ring.  the original behavior works as i expect.
+  xunmap p
 endfunction
 
 Bundle 'YankRing.vim'
 nnoremap <silent> yr :YRShow<CR>
+" switching windows loses the visual selection; this is what i mean:
+xnoremap <silent> yr d:YRShow<CR>
 
 " }}}
 
