@@ -1069,6 +1069,21 @@ endfunction
 "	endfunction
 
 " }}}
+" [ diff ] {{{
+
+command! -bar DiffHelpers call DiffHelpers()
+function! DiffHelpers()
+  autocmd CursorHold * diffupdate
+  nmap du :diffupdate<CR>
+endfunction
+
+" if diff is set on load (vimdiff), load DiffHelpers right away
+if &diff | DiffHelpers | endif
+
+" TODO: do this automatically when :diffthis is used?
+command! DiffThis diffthis | DiffHelpers
+
+" }}}
 
 " load project-specific vimrc
 "if getcwd() != "/home/rando"
