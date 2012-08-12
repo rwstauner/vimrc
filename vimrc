@@ -757,8 +757,9 @@ function <SID>SpaceLines() range
   call setpos(".", l:pos)
 endfunction
 
-function MaxLineLength(...) " default 80 characters
-	exe "match ErrorMsg '\\%>" . (a:0 >= 1 ? a:1 : 80) . "v.\\+'"
+function! MaxLineLength(...)
+  " default 80 characters
+  call matchadd('ErrorMsg', '\%>' . (a:0 >= 1 ? a:1 : 80) . 'v.\+')
 endfunction
 
 function FoldComments(singleline) "Create folds of consecutive commented lines by sending singleline comment starter
