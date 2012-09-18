@@ -247,6 +247,10 @@ FTBundle ft=csv 'csv.vim'
 " less css
 FTBundle ft=less 'groenewege/vim-less'
 
+" puppet: https://github.com/puppetlabs
+" alternative: 'rodjek/vim-puppet'
+FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
+
 " }}}
 " [ syntastic ] automatic syntax check into location list {{{
 
