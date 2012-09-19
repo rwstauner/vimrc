@@ -6,8 +6,29 @@ autocmd  FileType markdown setlocal ts=4 sts=4 sw=4   expandtab
 autocmd  FileType yaml     setlocal ts=2 sts=2 sw=2   expandtab
 
 " personal preference
-" TODO: detect present tabs
-autocmd  FileType css,html,javascript,json,less,perl,pod,python,ruby,eruby,sh,sql,vim,xhtml SourceCodeStyle
+let s:styled_types = [
+  \ 'css',
+  \ 'cpanchanges',
+  \ 'html',
+  \ 'javascript',
+  \ 'json',
+  \ 'less',
+  \ 'perl',
+  \ 'puppet',
+  \ 'pod',
+  \ 'python',
+  \ 'ruby',
+  \ 'eruby',
+  \ 'sh',
+  \ 'sql',
+  \ 'vim',
+  \ 'xhtml',
+  \ 'zsh'
+\ ]
+exe "autocmd  FileType " . join(s:styled_types, ',') . " SourceCodeStyle"
+
+" }}}
+" custom file types {{{
 
 " custom file types
 autocmd  BufNewFile,BufRead *.as                                        setf actionscript           " instead of setf atlas
