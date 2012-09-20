@@ -34,13 +34,15 @@ exe "autocmd  FileType " . join(s:styled_types, ',') . " SourceCodeStyle"
 autocmd  BufNewFile,BufRead *.as                                        setf actionscript           " instead of setf atlas
 autocmd  BufNewFile,BufRead *.bashrc,.bashrc*                           call SetFileTypeSH("bash")
 autocmd  BufNewFile,BufRead .bash_completion*,bash_completion           call SetFileTypeSH("bash")
-autocmd  BufNewFile,BufRead Changes                                     setf cpanchanges
+autocmd  BufNewFile,BufRead *.bsh                                       setf java                   " BeanShell
+autocmd  BufNewFile,BufRead *.hx                                        setf haxe
 autocmd  BufNewFile,BufRead *.json                                      setf json
 autocmd  BufNewFile,BufRead *.imap                                      setf mail
 autocmd  BufNewFile,BufRead *.inputrc,.inputrc*                         setf readline
 autocmd  BufNewFile,BufRead *.pshrc,*.psgi                              setf perl
 autocmd  BufNewFile,BufRead *.porklog                                   setf porklog
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
+autocmd  BufNewFile,BufRead Vagrantfile                                 setf ruby
 autocmd  BufNewFile,BufRead *.screenrc,.screenrc*                       setf screen
 
 " fake one, just color it a little bit
