@@ -35,6 +35,7 @@ autocmd  BufNewFile,BufRead *.as                                        setf act
 autocmd  BufNewFile,BufRead *.bashrc,.bashrc*                           call SetFileTypeSH("bash")
 autocmd  BufNewFile,BufRead .bash_completion*,bash_completion           call SetFileTypeSH("bash")
 autocmd  BufNewFile,BufRead *.bsh                                       setf java                   " BeanShell
+autocmd  BufNewFile,BufRead .gitignore                                  setf gitignore
 autocmd  BufNewFile,BufRead *.hx                                        setf haxe
 autocmd  BufNewFile,BufRead *.json                                      setf json
 autocmd  BufNewFile,BufRead *.imap                                      setf mail
