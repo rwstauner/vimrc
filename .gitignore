@@ -1,4 +1,5 @@
 /bundle/*
+/macros/local_before.vim
 /tags/ptags
 .cache/install-bundles.vim
 .cache/yankring_history*
