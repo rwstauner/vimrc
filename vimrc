@@ -9,6 +9,10 @@ if version < 700
   echoerr "this vimrc requires vim 7"
 endif
 
+if filereadable(expand("$HOME/.vim/macros/local_before.vim"))
+  runtime macros/local_before.vim
+endif
+
 " [ encoding ] {{{
 
 set     encoding=utf-8
