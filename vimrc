@@ -569,15 +569,18 @@ imap <F5> <C-O>:make<CR><CR><C-O><C-W>k
 " }}}
 " Painless spell checking (F11) {{{
 function! s:spell()
-    if !exists("s:spell_check") || s:spell_check == 0
-        echo "Spell check on"
-        let s:spell_check = 1
-        setlocal spell spelllang=en_us
-    else
-        echo "Spell check off"
-        let s:spell_check = 0
-        setlocal spell spelllang=
-    endif
+  if !&spell
+    echo "Spell check on"
+    setlocal spell
+    " TODO: what do we want here?
+    "if &spelllang != "en_us"
+      " TODO: add more, maybe even Pod::Wordlist::hanekomu
+      "set spelllang=en_us
+    "endif
+  else
+    echo "Spell check off"
+    setlocal nospell
+  endif
 endfunction
 map <F11> :call <SID>spell()<CR>
 imap <F11> <C-o>:call <SID>spell()<CR>
