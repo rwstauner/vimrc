@@ -13,6 +13,8 @@ if filereadable(expand("$HOME/.vim/macros/local_before.vim"))
   runtime macros/local_before.vim
 endif
 
+let s:cache = expand("$HOME/.vim/.cache")
+
 " [ encoding ] {{{
 
 set     encoding=utf-8
@@ -177,7 +179,7 @@ Bundle 'doy/vim-textobj'
 " }}}
 " [ yankring ] save a list of previously yanked text {{{
 
-let g:yankring_history_dir = '$HOME/.vim/.cache'
+let g:yankring_history_dir = s:cache
 let g:yankring_manage_numbered_reg = 1
 
 " my terminal sends Esc when I press Alt
@@ -231,7 +233,7 @@ FTBundle ft=perl,sql 'vim-perl/vim-perl'
 FTBundle name=Changes 'rwstauner/vim-cpanchanges'
 
 " enable :Perldoc command (via Pod::Simple::Vim)
-"let g:Perldoc_path = expand("~/.vim/.cache/perldoc/")
+"let g:Perldoc_path = s:cache . '/perldoc/'
 "Bundle 'PERLDOC2'
 
 " prove the current file and put colored results in a special window
