@@ -32,10 +32,10 @@ hi Todo         cterm=bold  ctermfg=white  ctermbg=blue
 
 "hi Directory   directory names (and other special names in listings)
 
-"hi DiffAdd     diff mode: Added line |diff.txt|
-"hi DiffChange  diff mode: Changed line |diff.txt|
-"hi DiffDelete  diff mode: Deleted line |diff.txt|
-"hi DiffText    diff mode: Changed text within a changed line |diff.txt|
+hi DiffAdd      ctermbg=22
+hi DiffChange   ctermbg=17
+hi DiffDelete   ctermbg=52
+hi DiffText     ctermbg=89
 
 hi ErrorMsg     cterm=bold ctermfg=white ctermbg=red
 "hi VertSplit   the column separating vertically split windows
