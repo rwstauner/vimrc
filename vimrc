@@ -26,18 +26,25 @@ setglobal fileencodings=ucs-bom,utf-8,default,latin1
 " }}}
 " [ options ] {{{
 
+set   autoread     " re-read file if it was changed externally and there are no changes in vim
+" TODO: maybe we only want autowrite on files in git?
+set   autowrite    " write before :make or jumping to another file
 set noautowriteall " i should probably turn this on
 set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
 set   background=dark
 set   completeopt=menuone,preview " show menu even with only one match
+set   confirm      " prompt yes/no/cancel instead of denying :q with changes
+set   display=lastline,uhex " show partial if lastline is too long, <xx> instead of ^x
 set   foldcolumn=2 " width
+set   foldopen +=insert,jump " auto-open folds when inserting or jumping far
 set noequalalways  " don't resize windows when i split, just split
 set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
-set nogdefault     " disable this, but it's an interesting option to remember
+set nogdefault     " if enabled s///gg will disable but that's too unintuitive to make me want it atm
 set   hidden       " when closing a window hide it instead of unloading it
 set   history=500  " number of items to rememeber for ex commands and searches
 set   hlsearch     " hightlight matches when searching
 set noincsearch    " too jumpy
+set   isfname -==  " let me complete filenames as vars (VAR=filename)
 set   joinspaces   " 2 spaces after punctuation when joining lines
 set   laststatus=2 " always show statusline
 set   lazyredraw   " don't redraw screen during macros
