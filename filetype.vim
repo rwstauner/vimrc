@@ -41,6 +41,8 @@ autocmd  BufNewFile,BufRead *.hx                                        setf hax
 autocmd  BufNewFile,BufRead *.json                                      setf json
 autocmd  BufNewFile,BufRead *.imap                                      setf mail
 autocmd  BufNewFile,BufRead *.inputrc,.inputrc*                         setf readline
+autocmd  BufNewFile         *.md                                        echoe ".md is not markdown"
+autocmd             BufRead *.md                                        setf markdown
 autocmd  BufNewFile,BufRead *.pshrc,*.psgi                              setf perl
 autocmd  BufNewFile,BufRead *.porklog                                   setf porklog
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
