@@ -62,3 +62,10 @@ func! s:setfReadme()
 endfunc
 
 " }}}
+
+" try again, w/o the .extra_extension at the end
+"autocmd  BufNewFile,BufRead *.svn-base,*.bak,*.bkp      let f = expand("<amatch>") | exe "doautocmd BufNewFile,BufRead " . f[:strridx(f, ".")-1]
+
+" warn me when editing a file that doesn't have a modeline
+" (need to escape the backslashes)
+"autocmd  FileType * if join(getline(1,2)) !~ "vim:\\s*set\\s.\\+:" | echohl ToDo | echomsg "Vim modeline not found at the top" | echohl None | endif
