@@ -1,4 +1,4 @@
-" whitespace formatting
+" whitespace formatting {{{
 
 " defined by language
 autocmd  FileType make     setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -14,6 +14,7 @@ let s:styled_types = [
   \ 'json',
   \ 'less',
   \ 'perl',
+  \ 'php',
   \ 'puppet',
   \ 'pod',
   \ 'python',
@@ -21,6 +22,7 @@ let s:styled_types = [
   \ 'eruby',
   \ 'sh',
   \ 'sql',
+  \ 'tmux',
   \ 'vim',
   \ 'xhtml',
   \ 'zsh'
@@ -30,7 +32,6 @@ exe "autocmd  FileType " . join(s:styled_types, ',') . " SourceCodeStyle"
 " }}}
 " custom file types {{{
 
-" custom file types
 autocmd  BufNewFile,BufRead *.as                                        setf actionscript           " instead of setf atlas
 autocmd  BufNewFile,BufRead *.bashrc,.bashrc*                           call SetFileTypeSH("bash")
 autocmd  BufNewFile,BufRead .bash_completion*,bash_completion           call SetFileTypeSH("bash")
@@ -56,3 +57,5 @@ func! s:setfReadme()
     setf readme
   endif
 endfunc
+
+" }}}
