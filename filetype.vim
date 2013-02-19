@@ -44,6 +44,7 @@ autocmd  BufNewFile,BufRead *.inputrc,.inputrc*                         setf rea
 autocmd  BufNewFile         *.md                                        echoe ".md is not markdown"
 autocmd             BufRead *.md                                        setf markdown
 autocmd  BufNewFile,BufRead *.pshrc,*.psgi                              setf perl
+autocmd             BufRead *.cgi                                       if getline(1) =~ "/plackup" | setf perl | endif
 autocmd  BufNewFile,BufRead *.porklog                                   setf porklog
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
 autocmd  BufNewFile,BufRead Vagrantfile                                 setf ruby
