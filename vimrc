@@ -250,6 +250,8 @@ FTBundle name=Changes 'rwstauner/vim-cpanchanges'
 FTBundle name=*.t 'perlprove.vim'
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
+runtime macros/stub_perl_mod.vim
+
 " }}}
 " [ filetypes ] {{{
 
