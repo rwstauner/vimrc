@@ -499,8 +499,9 @@ command MkPath Mkpath
 
 command EightyCharacters call MaxLineLength(80)
 command -nargs=? MaxLineLength call MaxLineLength(<args>)
-command ModeLine exe "norm O" . printf(&cms, " vim: set ts=2 sts=2 sw=2 expandtab smarttab:")
-"
+
+command! ModeLine exe "norm O" . substitute(&cms, ' \?%s', " vim: set ts=2 sts=2 sw=2 expandtab smarttab:", '')
+
 " using named register ("p) is easier than escaping expr reg ("=)
 "command! -nargs=1 -bang -complete=expression Put let @p = <args> | put<bang> p
 command! -nargs=1 -bang -complete=expression Put call append(line(".") - ('<bang>' == '!' ? 1 : 0), <args>)
