@@ -27,6 +27,9 @@ hi Todo         cterm=bold  ctermfg=white  ctermbg=blue
 
 " regular highlight groups
 
+" 'colorcolumn'
+hi ColorColumn  ctermbg=235
+
 "hi Cursor      the character under the cursor
 "hi CursorIM
 
