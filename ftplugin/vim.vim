@@ -4,7 +4,7 @@ setlocal keywordprg=:help
 setlocal iskeyword+=-,<,>,:
 
 " in vim it's much more clear to think of them in terms of ^x
-setlocal display-=uhex
+setlocal display -=uhex
 
 " why does this default to shiftwidth * 3?
 let g:vim_indent_cont = &sw
