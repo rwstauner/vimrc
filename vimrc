@@ -979,15 +979,16 @@ function SurroundCword(...) range "unrestrictiveboundaries, leftside, rightside,
 				let beginBound = "b"
 				let endBound = "e"
 			endif
-			let surround = "w" . beginBound . "i" . leftside . "\e" . endBound . "a" . rightside . "\e" 
+      let surround = "w" . beginBound . "i" . leftside . "\e" . endBound . "a" . rightside . "\e"
 			"add start and end commands if present
-			exe "normal " . ( a:0 >= 5 ? a:5 : "" ) . surround . ( a:0 >= 4 ? a:4 : beginBound . ( rBounds ? strlen( leftside ) . "l" : "" )  ) . "\e"
+      exe "normal! " . ( a:0 >= 5 ? a:5 : "" ) . surround . ( a:0 >= 4 ? a:4 : beginBound . ( rBounds ? strlen( leftside ) . "l" : "" )  )
 		else
 			let surround = "i" . leftside . rightside . "\e"
 			let rightsidelen = ( strlen( rightside ) - 1 )
-			execute "normal " . surround . ( rightsidelen ? rightsidelen . "h" : "" ) . "\e"
+      execute "normal! " . surround . ( rightsidelen ? rightsidelen . "h" : "" )
 		endif
 endfunction
+
 function SurroundSelection(...) range "leftside, rightside, endcommands, startcommands
 	let leftside = ""
 	let rightside = ""
@@ -999,7 +1000,7 @@ function SurroundSelection(...) range "leftside, rightside, endcommands, startco
 		let i = ( i + 1 )
 	endwhile
 		"execute "normal \e`>" . ( ( i - 1 ) > 0 ? 2 * ( i - 1 ) . "l" : "" ) . ( a:0 >= 3 ? a:3 : "" ) . "a" . rightside . "\e`<" . ( a:0 >= 4 ? a:4 : "" ) . "i" . leftside  
-		execute "normal \e" . ( a:0 >= 4 ? a:4 : "" ) . "`>a" . rightside . "\e`<" . "i" . leftside . "\e" . ( a:0 >= 3 ? a:3 : "" ) . "\e"
+    execute "normal! " . ( a:0 >= 4 ? a:4 : "" ) . "`>a" . rightside . "\e`<" . "i" . leftside . "\e" . ( a:0 >= 3 ? a:3 : "" )
 endfunction
 function SurroundTill(r, ...) range "replace, tilloutside(farther), till, leftside, rightside
 	let tillcmds = ""
