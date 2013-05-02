@@ -10,6 +10,7 @@ let s:styled_types = [
   \ 'css',
   \ 'cpanchanges',
   \ 'html',
+  \ 'mako',
   \ 'javascript',
   \ 'json',
   \ 'less',
