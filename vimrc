@@ -262,6 +262,9 @@ FTBundle ft=csv 'csv.vim'
 " less css
 FTBundle ft=less 'groenewege/vim-less'
 
+" python template engine
+FTBundle ft=mako 'mako.vim'
+
 " puppet: https://github.com/puppetlabs
 " alternative: 'rodjek/vim-puppet'
 FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
