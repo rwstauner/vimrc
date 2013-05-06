@@ -208,10 +208,15 @@ xnoremap <silent> yr d:YRShow<CR>
 
 " }}}
 
-" visual undo browser
+" [ gundo ] visual undo browser {{{
+
+" ubu 12.04 includes py2.7 which causes this thing to spew errors
+let g:gundo_prefer_python3 = 1
+
 LazyCommand GundoToggle 'sjl/gundo.vim'
 nnoremap <F12> :GundoToggle<CR>
 
+" }}}
 " file browser
 Bundle 'scrooloose/nerdtree'
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
