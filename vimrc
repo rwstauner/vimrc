@@ -263,7 +263,7 @@ FTBundle ft=csv 'csv.vim'
 FTBundle ft=less 'groenewege/vim-less'
 
 " python template engine
-FTBundle ft=mako 'rwstauner/vim-bundle-mako'
+FTBundle ft=mako 'sophacles/vim-bundle-mako'
 
 " puppet: https://github.com/puppetlabs
 " alternative: 'rodjek/vim-puppet'
