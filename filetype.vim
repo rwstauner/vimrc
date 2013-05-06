@@ -7,6 +7,7 @@ autocmd  FileType yaml     setlocal ts=2 sts=2 sw=2   expandtab
 
 " personal preference
 let s:styled_types = [
+  \ 'awk',
   \ 'css',
   \ 'cpanchanges',
   \ 'html',
