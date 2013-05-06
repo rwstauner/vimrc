@@ -280,6 +280,8 @@ let g:syntastic_loc_list_height=5
 let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
+let g:syntastic_python_checkers = [ 'pylint', 'python' ]
+
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
