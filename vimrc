@@ -217,11 +217,40 @@ LazyCommand GundoToggle 'sjl/gundo.vim'
 nnoremap <F12> :GundoToggle<CR>
 
 " }}}
-" file browser
-Bundle 'scrooloose/nerdtree'
+" [ file browser ] {{{
+" [ netrw ] (built-in) {{{
+
+let g:netrw_home         = s:cache
+let g:netrw_liststyle    = 3  " Use tree-mode as default view
+let g:netrw_browse_split = 2  " vsplit
+let g:netrw_preview      = 1  " preview window shown in a vertical split
+let g:netrw_winsize      = 20 " inital size of new browser
+
+" }}}
+" [ nerdtree ] {{{
+
+let g:NERDTreeHijackNetrw     = 1
+let g:NERDTreeShowHidden      = 1
+let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeBookmarksFile   = s:cache . '/.NERDTreeBookmarks'
+
+LazyCommand -nargs=* -complete=dir NERDTree 'scrooloose/nerdtree'
+
+if g:NERDTreeHijackNetrw
+  " tell netrw to forget it
+  let g:loaded_netrwPlugin = "nerdtree!"
+  " fake netrw's augroup so nerdtree will replace it
+  augroup FileExplorer
+    au!
+    au BufEnter,VimEnter * if isdirectory(expand("<amatch>")) | unlet g:loaded_netrwPlugin | exe "NERDTree " . expand("<amatch>") | wincmd p | wincmd q | exe 'au! FileExplorer' | endif
+  augroup END
+endif
+
 "function StartUp() | if 0 == argc() | NERDTree | end | endfunction
 "autocmd VimEnter * call StartUp()
 
+" }}}
+" }}}
 " [ git ] {{{
 
 " get the latest fixes for vim files
