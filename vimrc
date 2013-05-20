@@ -159,6 +159,9 @@ runtime macros/lazy_bundle.vim
 " https://github.com/mutewinter/dot_vim
 " vimscripts: 'L9' + 'FuzzyFinder'
 
+" i tried delimitmate but it gets in my way more often than it's useful
+"Bundle 'Raimondi/delimitMate'
+
 " enable repeating certain plugin actions with .
 Bundle 'tpope/vim-repeat'
 
