@@ -299,8 +299,15 @@ FTBundle ft=csv 'csv.vim'
 " less css
 FTBundle ft=less 'groenewege/vim-less'
 
+" [ python ] {{{
 " python template engine
 FTBundle ft=mako 'sophacles/vim-bundle-mako'
+
+" compiler (makeprg) for nosetests
+" NOTE: pip install git+git://github.com/nvie/nose-machineout.git#egg=nose_machineout
+FTBundle name=test_*.py 'lambdalisue/nose.vim'
+  au BufRead,BufNewFile test_*.py compiler nose
+" }}}
 
 " puppet: https://github.com/puppetlabs
 " alternative: 'rodjek/vim-puppet'
