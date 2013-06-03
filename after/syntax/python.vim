@@ -1,4 +1,3 @@
-"setlocal formatoptions=+r
 setlocal textwidth=80
 
 syn keyword pythonSelf self
