@@ -585,7 +585,7 @@ command -nargs=1 FoldComments	call FoldComments(<f-args>)
 command! -nargs=1 TabWidth exe "setlocal ts=" . <args> . " sts=" . <args> . " sw=" . <args>
 
 if exists("+cursorline")
-	command HighlightPosition 	set cursorcolumn! | set cursorline!
+  command HighlightPosition set cursorcolumn! cursorline!
 endif
 
 command -nargs=1 -complete=dir -complete=file Arge 99arge <args>
