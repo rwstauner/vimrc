@@ -313,6 +313,9 @@ FTBundle ft=csv 'csv.vim'
 " less css
 FTBundle ft=less 'groenewege/vim-less'
 
+" redmine uses textile
+FTBundle ft=textile 'timcharper/textile.vim'
+
 " [ python ] {{{
 " python template engine
 FTBundle ft=mako 'sophacles/vim-bundle-mako'
