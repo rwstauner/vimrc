@@ -427,6 +427,9 @@ let html_no_pre = 1
 
 " [ term ] {{{
 
+" fast terminal connection, smoother redrawing
+set ttyfast
+
 " fix ctrl-arrow to work in command line mode (:help term.txt)
 " vim doesn't have t_XX codes for C-arrow but S-arrow performs the same function
 set t_#4=[1;5D
