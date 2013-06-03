@@ -1,3 +1,7 @@
 " remap K to be more permissive
-setlocal keywordprg=perlfind
+"if system("perlfind --version")
+"setlocal keywordprg=perlfind
+
 setlocal iskeyword+=:
+
+set formatoptions=tcrql
