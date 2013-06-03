@@ -1,3 +1,5 @@
+if exists("b:current_syntax") | finish | endif
+
 " configure these vars before loading the real syntax file
 let perl_include_pod = 1
 let perl_extended_vars = 1 " obsolete
