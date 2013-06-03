@@ -147,6 +147,9 @@ set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
 
 filetype off " turn off to load plugins (we turn it on later)
 
+" more powerful % matching?
+"runtime macros/matchit.vim
+
 " git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle/
 set rtp +=~/.vim/bundle/vundle
 call vundle#rc()
@@ -167,7 +170,8 @@ runtime macros/lazy_bundle.vim
 Bundle 'tpope/vim-repeat'
 
 " view images
-Bundle 'tpope/vim-afterimage'
+" TODO: try this, then lazy-load it
+"Bundle 'tpope/vim-afterimage'
 
 " toggle comment state with \\\
 Bundle 'tpope/vim-commentary'
@@ -208,7 +212,8 @@ endfunction
 Bundle 'YankRing.vim'
 nnoremap <silent> yr :YRShow<CR>
 " switching windows loses the visual selection; this is what i mean:
-xnoremap <silent> yr d:YRShow<CR>
+xnoremap <silent> YR d:YRShow<CR>
+" TODO: map something to :YRToggle ?
 
 " }}}
 
@@ -281,6 +286,9 @@ FTBundle name=Changes 'rwstauner/vim-cpanchanges'
 "let g:Perldoc_path = s:cache . '/perldoc/'
 "Bundle 'PERLDOC2'
 
+" enable :Perldoc command (via perldoc command plus vim parsing)
+"Bundle 'Perldoc.vim'
+
 " prove the current file and put colored results in a special window
 "Bundle 'motemen/tap-vim'
 
@@ -289,6 +297,8 @@ FTBundle name=*.t 'perlprove.vim'
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
 runtime macros/stub_perl_mod.vim
+
+" https://github.com/yko/mojo.vim
 
 " }}}
 " [ filetypes ] {{{
@@ -451,6 +461,7 @@ set t_ti= t_te=
 "endif
 
 " }}}
+" load man pages in another window {{{
 
 "give me the Man command (but I'll just use the one that comes with)
 if exists(":Man") != 2
@@ -469,6 +480,8 @@ if exists(":Man") != 2
 		endif
 	endfunction
 end
+
+" }}}
 
 " suggested by motion.txt
 ":map [[ ?{<CR>w99[{
@@ -511,6 +524,9 @@ runtime macros/new_file_autocommands.vim
 
 " open (or close) the quickfix window after make/grep commands
 autocmd  QuickFixCmdPost *make*,*grep* cwindow
+
+" try hard to highlight correctly
+"autocmd BufEnter,CursorHold,CursorHoldI * syntax sync fromstart
 
 "let s:do_lwindow = 0
 "autocmd  QuickFixCmdPost *lmake*,*lgrep* let s:do_lwindow = 1
@@ -579,11 +595,12 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 
 " [ mappings ] {{{
 " <Leader> == 'mapleader' (default: "\")
+" TODO: mapping for :tabedit ?
 
-" ctrl-up/down (like ctrl-e/y but with one hand)
+" <C-Up> <C-Down> (like ctrl-e/y but with one hand)
 nnoremap [1;5A <C-y>
 nnoremap [1;5B <C-e>
-" shift-up/down
+" <S-Up> <S-Down> (same)
 nnoremap [1;2A <C-y>
 nnoremap [1;2B <C-e>
 
@@ -607,10 +624,10 @@ nnoremap ' `
 nnoremap ` '
 
 " }}}
+" {{{
 
-" borrow idea from sartak and add 'zv' to auto-open folds with search results:
-" now search commands will re-center the screen
-if 0
+" center screen and auto-open folds when searching
+if 0 " i like the idea but in practice it's too jumpy for me
   nmap n   nzzzv
   nmap N   Nzzzv
   nmap *   *zzzv
@@ -618,6 +635,8 @@ if 0
   nmap g* g*zzzv
   nmap g# g#zzzv
 endif
+
+" }}}
 
 " TODO: consider swapping '*' and 'g*' (and '#' and 'g#')
 
