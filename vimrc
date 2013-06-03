@@ -43,7 +43,7 @@ set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen 
 set nogdefault     " if enabled s///gg will disable but that's too unintuitive to make me want it atm
 set   hidden       " when closing a window hide it instead of unloading it
 set   history=500  " number of items to rememeber for ex commands and searches
-set   hlsearch     " hightlight matches when searching
+set   hlsearch     " highlight matches when searching
 set noincsearch    " too jumpy
 set   isfname -==  " let me complete filenames as vars (VAR=filename)
 set   joinspaces   " 2 spaces after punctuation when joining lines
