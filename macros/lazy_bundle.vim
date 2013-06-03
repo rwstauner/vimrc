@@ -16,10 +16,40 @@ function! LazyBundle(...)
 endfunction
 
 " define a command that will load a plugin bundle that redefines the command
-command! -nargs=+ -bar LazyCommand call LazyCommand(<f-args>)
+command! -nargs=+ LazyCommand call LazyCommand(<f-args>)
 
-function! LazyCommand(cmd, bundle, ...)
-  exe "command! -nargs=* " . a:cmd . " LazyBundle " . a:bundle . join(a:000, ' ') . " | " . a:cmd . " <args>"
+let s:lazy_commands = {}
+
+function! LazyCommand(...)
+  let cmdargs = []
+  let cmdname = ''
+  let bundleargs = []
+  let barcmds = []
+  for arg in a:000
+    " arguments to the command we're creating
+    if cmdname == '' && arg =~ '^-'
+      call add(cmdargs, arg)
+    " the command
+    elseif cmdname == ''
+      let cmdname = arg
+    " if there's a bar, execute those commands after the lazy one
+    elseif arg == "|" || !empty(barcmds)
+      call add(barcmds, arg)
+    " anything else are the args to Bundle
+    else
+      call add(bundleargs, arg)
+    endif
+  endfor
+  let s:lazy_commands[cmdname] = { 'bar': barcmds, 'bundle': bundleargs }
+  exe join(['command!', join(cmdargs, ' '), cmdname,
+    \ 'call s:LazyCommandDelegate("' . cmdname . '", (<count> == -1 ? "" : "<line1>,<line2>"), <q-args>)'], ' ')
+endfunction
+
+function! s:LazyCommandDelegate(cmdname, lines, args)
+  exe 'delcommand ' . a:cmdname
+  exe 'LazyBundle ' . join(s:lazy_commands[a:cmdname].bundle, ' ')
+  exe a:lines . a:cmdname . ' ' . a:args
+  exe join(s:lazy_commands[a:cmdname].bar[1:], ' ')
 endfunction
 
 " Load plugin bundles only for certain file types
