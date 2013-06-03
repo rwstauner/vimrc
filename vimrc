@@ -616,8 +616,7 @@ nnoremap [1;2B <C-e>
 " Hit <C-a> in insert mode after a bad paste (thanks absolon) {{{
 inoremap <silent> <C-a> <ESC>u:set paste<CR>.:set nopaste<CR>gi
 " }}}
-" spacebar (in command mode) inserts a single character before the cursor
-nmap <Space> i <Esc>r
+
 " up and down move by virtual line
 nmap <Up>   gk
 nmap <Down> gj
@@ -630,7 +629,10 @@ nnoremap ' `
 nnoremap ` '
 
 " }}}
-" {{{
+" borrow ideas from sartak, modify slightly {{{
+
+" ctrl-space to insert a single character before the cursor
+nnoremap <C-@> i <Esc>:echo "put character:"<CR>r
 
 " center screen and auto-open folds when searching
 if 0 " i like the idea but in practice it's too jumpy for me
