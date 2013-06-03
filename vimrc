@@ -1197,5 +1197,13 @@ command! DiffThis diffthis | DiffHelpers
 " https://github.com/derekwyatt/vim-config
 " https://github.com/paradigm/dotfiles/blob/master/.vimrc#L215
 " https://github.com/sunaku/vim-unbundle
-" https://github.com/sartak/conf/blob/master/vimrc (nopaste, alignassignments)
+" https://github.com/sartak/conf/blob/master/vimrc (nopaste)
+" https://github.com/doy/conf/blob/master/vimrc
+" https://github.com/nelstrom/dotfiles/tree/master/vim/bundle
+" http://www.vim.org/scripts/script_search_results.php?order_by=downloads
+" https://launchpad.net/ubuntu/+source/vim-scripts/+changelog
+" https://github.com/sjl/dotfiles/tree/master/vim/vimrc
+" https://github.com/kien/ctrlp.vim
 " }}}
+
+" :Ni!
