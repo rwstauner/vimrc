@@ -506,9 +506,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " open the fold if the initial position is inside one
 au BufWinEnter * if !exists("b:did_zv") | exe "normal zv" | let b:did_zv = 1 | endif
 
-" automatically set exec bit on new files with shebangs
-au BufNewFile * let b:is_new_file = 1
-au BufWritePost * if exists("b:is_new_file") && getline(1) =~ "^#!.*/bin/" | exe "silent !chmod a+x <afile>" | endif
+runtime macros/new_file_autocommands.vim
 
 " open (or close) the quickfix window after make/grep commands
 autocmd  QuickFixCmdPost *make*,*grep* cwindow
