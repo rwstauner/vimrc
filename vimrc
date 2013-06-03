@@ -268,7 +268,7 @@ LazyCommand Gitv 'gregsexton/gitv'
 " [ perl ] {{{
 
 " use ack as &grepprg
-LazyCommand Ack 'mileszs/ack.vim'
+LazyCommand -nargs=* Ack 'mileszs/ack.vim'
 
 " syntax and ftplugin files for perl (plus pod, tt2...)
 " include sql for tt2 queries
