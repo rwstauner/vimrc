@@ -32,6 +32,7 @@ set   autowrite    " write before :make or jumping to another file
 set noautowriteall " i should probably turn this on
 set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
 set   background=dark
+set   colorcolumn=+0 " highlight the column at &textwidth
 set   completeopt=menuone,preview " show menu even with only one match
 set   confirm      " prompt yes/no/cancel instead of denying :q with changes
 set   display=lastline,uhex " show partial if lastline is too long, <xx> instead of ^x
