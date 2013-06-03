@@ -563,8 +563,8 @@ command Wn wn
 command WN wN
 command Args args
 command -nargs=? -complete=dir -complete=file Sp sp <args>
-command Mkpath !mkdir -p %:h
-command MkPath Mkpath
+
+command! Mkpath call mkdir(expand("%:h"), 'p')
 
 command EightyCharacters call MaxLineLength(80)
 command -nargs=? MaxLineLength call MaxLineLength(<args>)
