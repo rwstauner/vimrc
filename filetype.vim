@@ -49,7 +49,7 @@ autocmd  BufNewFile,BufRead *.pshrc,*.psgi                              setf per
 autocmd             BufRead *.cgi                                       if getline(1) =~ "/plackup" | setf perl | endif
 autocmd  BufNewFile,BufRead *.porklog                                   setf porklog
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
-autocmd  BufNewFile,BufRead Vagrantfile                                 setf ruby
+autocmd  BufNewFile,BufRead Vagrantfile,_Vagrantfile                    setf ruby
 autocmd  BufNewFile,BufRead *.screenrc,.screenrc*                       setf screen
 
 " fake one, just color it a little bit
