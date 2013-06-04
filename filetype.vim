@@ -51,6 +51,7 @@ autocmd  BufNewFile,BufRead *.porklog                                   setf por
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
 autocmd  BufNewFile,BufRead Vagrantfile,_Vagrantfile                    setf ruby
 autocmd  BufNewFile,BufRead *.screenrc,.screenrc*                       setf screen
+autocmd  BufNewFile,BufRead *.wsgi                                      setf python
 
 " fake one, just color it a little bit
 autocmd  BufNewFile,BufRead CHANGELOG,HACKING,INSTALL,README,README.txt,TODO        call s:setfReadme()
