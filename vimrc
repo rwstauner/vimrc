@@ -114,7 +114,7 @@ set nosmartindent  " braces sound ok but i use # for comments more often than #i
 " 'cindent' is off by default, but may be useful to turn on for some filetypes
 " we call "filetype indent on" later so 'indentexpr' can be customized by ft ($VIMRUNTIME/indent/)
 
-set   textwidth=0  " don't wrap text by default (though many filetypes set this)
+set   textwidth=80 " common long-line limit (some filetypes customize this)
 
 " see fo-table for descriptions of tcroqwan2vblmMB1
 set  formatoptions +=crqbl  formatoptions -=towa
