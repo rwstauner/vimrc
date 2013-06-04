@@ -43,8 +43,10 @@ hi DiffText     ctermbg=89
 hi ErrorMsg     cterm=bold ctermfg=white ctermbg=red
 "hi VertSplit   the column separating vertically split windows
 hi Folded       ctermfg=black ctermbg=darkcyan
-hi FoldColumn   ctermfg=cyan ctermbg=darkgrey
-"hi SignColumn  column where |signs| are displayed
+
+hi FoldColumn   ctermfg=cyan  ctermbg=237
+hi SignColumn   ctermbg=240
+
 "hi IncSearch   'incsearch' highlighting; also used for the text replaced with
 hi LineNr       cterm=bold ctermfg=darkyellow ctermbg=none
 hi MatchParen   cterm=bold ctermfg=black ctermbg=darkblue
@@ -68,8 +70,8 @@ hi SpellCap     cterm=bold  ctermfg=black  ctermbg=magenta
 hi SpellRare    cterm=bold  ctermfg=black  ctermbg=cyan
 hi SpellLocal   cterm=bold  ctermfg=black  ctermbg=green
 
-hi StatusLine   ctermfg=green ctermbg=darkgrey cterm=bold
-hi StatusLineNC ctermfg=magenta ctermbg=darkgrey cterm=bold
+hi StatusLine   cterm=bold  ctermbg=236  ctermfg=green
+hi StatusLineNC cterm=bold  ctermbg=235  ctermfg=magenta
 
 "hi Title       titles for output from ":set all", ":autocmd" etc.
 hi Visual       ctermfg=white ctermbg=magenta cterm=bold
