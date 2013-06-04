@@ -329,6 +329,9 @@ FTBundle ft=python 'lambdalisue/nose.vim'
 " alternative: 'rodjek/vim-puppet'
 FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
 
+" json: better than 'javascript'
+FTBundle ft=json   'elzr/vim-json'
+
 " }}}
 " [ syntastic ] automatic syntax check into location list {{{
 

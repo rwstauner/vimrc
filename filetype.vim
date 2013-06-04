@@ -41,7 +41,6 @@ autocmd  BufNewFile,BufRead .bash_completion*,bash_completion           call Set
 autocmd  BufNewFile,BufRead *.bsh                                       setf java                   " BeanShell
 autocmd  BufNewFile,BufRead .gitignore                                  setf gitignore
 autocmd  BufNewFile,BufRead *.hx                                        setf haxe
-autocmd  BufNewFile,BufRead *.json                                      setf json
 autocmd  BufNewFile,BufRead *.imap                                      setf mail
 autocmd  BufNewFile,BufRead *.inputrc,.inputrc*                         setf readline
 autocmd  BufNewFile         *.md                                        echoe ".md is not markdown"
