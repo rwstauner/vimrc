@@ -555,7 +555,7 @@ cmap d <A-D>
 
 " stupid fingers (either too fast or too slow...)
 command -nargs=? -complete=dir -complete=file W w <args>
-command -nargs=+ -complete=dir -complete=file Grep execute "grep " . (<q-args>) | copen
+command -nargs=+ -complete=dir -complete=file Grep grep <args>
 command -bang Q q<bang>
 command -bang Qall qall<bang>
 command Wq wq
@@ -568,7 +568,7 @@ command -nargs=? -complete=dir -complete=file Sp sp <args>
 command! Mkpath call mkdir(expand("%:h"), 'p')
 
 command EightyCharacters call MaxLineLength(80)
-command -nargs=? MaxLineLength call MaxLineLength(<args>)
+command -nargs=? MaxLineLength call MaxLineLength(<f-args>)
 
 command! ModeLine exe "norm O" . substitute(&cms, ' \?%s', " vim: set ts=2 sts=2 sw=2 expandtab smarttab:", '')
 
@@ -577,7 +577,7 @@ command! ModeLine exe "norm O" . substitute(&cms, ' \?%s', " vim: set ts=2 sts=2
 command! -nargs=1 -bang -complete=expression Put call append(line(".") - ('<bang>' == '!' ? 1 : 0), <args>)
 
 command -nargs=1 -complete=option 	Set 	set <args>
-command -nargs=1 -complete=file 	Echo 	echo <q-args>
+command -nargs=1 -complete=expression   Echo  echo <q-args>
 command -nargs=1 -range				PerlDo 	call PerlDo(<q-args>)
 command -nargs=1 -complete=file 	Rename 	call RenameCurrent(<q-args>)
 command -nargs=+ -range 			CommentSection call CommentSection(<f-args>)
