@@ -485,8 +485,6 @@ if exists(":Man") != 2
 			delcommand Man
 			exe "source " . manplugin
 			exe "Man " . a:cmd
-      " we're in the "man" window now
-      set nonumber
 		else
 			echoe "Man plugin not found"
 		endif
