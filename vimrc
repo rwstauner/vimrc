@@ -443,6 +443,14 @@ set t_%i=[1;5C
 "nmap <kPageUp>   gT
 "nmap <kPageDown> gt
 
+" compatibility with shell movement (and/or when i wrongfully hold shift)
+" ctrl-arrow moves across words
+nnoremap [1;5C w
+nnoremap [1;5D b
+" shift-arrow moves across shell words (non-space)
+nnoremap [1;2C W
+nnoremap [1;2D B
+
 " don't clear the screen (no termcap) when exiting vim or executing external commands
 set t_ti= t_te=
 
