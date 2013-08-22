@@ -280,7 +280,7 @@ LazyCommand -nargs=* Ack 'mileszs/ack.vim'
 
 " syntax and ftplugin files for perl (plus pod, tt2...)
 " include sql for tt2 queries
-FTBundle ft=perl,sql 'vim-perl/vim-perl'
+FTBundle ft=perl,pod,tt2,tt2html,sql 'vim-perl/vim-perl'
 
 " syntax files for CPAN::Changes
 FTBundle name=Changes 'rwstauner/vim-cpanchanges'
