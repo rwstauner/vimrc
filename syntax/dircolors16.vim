@@ -1,3 +1,9 @@
+" The debian dircolors expects the non-256 version.
+let b:dircolors_t_co = &t_Co
+let &t_Co = 16
+
+runtime syntax/dircolors.vim
+
 let &t_Co = b:dircolors_t_co
 unlet       b:dircolors_t_co
 
@@ -21,3 +27,5 @@ unlet       b:dircolors_t_co
   hi def      dircolorsBGCyan     ctermbg=darkcyan guibg=darkcyan
   hi def      dircolorsBGWhite    ctermbg=white ctermfg=black
                                   \ guibg=white guifg=black
+
+" TODO: BrightColors
