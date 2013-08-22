@@ -347,6 +347,7 @@ let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 let g:syntastic_python_checkers = [ 'pylint', 'python' ]
+let g:syntastic_puppet_lint_arguments = '--no-80chars-check'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
