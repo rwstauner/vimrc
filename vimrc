@@ -328,6 +328,10 @@ FTBundle ft=mako 'sophacles/vim-bundle-mako'
 FTBundle ft=python 'lambdalisue/nose.vim'
 " }}}
 
+" [ ruby ] {{{
+FTBundle ft=ruby,eruby 'vim-ruby/vim-ruby'
+" }}}
+
 " puppet: https://github.com/puppetlabs
 " alternative: 'rodjek/vim-puppet'
 FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
