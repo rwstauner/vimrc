@@ -336,6 +336,22 @@ FTBundle ft=ruby,eruby 'vim-ruby/vim-ruby'
 " alternative: 'rodjek/vim-puppet'
 FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
 
+" TODO: Put this somewhere else.
+let s:puppet_lint_args = '--no-80chars-check'
+command -nargs=* -complete=file PuppetLint call PuppetLint(<f-args>)
+function PuppetLint(...)
+  let l:makeprg = &makeprg
+  let l:efm = &efm
+
+  let &l:makeprg='find ' . (a:0 ? a:1 : '.') . ' -name \*.pp \| xargs --no-run-if-empty -n 1 puppet-lint ' . s:puppet_lint_args . ' --log-format "\%{path}:\%{linenumber}:\%{kind}:\%{check}:\%{message}"'
+  setl efm=%f:%l:%t%*[a-z]:%m
+  make
+
+  let &efm = l:efm
+  let &makeprg = l:makeprg
+endfunction
+" }}}
+
 " json: better than 'javascript'
 FTBundle ft=json   'elzr/vim-json'
 
@@ -351,7 +367,7 @@ let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 let g:syntastic_python_checkers = [ 'pylint', 'python' ]
-let g:syntastic_puppet_lint_arguments = '--no-80chars-check'
+let g:syntastic_puppet_lint_arguments = s:puppet_lint_args
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
