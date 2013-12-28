@@ -7,6 +7,7 @@ autocmd  FileType markdown setlocal ts=4 sts=4 sw=4   expandtab
 " personal preference
 let s:styled_types = [
   \ 'awk',
+  \ 'cfg',
   \ 'css',
   \ 'cpanchanges',
   \ 'html',
@@ -50,6 +51,7 @@ autocmd  BufNewFile,BufRead *.porklog                                   setf por
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
 autocmd  BufNewFile,BufRead Vagrantfile,_Vagrantfile                    setf ruby
 autocmd  BufNewFile,BufRead *.screenrc,.screenrc*                       setf screen
+autocmd  BufNewFile,BufRead tox.ini                                     setf cfg
 autocmd  BufNewFile,BufRead *.wsgi                                      setf python
 
 " fake one, just color it a little bit
