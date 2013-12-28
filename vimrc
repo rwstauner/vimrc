@@ -352,6 +352,12 @@ function PuppetLint(...)
 endfunction
 " }}}
 
+" go
+if exists('$GOROOT')
+  source $GOROOT/misc/vim/ftdetect/gofiletype.vim
+  au FileType go set rtp^=$GOROOT/misc/vim rtp+=$GOROOT/misc/vim/after | FixRunTimePath
+endif
+
 " json: better than 'javascript'
 FTBundle ft=json   'elzr/vim-json'
 
