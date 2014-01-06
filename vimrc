@@ -353,7 +353,7 @@ endfunction
 " }}}
 
 " go
-if exists('$GOROOT')
+if exists('$GOROOT') && isdirectory($GOROOT)
   source $GOROOT/misc/vim/ftdetect/gofiletype.vim
   au FileType go set rtp^=$GOROOT/misc/vim rtp+=$GOROOT/misc/vim/after | FixRunTimePath
 endif
