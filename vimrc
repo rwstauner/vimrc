@@ -372,15 +372,19 @@ FTBundle ft=json   'elzr/vim-json'
 " [ syntastic ] automatic syntax check into location list {{{
 
 let g:syntastic_check_on_open=0 " avoid start-up delay; check on save, not open
+let g:syntastic_check_on_wq = 0 " If I issue :wq just let me leave.
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_auto_jump=0
 let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_balloons = 0
+"let g:syntastic_ignore_files = ['^/usr/include/', '\c\.h$']
 let g:syntastic_loc_list_height=5
 "let g:syntastic_mode_map = { 'mode': 'active', \ 'active_filetypes': ['ruby', 'php'], \ 'passive_filetypes': ['puppet'] }
-let g:syntastic_quiet_warnings=0
+"g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 let g:syntastic_python_checkers = [ 'pylint', 'python' ]
-let g:syntastic_puppet_lint_arguments = s:puppet_lint_args
+let g:syntastic_puppet_puppetlint_args = s:puppet_lint_args
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
