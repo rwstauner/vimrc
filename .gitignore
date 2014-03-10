@@ -3,5 +3,7 @@
 /tags/ptags
 .cache/install-bundles.vim
 .cache/yankring_history*
+.cache/netrw*
+.cache/.NERDTree*
 .netrwhist
 .VimballRecord
