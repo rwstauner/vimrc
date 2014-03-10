@@ -245,6 +245,12 @@ let g:NERDTreeHijackNetrw     = 1
 let g:NERDTreeShowHidden      = 1
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeBookmarksFile   = s:cache . '/.NERDTreeBookmarks'
+let g:NERDTreeIgnore = [
+  \ '\~$',
+  \ '^\..\+\.swp',
+  \ '\.py[co]',
+  \ '__pycache__',
+  \ ]
 
 LazyCommand -nargs=* -complete=dir NERDTree 'scrooloose/nerdtree'
 
