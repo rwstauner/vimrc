@@ -338,12 +338,13 @@ FTBundle ft=python 'lambdalisue/nose.vim'
 FTBundle ft=ruby,eruby 'vim-ruby/vim-ruby'
 " }}}
 
+" [ puppet ] {{{
 " puppet: https://github.com/puppetlabs
 " alternative: 'rodjek/vim-puppet'
 FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
 
 " TODO: Put this somewhere else.
-let s:puppet_lint_args = '--no-80chars-check'
+let s:puppet_lint_args = '--no-80chars-check --no-arrow_alignment-check'
 command -nargs=* -complete=file PuppetLint call PuppetLint(<f-args>)
 function PuppetLint(...)
   let l:makeprg = &makeprg
