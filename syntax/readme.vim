@@ -10,7 +10,7 @@ syn match   readmeChars     /\v[-=*]+/
 syn match   readmeVars      /\v\<[^>]+\>/
 syn match   readmeOptional  /\v\[[^]]+\]/ contains=readmeVars
 syn match   readmeURL       "\v([^[:space:]]+\@)?(\<[^>]+\>|[a-z]+):/+[^[:space:]]+" contains=readmeVars
-syn match   readmeComment   /\v#.+$/ contains=readmeURL
+syn match   readmeComment   /\v#.*$/ contains=readmeURL
 syn region  readmeShellLine start=/\v^\s*\$+/ end=/\v(\\\n.+)*$/ keepend contains=@readmeShell,readmeVars,readmeURL,readmeOptional,readmeComment
 
 " Define the default highlighting.
