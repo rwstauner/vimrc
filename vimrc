@@ -317,10 +317,10 @@ let g:csv_highlight_column = 'y'
 FTBundle ft=csv 'csv.vim'
 
 " less css
-FTBundle ft=less 'groenewege/vim-less'
+FTBundle ft=less,html 'groenewege/vim-less'
 
 " coffee script
-FTBundle ft=coffee,eco 'kchmck/vim-coffee-script'
+FTBundle ft=coffee,html,eco 'kchmck/vim-coffee-script'
 FTBundle ft=eco             'AndrewRadev/vim-eco'
 
 " redmine uses textile
