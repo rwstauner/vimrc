@@ -320,7 +320,8 @@ FTBundle ft=csv 'csv.vim'
 FTBundle ft=less 'groenewege/vim-less'
 
 " coffee script
-FTBundle ft=coffee 'kchmck/vim-coffee-script'
+FTBundle ft=coffee,eco 'kchmck/vim-coffee-script'
+FTBundle ft=eco             'AndrewRadev/vim-eco'
 
 " redmine uses textile
 FTBundle ft=textile 'timcharper/textile.vim'

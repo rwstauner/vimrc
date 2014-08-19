@@ -10,6 +10,8 @@ let s:styled_types = [
   \ 'cfg',
   \ 'css',
   \ 'cpanchanges',
+  \ 'coffee',
+  \ 'eco',
   \ 'html',
   \ 'mako',
   \ 'javascript',
