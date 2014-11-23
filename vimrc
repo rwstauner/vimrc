@@ -155,6 +155,12 @@ set rtp +=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+" editorconfig {{{
+Bundle 'editorconfig/editorconfig-vim'
+" Overwrite filetype.
+autocmd BufWinEnter .editorconfig set filetype=cfg
+" }}}
+
 " define some vundle helper commands
 runtime macros/lazy_bundle.vim
 
