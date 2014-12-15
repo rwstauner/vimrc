@@ -66,6 +66,7 @@ set   shortmess=atToO " shorten file info messages
 set   showbreak=⦉  " show start of wrapped lines
 set   showcmd      " show unfinished command in the command line (right side)
 set   showmode     " show vim mode at the bottom (insert/replace/visual)
+set   splitright splitbelow " change default split to append rather than prepend
 "set   switchbuf=   " default is blank, but usetab could be interesting
 set   timeout timeoutlen=3000 ttimeoutlen=100 " try to detect term keys but give me 3 sec to finish my command
 set   tildeop      " make ~ an operator (that expects a motion command)
