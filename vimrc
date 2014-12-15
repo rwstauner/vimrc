@@ -162,6 +162,19 @@ Bundle 'editorconfig/editorconfig-vim'
 autocmd BufWinEnter .editorconfig set filetype=cfg
 " }}}
 
+" [ vim-tmux-navigatior ] {{{
+let g:tmux_navigator_no_mappings = 1
+" let g:tmux_navigator_save_on_switch = 0
+
+Bundle 'christoomey/vim-tmux-navigator'
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
+" }}}
+
 " define some vundle helper commands
 runtime macros/lazy_bundle.vim
 
