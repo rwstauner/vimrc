@@ -168,11 +168,12 @@ let g:tmux_navigator_no_mappings = 1
 
 Bundle 'christoomey/vim-tmux-navigator'
 
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-p> :TmuxNavigatePrevious<cr>
+" C-Left C-Down C-Up C-Right
+nnoremap <silent> [1;5D   :TmuxNavigateLeft<cr>
+nnoremap <silent> [1;5B   :TmuxNavigateDown<cr>
+nnoremap <silent> [1;5A   :TmuxNavigateUp<cr>
+nnoremap <silent> [1;5C   :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\>     :TmuxNavigatePrevious<cr>
 " }}}
 
 " define some vundle helper commands
@@ -675,9 +676,9 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 " TODO: mapping for :tabedit ?
 
 " <C-Up> <C-Down> (like ctrl-e/y but with one hand)
-nnoremap [1;5A <C-y>
-nnoremap [1;5B <C-e>
-" <S-Up> <S-Down> (same)
+"nnoremap [1;5A <C-y>
+"nnoremap [1;5B <C-e>
+" <S-Up> <S-Down> (like ctrl-e/y but with one hand)
 nnoremap [1;2A <C-y>
 nnoremap [1;2B <C-e>
 
