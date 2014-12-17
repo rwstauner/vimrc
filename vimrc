@@ -169,12 +169,15 @@ let g:tmux_navigator_no_mappings = 1
 Bundle 'christoomey/vim-tmux-navigator'
 
 " S-Left S-Down S-Up S-Right
-nnoremap <silent> [1;2D   :TmuxNavigateLeft<cr>
-nnoremap <silent> [1;2B   :TmuxNavigateDown<cr>
-nnoremap <silent> [1;2A   :TmuxNavigateUp<cr>
-nnoremap <silent> [1;2C   :TmuxNavigateRight<cr>
+noremap <silent> [1;2A   :<C-U>TmuxNavigateUp<cr>
+noremap <silent> [1;2B   :<C-U>TmuxNavigateDown<cr>
+noremap <silent> [1;2C   :<C-U>TmuxNavigateRight<cr>
+noremap <silent> [1;2D   :<C-U>TmuxNavigateLeft<cr>
 " This one doesn't fit :/
-nnoremap <silent> <C-\>     :TmuxNavigatePrevious<cr>
+noremap <silent> <C-\>     :<C-U>TmuxNavigatePrevious<cr>
+
+" Note: In visual mode the selection won't be preserved
+" but this is also the case for regular C-w commands, so that's fine.
 " }}}
 
 " define some vundle helper commands
