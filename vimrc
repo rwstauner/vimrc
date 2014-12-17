@@ -168,11 +168,12 @@ let g:tmux_navigator_no_mappings = 1
 
 Bundle 'christoomey/vim-tmux-navigator'
 
-" C-Left C-Down C-Up C-Right
-nnoremap <silent> [1;5D   :TmuxNavigateLeft<cr>
-nnoremap <silent> [1;5B   :TmuxNavigateDown<cr>
-nnoremap <silent> [1;5A   :TmuxNavigateUp<cr>
-nnoremap <silent> [1;5C   :TmuxNavigateRight<cr>
+" S-Left S-Down S-Up S-Right
+nnoremap <silent> [1;2D   :TmuxNavigateLeft<cr>
+nnoremap <silent> [1;2B   :TmuxNavigateDown<cr>
+nnoremap <silent> [1;2A   :TmuxNavigateUp<cr>
+nnoremap <silent> [1;2C   :TmuxNavigateRight<cr>
+" This one doesn't fit :/
 nnoremap <silent> <C-\>     :TmuxNavigatePrevious<cr>
 " }}}
 
@@ -506,13 +507,19 @@ set t_%i=[1;5C
 "nmap <kPageUp>   gT
 "nmap <kPageDown> gt
 
+" Arrow keys: UDRL => ABCD
+
+" <C-Up> <C-Down> (like ctrl-e/y but with one hand)
+nnoremap [1;5A <C-y>
+nnoremap [1;5B <C-e>
+
 " compatibility with shell movement (and/or when i wrongfully hold shift)
-" ctrl-arrow moves across words
+" Ctrl-arrow (C-Left C-Right) moves across words.
 nnoremap [1;5C w
 nnoremap [1;5D b
-" shift-arrow moves across shell words (non-space)
-nnoremap [1;2C W
-nnoremap [1;2D B
+" Ctrl-Shift-arrow (C-S-Left C-S-Right) moves across shell words (non-space).
+nnoremap [1;6C W
+nnoremap [1;6D B
 
 " don't clear the screen (no termcap) when exiting vim or executing external commands
 set t_ti= t_te=
@@ -674,13 +681,6 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 " [ mappings ] {{{
 " <Leader> == 'mapleader' (default: "\")
 " TODO: mapping for :tabedit ?
-
-" <C-Up> <C-Down> (like ctrl-e/y but with one hand)
-"nnoremap [1;5A <C-y>
-"nnoremap [1;5B <C-e>
-" <S-Up> <S-Down> (like ctrl-e/y but with one hand)
-nnoremap [1;2A <C-y>
-nnoremap [1;2B <C-e>
 
 
 " thanks to sartak for these (https://github.com/sartak/conf/blob/master/vimrc): {{{
