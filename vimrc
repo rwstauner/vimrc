@@ -529,6 +529,12 @@ set t_ti= t_te=
 
 " 256 color detection works
 " (at least with gnome-terminal TERM=xterm-256color tmux TERM=screen-256color)
+" Currently with xfce4-terminal and tmux everything ends up bold.
+if &term =~ "-256color" && $XDG_CURRENT_DESKTOP == "XFCE" && $TMUX != ""
+  "set t_Co=256
+  set t_AB=[48;5;%dm
+  set t_AF=[38;5;%dm
+endif
 
 " 16 colors
 "if has("terminfo")
