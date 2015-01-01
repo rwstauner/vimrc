@@ -205,6 +205,8 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-commentary'
 " navigate various things back and forth with [x and ]x (t,l,q...)
 Bundle 'tpope/vim-unimpaired'
+" better management of quotes and paired symbols than i used to do
+Bundle 'tpope/vim-surround'
 
 " cursor jump selection with \\w or \\f
 Bundle 'Lokaltog/vim-easymotion'
