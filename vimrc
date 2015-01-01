@@ -51,7 +51,7 @@ set   laststatus=2 " always show statusline
 set   lazyredraw   " don't redraw screen during macros
 "set   linebreak    " has no effect when list is on
 set   list         " show invisible chars ('listchars')
-set   listchars=tab:▸\ ,extends:⇢,precedes:⇠,nbsp:☐,trail:⬚ "eol:¬, " hooray for unicode
+set   listchars=tab:▸\ ,extends:⇢,precedes:⇠,nbsp:▣,trail:▫ "eol:¬, " hooray for unicode
 set   magic        " too bad there's no set verymagic (but good for compatibility)
 set   matchpairs+=<:>
 set   modeline     " ensure modelines are honored
