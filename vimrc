@@ -162,6 +162,10 @@ Bundle 'editorconfig/editorconfig-vim'
 autocmd BufWinEnter .editorconfig set filetype=cfg
 " }}}
 
+" Disable the tmux escape sequence wrapper as it seems unnecessary in my usual env.
+let g:bracketed_paste_tmux_wrap = 0
+Bundle 'ConradIrwin/vim-bracketed-paste'
+
 " [ vim-tmux-navigatior ] {{{
 let g:tmux_navigator_no_mappings = 1
 " let g:tmux_navigator_save_on_switch = 0
