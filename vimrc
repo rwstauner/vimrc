@@ -272,6 +272,9 @@ let g:netrw_winsize      = 20 " inital size of new browser
 " }}}
 " [ nerdtree ] {{{
 
+let g:NERDTreeCasadeOpenSingleChildDir  = 1
+let g:NERDChristmasTree                 = 1
+let g:NERDTreeHighlightCursorline       = 1
 let g:NERDTreeHijackNetrw     = 1
 let g:NERDTreeShowHidden      = 1
 let g:NERDTreeShowLineNumbers = 1
@@ -283,7 +286,7 @@ let g:NERDTreeIgnore = [
   \ '__pycache__',
   \ ]
 
-LazyCommand -nargs=* -complete=dir NERDTree 'scrooloose/nerdtree'
+LazyCommand -nargs=? -complete=dir NERDTree 'scrooloose/nerdtree'
 
 if g:NERDTreeHijackNetrw
   " tell netrw to forget it
@@ -291,7 +294,7 @@ if g:NERDTreeHijackNetrw
   " fake netrw's augroup so nerdtree will replace it
   augroup FileExplorer
     au!
-    au BufEnter,VimEnter * if isdirectory(expand("<amatch>")) | unlet g:loaded_netrwPlugin | exe "NERDTree " . expand("<amatch>") | wincmd p | wincmd q | exe 'au! FileExplorer' | endif
+    au BufEnter,VimEnter * if isdirectory(expand("<amatch>")) | unlet g:loaded_netrwPlugin | exe "NERDTree " . escape(expand("<amatch>"), ' \') | wincmd p | wincmd q | exe 'au! FileExplorer' | endif
   augroup END
 endif
 
