@@ -409,6 +409,8 @@ endif
 " See also: https://gist.github.com/schmmd/1320359.
 FTBundle ft=scala 'derekwyatt/vim-scala'
 
+FTBundle ft=Dockerfile 'ekalinin/Dockerfile.vim'
+
 " json: better than 'javascript'
 FTBundle ft=json   'elzr/vim-json'
 
