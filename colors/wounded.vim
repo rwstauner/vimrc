@@ -63,7 +63,7 @@ hi PmenuSel     ctermfg=black ctermbg=magenta cterm=bold
 
 "hi Search      ctermfg=white ctermbg=magenta cterm=underline,bold
 hi Search       cterm=none  ctermfg=black  ctermbg=yellow
-hi SpecialKey   ctermfg=darkgrey ctermbg=none cterm=bold
+hi SpecialKey   ctermfg=240 ctermbg=none cterm=bold
 
 hi SpellBad     cterm=bold  ctermfg=black  ctermbg=red
 hi SpellCap     cterm=bold  ctermfg=black  ctermbg=magenta
