@@ -361,6 +361,12 @@ FTBundle ft=eco             'AndrewRadev/vim-eco'
 " redmine uses textile
 FTBundle ft=textile 'timcharper/textile.vim'
 
+" FIXME: This doesn't work with any syntaxes that are lazily added to &rtp.
+" But it would if we generated a tree with all the files linked into it.
+" FIXME: This seems to load the syntastic check for sh which fails miserably.
+"let g:markdown_fenced_languages = [ 'bash', 'perl', 'ruby', 'sh' ]
+"FTBundle ft=markdown 'tpope/vim-markdown'
+
 " [ python ] {{{
 " python template engine
 FTBundle ft=mako 'sophacles/vim-bundle-mako'
@@ -414,6 +420,16 @@ FTBundle ft=Dockerfile 'ekalinin/Dockerfile.vim'
 
 " json: better than 'javascript'
 FTBundle ft=json   'elzr/vim-json'
+
+" fishshell.com
+"FTBundle ft=fish 'aliva/vim-fish'
+
+" haxe: see http://haxe.org/com/ide/vim
+"Bundle 'vim-haxe' " requires vim-addon-manager
+"Bundle 'jdonaldson/vaxe'
+" wikidoc: Bundle 'wikidoc.vim'
+
+" TODO: https://github.com/janko-m/vim-test
 
 " xml shortcuts
 let xml_use_xhtml = 1
@@ -492,6 +508,14 @@ if $MULTIPLEXER != ""
 endif
 
 " }}}
+
+" [ covim ] {{{
+"Bundle 'FredKSchott/CoVim'
+" :CoVim start [port] [name]
+" :CoVim connect host port name
+" :CoVim disconnect
+" }}}
+
 FixRunTimePath
 " }}}
 
