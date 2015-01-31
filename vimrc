@@ -1253,6 +1253,7 @@ command! -bar DiffThese diffthis | wincmd p | diffthis | wincmd p | DiffHelpers
 command! -bar DiffToggle windo if &diff | diffoff | DiffHelpers | else |
   \ if &buftype == "" | DiffThis | endif | endif
 nmap <Leader>dt :DiffToggle<CR>
+
 " }}}
 
 " load project-specific vimrc
@@ -1275,3 +1276,5 @@ nmap <Leader>dt :DiffToggle<CR>
 " }}}
 
 " :Ni!
+set secure " last
+set noexrc
