@@ -731,6 +731,20 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 " <Leader> == 'mapleader' (default: "\")
 " TODO: mapping for :tabedit ?
 
+" Create shortcuts for common % modifier operations.
+function ExpandEscaped(exp)
+  " We need to double-escape for the backslashes to make it to the command line.
+  return substitute(expand(a:exp), " ", "\\\\ ", "g")
+endfunction
+" full path
+cnoremap %p <C-R>=ExpandEscaped('%:p')<CR>
+" head (parent dir)
+cnoremap %h <C-R>=ExpandEscaped('%:h').'/'<CR>
+" tail (file)
+cnoremap %t <C-R>=ExpandEscaped('%:t')<CR>
+" root (extention removed)
+cnoremap %r <C-R>=ExpandEscaped('%:r')<CR>
+
 " suggested by motion.txt for jumping to braces (not in the first column)
 map <silent> [[ ?{<CR>:noh<CR>w99[{
 map <silent> ][ /}<CR>:noh<CR>b99]}
