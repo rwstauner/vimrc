@@ -494,9 +494,9 @@ command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 " [ tags ] {{{
 
 "set tags+=~/.vim/tags/ptags " cpan: Vim::Tags
-command -nargs=1 -complete=tag SpTag new | tag <args>
 nmap <Leader>[t :sp +tN<CR>
 nmap <Leader>]t :sp +tn<CR>
+
 " I'd like a plugin that explores my whole tags file, but these only operate
 " on the current buffer (which I haven't found useful yet)
 "Bundle 'taglist.vim'
