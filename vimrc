@@ -648,8 +648,9 @@ elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded |
 
 " }}}
 
-syntax enable
+" Do filetype then syntax in case the ftplugin customizes the syntax defs.
 filetype plugin indent on
+syntax enable
 
 
 " restore previous cursor position (:help last-position-jump)
