@@ -25,6 +25,7 @@ let s:styled_types = [
   \ 'ruby',
   \ 'eruby',
   \ 'rst',
+  \ 'scala',
   \ 'sh',
   \ 'sql',
   \ 'tmux',

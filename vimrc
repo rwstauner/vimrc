@@ -400,6 +400,15 @@ if exists('$GOROOT') && isdirectory($GOROOT)
   au FileType go set rtp^=$GOROOT/misc/vim rtp+=$GOROOT/misc/vim/after | FixRunTimePath
 endif
 
+" scala
+" if exists('$SCALA_DIST') && isdirectory($SCALA_DIST)
+"   source $SCALA_DIST/tool-support/src/vim/ftdetect/filetype.vim
+"   " NOTE: Currently there's no 'after' directory.
+"   au FileType scala set rtp^=$SCALA_DIST/tool-support/src/vim | FixRunTimePath
+" endif
+" See also: https://gist.github.com/schmmd/1320359.
+FTBundle ft=scala 'derekwyatt/vim-scala'
+
 " json: better than 'javascript'
 FTBundle ft=json   'elzr/vim-json'
 
