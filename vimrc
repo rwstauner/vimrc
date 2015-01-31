@@ -414,6 +414,11 @@ FTBundle ft=Dockerfile 'ekalinin/Dockerfile.vim'
 " json: better than 'javascript'
 FTBundle ft=json   'elzr/vim-json'
 
+" xml shortcuts
+let xml_use_xhtml = 1
+FTBundle ft=xml 'sukima/xmledit'
+command! XMLMode exe "LazyBundle 'sukima/xmledit'" | set ft=xml
+
 " }}}
 " [ syntastic ] automatic syntax check into location list {{{
 
@@ -697,12 +702,8 @@ if exists("+cursorline")
 endif
 
 command -nargs=1 -complete=dir -complete=file Arge 99arge <args>
-command -nargs=+ -complete=custom,XMLargumentCompletion		Xt 	call XMLtag(0,<f-args>)
-command -nargs=+ -complete=custom,XMLargumentCompletion -range 	Xv	call XMLtagV(<f-args>)
-command -nargs=+ -complete=custom,XMLargumentCompletion		Xa	call XMLattr(<f-args>)
 
 command SynStack for id in synstack(line("."), col(".")) | echo synIDattr(id, "name") . " => " . synIDattr(synIDtrans(id), "name") | endfor
-command XMLmode call XMLmode()
 
 command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e '$t = Text::ASCIITable->new; $t->setCols(split(/\t/, scalar <STDIN>)); $t->addRow(split(/\t/)) for <STDIN>; print $t'
 " }}}
@@ -828,30 +829,13 @@ vmap <silent> <Leader>= 	:call Pod("v")<CR>
 "nmap <silent> <Leader>cs 	:call SpanishCharacters(    )<CR>
 "nmap <silent> <Leader>ch 	:call HtmlEscape(    )<CR>
 " html paragraph
-"nmap <silent> <Leader>hp 	:call XMLtag( 0, "p" )<CR>
-"nmap <silent> <Leader>hP 	:call XMLtag( 1, "p" )<CR>
 nmap <silent> <Leader>hp 	:norm {o<p>}O</p>
 nmap <silent> <Leader>hP 	:norm o</p>oo<p>
-vmap <silent> <Leader>hp 	:call XMLtagV(   "p" )<CR>
 " html div
 nmap <silent> <Leader>hd 	:norm {o<div>}O</div>
 nmap <silent> <Leader>hD 	:norm o</div>oo<div>
 "html tags
-nmap <silent> <Leader>hb 	:call XMLtag( 0, "b" )<CR>
-nmap <silent> <Leader>hB 	:call XMLtag( 1, "b" )<CR>
-vmap <silent> <Leader>hb 	:call XMLtagV(   "b" )<CR>
 nmap <silent> <Leader>he 	:call HtmlEscape(    )<CR>
-nmap <silent> <Leader>hi 	:call XMLtag( 0, "i" )<CR>
-nmap <silent> <Leader>hI 	:call XMLtag( 1, "i" )<CR>
-vmap <silent> <Leader>hi 	:call XMLtagV(   "i" )<CR>
-nmap <silent> <Leader>hu 	:call XMLtag( 0, "u" )<CR>
-nmap <silent> <Leader>hU 	:call XMLtag( 1, "u" )<CR>
-vmap <silent> <Leader>hu 	:call XMLtagV(   "u" )<CR>
-nmap <silent> <Leader>hs 	:call XMLtag( 0, "span", "class" )<CR>
-nmap <silent> <Leader>hS 	:call XMLtag( 1, "span", "class" )<CR>
-vmap <silent> <Leader>hs 	:call XMLtagV(   "span", "class" )<CR>
-vmap <silent> <Leader>hS 	:call XMLtagV(   "span" )<CR>
-nmap <silent> <Leader>hc 	:call XMLattr(   "class" )<CR>
 nmap <Leader>hr 		i<lt>br /><Esc>
 nmap <Leader>hR 		A<lt>br /><Esc>
 nmap <Leader>hh 		i<lt>hr /><Esc>
@@ -1215,61 +1199,6 @@ function SurroundTill(r, ...) range "replace, tilloutside(farther), till, leftsi
 		execute tillleftcmd
 	endif
 endfunction
-
-function XMLmode()
-	" we need the g: global prefix b/c we're inside a function
-	let g:xml_use_xhtml = 1
-	"let g:xml_tag_completion_map = "<C-l>"
-	if exists("b:did_ftplugin")
-		unlet b:did_ftplugin
-	endif
-	let b:match_words = "XMLmodeMatchWords()"
-	source $VIMRUNTIME/macros/matchit.vim
-	source ~/.vim/macros/xml_xhtml.vim
-	if ! (&filetype == "html" || &filetype == "xhtml")
-		set filetype=xml
-	endif
-endfunction
-
-function XMLmodeMatchWords()
-	" jump from <tag> to </tag> by returning the tag you're currently on
-	let cword = expand("<cword>")
-	return "<:>,<" . cword . ":</" . cword . ">"
-endfunction
-
-function XMLattr(attr, ...) "attrname, value
-	let attrtxt = a:attr . "=\"" . ( a:0 ? a:1 : "" ) . "\""
-	if Cchar() == ">" || Cchar() == " "		"if at the end of the tag or on a space
-		let attrcmd = "i " . attrtxt . "\e"
-	elseif Cword(1)[0] == "<" 			"if in the start of the tag
-		let attrcmd = ( Cchar() != "<" ? "B" : "") . "ea " . attrtxt . "\e"
-	else						"if somewhere inside
-		let attrcmd = ( Cchar(-1) == " " ? "" : "B" ) . "i" . attrtxt . " \eh"
-	endif
-		execute "normal " . attrcmd
-endfunction
-"	function XMLargumentCompletion(ArgLead, CmdLine, CursorPos)
-"		"if filereadable("/usr/share/vim/vim*/syntax/html.vim")
-"		"if filereadable("/usr/share/vim/vim*/syntax/cf.vim")
-"		return "a\nb\ninput\nspan\ntable"
-"		"let taglist = execute "syntax list cfTagName"
-"		"$VIMRUNTIME/syntax/cf.vim
-"		"runtime! syntax/<name>.vim
-"		"return ArgumentCompletion("xml", a:ArgLead, a:CmdLine, a:CursorPos)
-"	
-"		"let cftags = substitute("cfabort cfapplet cfapplication cfassociate cfauthenticate cfbreak cfcache cfcol cfcollection cfcontent cfcookie cfdirectory cferror cfexit cffile cfform cfftp cfgrid cfgridcolumn cfgridrow cfgridupdate cfheader cfhtmlhead cfhttp cfhttpparam cfif cfelseif cfelse cfinclude cfindex cfinput cfinsert cfldap cflocation cflock cfloop cfmail cfmodule cfobject cfoutput cfparam cfpop cfprocparam cfprocresult cfquery cfregistry cfreport cfschedule cfscript cfsearch cfselect cfset cfsetting cfslider cfstoredproc cfswitch cfcase cfdefaultcase cftable cftextinput cfthrow cftransaction cftree cftreeitem cftry cfcatch cfupdate cfwddx cfdump cfsavecontent cffunction cfmailparam cfreturn cfargument cfqueryparam", " ", "\n", "g")
-"	
-"	endfunction
-function XMLtag(...) "unrestrictive boundaries, tagname, attribute, value
-	:call SurroundCword( a:1, "<" . a:2 . ( a:0 >= 3 ? " " . a:3 . "=\"" . ( a:0 >= 4 ? a:4 : "" ) . "\"" : "") .  ">", "</" . a:2 . ">", "B" . ( ( a:0 >= 3 ? strlen( a:3 ) : strlen( a:2 ) ) + 2 ) . "l" )
-endfunction
-function XMLtagV(htag, ...) range "tagname, attribute, value
-	:call SurroundSelection( "<" . a:htag . ( a:0 >= 1 ? " " . a:1 . "=\"" . ( a:0 >= 2 ? a:2 : "" ) . "\"" : "") .">", "</" . a:htag . ">", ( a:0 >= 1 ? "h" : "l" ) )
-endfunction
-
-"	function ArgumentCompletion(which, ArgLead, CmdLine, CursorPos)
-"		return "a\nb\ninput\nspan\ntable"
-"	endfunction
 
 " }}}
 " [ diff ] {{{
