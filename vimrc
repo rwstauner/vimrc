@@ -630,12 +630,6 @@ end
 
 " }}}
 
-" suggested by motion.txt
-":map [[ ?{<CR>w99[{
-":map ][ /}<CR>b99]}
-":map ]] j0[[%/{<CR>
-":map [] k$][%?}<CR>
-
 " highlight conflict markers
 au BufReadPost * call matchadd("ErrorMsg", '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$')
 " highlight todo messages in any syntax
@@ -737,6 +731,11 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 " <Leader> == 'mapleader' (default: "\")
 " TODO: mapping for :tabedit ?
 
+" suggested by motion.txt for jumping to braces (not in the first column)
+map <silent> [[ ?{<CR>:noh<CR>w99[{
+map <silent> ][ /}<CR>:noh<CR>b99]}
+map <silent> ]] j0[[%/{<CR>:noh<CR>
+map <silent> [] k$][%?}<CR>:noh<CR>
 
 " thanks to sartak for these (https://github.com/sartak/conf/blob/master/vimrc): {{{
 
