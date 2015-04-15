@@ -63,6 +63,7 @@ autocmd             BufRead *.cgi                                       if getli
 autocmd  BufNewFile,BufRead *.porklog                                   setf porklog
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
 autocmd  BufNewFile,BufRead Vagrantfile,_Vagrantfile                    setf ruby
+autocmd  BufNewFile,BufRead *.sc                                        setf scala
 autocmd  BufNewFile,BufRead *.screenrc,.screenrc*                       setf screen
 autocmd  BufNewFile,BufRead tox.ini                                     setf cfg
 autocmd  BufNewFile,BufRead *.wsgi                                      setf python
