@@ -119,6 +119,8 @@ set   textwidth=80 " common long-line limit (some filetypes customize this)
 
 " see fo-table for descriptions of tcroqwan2vblmMB1
 set  formatoptions +=crqbl  formatoptions -=towa
+" j is fairly new in Vim, so don't complain if it's not there
+silent! set formatoptions+=j
 " i usually find 'o' more annoying than helpful
 autocmd BufWinEnter * setlocal formatoptions -=o
 
