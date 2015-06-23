@@ -3,5 +3,3 @@
 "setlocal keywordprg=perlfind
 
 setlocal iskeyword+=:
-
-set formatoptions=tcrql
