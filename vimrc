@@ -221,7 +221,8 @@ Bundle 'tpope/vim-unimpaired'
 " better management of quotes and paired symbols than i used to do
 Bundle 'tpope/vim-surround'
 
-" cursor jump selection with \\w or \\f
+" cursor jump selection with \mw or \mf
+let g:EasyMotion_leader_key = 'm'
 Bundle 'Lokaltog/vim-easymotion'
 
 " custom text objects {{{
