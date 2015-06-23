@@ -86,6 +86,10 @@ set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x secon
 " TODO: investigate 'cpoptions'
 
 " }}}
+
+" Don't load other language syntax files when editing vim files.
+let g:vimsyn_embed = 0 "  'pP' => p: perl, P: python
+
 " [ undo ] {{{
 
 " remember :display and redo-register
