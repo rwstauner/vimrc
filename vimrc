@@ -239,7 +239,9 @@ Bundle 'doy/vim-textobj'
 " [ yankring ] save a list of previously yanked text {{{
 
 let g:yankring_history_dir = s:cache
-let g:yankring_manage_numbered_reg = 1
+let g:yankring_manage_numbered_reg = 0
+" I usually have an x-based clipboard manager.
+let g:yankring_clipboard_monitor = 0
 
 " my terminal sends Esc when I press Alt
 let g:yankring_replace_n_pkey = '<Esc>,'
