@@ -117,12 +117,15 @@ set nosmartindent  " braces sound ok but i use # for comments more often than #i
 
 set   textwidth=80 " common long-line limit (some filetypes customize this)
 
-" see fo-table for descriptions of tcroqwan2vblmMB1
-set  formatoptions +=crqbl  formatoptions -=towa
-" j is fairly new in Vim, so don't complain if it's not there
+" [ 'formatoptions' ] {{{
+" `:help fo-table` for descriptions of tcroqwan2vblmMB1j
+" Subtract options one at a time (`:help add-option-flags`).
+set  formatoptions +=crqbl  fo -=t fo -=o fo -=w fo -=a
+" j is new in Vim 7.4, so don't complain if it's not there.
 silent! set formatoptions+=j
 " i usually find 'o' more annoying than helpful
 autocmd BufWinEnter * setlocal formatoptions -=o
+" }}}
 
 "set   formatprg=fmt " better gq c-indent formatting
 " cinoptions+=l1
