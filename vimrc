@@ -1244,11 +1244,6 @@ nmap <Leader>dt :DiffToggle<CR>
 
 " }}}
 
-" load project-specific vimrc
-"if getcwd() != "/home/rando"
-"  exe "source " . getcwd() . "/.vimrc"
-"endif
-
 " [ see also ] {{{
 " http://vim.wikia.com/wiki/Vim_Tips_Wiki
 " https://github.com/derekwyatt/vim-config
