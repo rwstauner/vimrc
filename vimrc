@@ -361,7 +361,9 @@ runtime macros/stub_perl_mod.vim
 
 let g:csv_hiGroup = 'CSVHiColumn'
 let g:csv_highlight_column = 'y'
-FTBundle ft=csv 'csv.vim'
+"FTBundle ft=csv 'csv.vim'
+" More often than not I just want to peek at the file without all the magic.
+command! CSV exe "Bundle 'csv.vim'" | set ft=csv
 
 " less css
 FTBundle ft=less,html 'groenewege/vim-less'
