@@ -429,6 +429,7 @@ endif
 " endif
 " See also: https://gist.github.com/schmmd/1320359.
 FTBundle ft=scala 'derekwyatt/vim-scala'
+FTBundle ft=sbt.scala 'derekwyatt/vim-sbt'
 
 FTBundle ft=Dockerfile 'ekalinin/Dockerfile.vim'
 
