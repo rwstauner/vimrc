@@ -682,6 +682,9 @@ runtime macros/new_file_autocommands.vim
 " open (or close) the quickfix window after make/grep commands
 autocmd  QuickFixCmdPost *make*,*grep* cwindow
 
+" Turn an open buffer into a quickfix list (for pasting the output of a command into a buffer).
+command! -bang QuickFixThis let &l:modified = !strlen("<bang>") | cbuffer | copen | cfirst
+
 " try hard to highlight correctly
 "autocmd BufEnter,CursorHold,CursorHoldI * syntax sync fromstart
 
