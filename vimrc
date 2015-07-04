@@ -196,6 +196,14 @@ noremap <silent> <C-\>     :<C-U>TmuxNavigatePrevious<cr>
 " define some vundle helper commands
 runtime macros/lazy_bundle.vim
 
+" Reopen all "file:line" args as file at line.
+let g:file_line_bundle_cmd = "Bundle 'bogado/file-line'"
+" Load it automatically if any args contain a colon.
+if match(argv(), ':') >= 0 | exe g:file_line_bundle_cmd | endif
+" Can also be delayed behind a command (add dir to rtp, load plugin, and
+" trigger autocommand that the plugin listens for (no api is exposed)).
+"command! FileLine exe g:file_line_bundle_cmd | runtime plugin/file_line.vim | silent doautocmd <nomodeline> VimEnter *
+
 " TODO: consider these:
 " https://github.com/zaiste/vimified
 " https://github.com/mutewinter/dot_vim
