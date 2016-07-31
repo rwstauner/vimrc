@@ -384,6 +384,12 @@ FTBundle ft=less,html 'groenewege/vim-less'
 FTBundle ft=coffee,html,eco 'kchmck/vim-coffee-script'
 FTBundle ft=eco             'AndrewRadev/vim-eco'
 
+" elm
+FTBundle ft=elm             'lambdatoast/elm.vim'
+
+" purescript
+FTBundle ft=purescript      'raichoo/purescript-vim'
+
 " redmine uses textile
 FTBundle ft=textile 'timcharper/textile.vim'
 
