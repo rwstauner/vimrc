@@ -11,6 +11,7 @@ let s:styled_types = [
   \ 'css',
   \ 'cpanchanges',
   \ 'coffee',
+  \ 'Dockerfile',
   \ 'eco',
   \ 'haskell',
   \ 'html',
