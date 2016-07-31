@@ -83,6 +83,8 @@ set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
 set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
+let &shell="env PATH=" . expand('$PATH') . ' ' . &shell
+
 " TODO: investigate 'cpoptions'
 
 " }}}
