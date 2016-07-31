@@ -1,7 +1,7 @@
 SHELL = /bin/bash
 VIMRC = vimrc
 
-.PHONY: all vundle bundles unbundled
+.PHONY: all vundle bundles
 
 # by default just install the bundles that are always enabled
 all: vundle
@@ -22,6 +22,3 @@ update-bundles install-bundles: vundle
 	echo $$':BundleInstall$(if $(findstring update,$@),!)\n:wincmd p\n:wincmd c' >> $(INSTALL_SCRIPT)
 	cat    $(INSTALL_SCRIPT)
 	vim -s $(INSTALL_SCRIPT)
-
-unbundled:
-	./unbundled.sh
