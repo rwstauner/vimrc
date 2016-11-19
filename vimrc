@@ -452,6 +452,16 @@ Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'derekwyatt/vim-sbt', { 'for': 'sbt.scala' }
 " }}}
 
+" [ clojure ] {{{
+"Plug 'vim-scripts/VimClojure'
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" tpope/vim-classpath
+" guns/vim-clojure-static
+" kovisoft/paredit
+" }}}
+
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " json: better than 'javascript'
