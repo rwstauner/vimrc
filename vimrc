@@ -588,11 +588,6 @@ nmap <Leader>]t :sp +tn<CR>
 " }}}
 " [ misc ]
 
-"use this to keep screen from hanging on load, but set it back so i can use mouse wheel and click to select windows (hooray for hacks)
-"set ttymouse=xterm2
-"set mouse=a
-"set ttymouse=xterm
-
 "for TOhtml
 let use_xhtml = 1
 let html_use_css = 1
@@ -896,7 +891,7 @@ nmap <Leader>J			gJkgJ
 nmap <silent> <Leader>_ 	i_gu2l
 vmap <silent> <Leader>_ 	<Esc>:set lz<CR>`>a`<i:s/\v([a-z])([A-Z])/\1_\l\2/g<CR>gJkgJ:set nolz<CR>:redraw<CR>:silent noh<CR>
 "mappings for dynamic characters
-map  <silent> <Leader>! 	:call Bang()<CR>
+" b takes the next character (c, d, x, y, v)
 nmap <silent> <Leader>b 	:call InBetween("",0)<CR>
 nmap <silent> <Leader>B 	:call InBetween("",1)<CR>
 nmap <silent> <Leader>c 	:call InBetween("c",0)<CR>
@@ -909,6 +904,7 @@ nmap <silent> <Leader>v 	:call InBetween("v",0)<CR>
 nmap <silent> <Leader>V 	:call InBetween("v",1)<CR>
 nmap <silent> <Leader>y 	:call InBetween("y",0)<CR>
 nmap <silent> <Leader>Y 	:call InBetween("y",1)<CR>
+" FIXME: make text objects?
 nmap <silent> <Leader>s 	:<C-U>call SurroundCword(0)<CR>
 nmap <silent> <Leader>S 	:<C-U>call SurroundCword(1)<CR>
 nmap <silent> <Leader>t 	:<C-U>call SurroundTill(0,0)<CR>
@@ -916,9 +912,7 @@ nmap <silent> <Leader>T 	:<C-U>call SurroundTill(0,1)<CR>
 nmap <silent> <Leader>r 	:<C-U>call SurroundTill(1,1)<CR>
 nmap <silent> <Leader>R 	:<C-U>call SurroundTill(1,0)<CR>
 vmap <silent> <Leader>s 	:call SurroundSelection()<CR>
-"character manipulation
-"nmap <silent> <Leader>cs 	:call SpanishCharacters(    )<CR>
-"nmap <silent> <Leader>ch 	:call HtmlEscape(    )<CR>
+
 " html paragraph
 nmap <silent> <Leader>hp 	:norm {o<p>}O</p>
 nmap <silent> <Leader>hP 	:norm o</p>oo<p>
@@ -988,18 +982,6 @@ function ArgeCfile() "open filename under cursor at the end of the current argum
 "			echoe "File Not Found"
 "		endif
 "	endif
-endfunction
-function Bang() range "external commands
-	let commandchar = nr2char( getchar() )
-	if commandchar == "x"
-		let commandarg = nr2char( getchar() )
-		let i = 1
-		while i <= v:count1
-			let i = ( i + 1 )
-			execute ":silent ! ~/bin/xmmskeys -" . commandarg 
-			redraw!
-		endwhile
-	endif
 endfunction
 
 function CleanupWordPaste() range
@@ -1071,39 +1053,7 @@ function HtmlEscape(...) "range
 
 	call setreg('"', oldreg) "preserve my previous yanking
 endfunction
-"	function FancyCharacters(...) "range
-"		let oldreg = getreg('"') "preserve my previous yanking
-"	
-"		let reg = 'c'
-"		exe 'norm "' . reg . 'yl'
-"		let c = getreg(reg)
-"	
-"		" …“”’–
-"		let entities = {'…': '...', '“': '"', '”': '"', "’": "'", '–': '--'}
-"		" insert using vim utf-8 escape sequence
-"		"if has_key(entities, c)
-"			"exe 'norm "_clu00' . entities[c]
-"		"endif
-"		unlet entities
-"	
-"		call setreg('"', oldreg) "preserve my previous yanking
-"	endfunction
-"	function SpanishCharacters(...) "range
-"		let oldreg = getreg('"') "preserve my previous yanking
-"	
-"		let reg = 'c'
-"		exe 'norm "' . reg . 'yl'
-"		let c = getreg(reg)
-"	
-"		let entities = {'a': 'E1', 'e': 'E9', 'i': 'ED', 'n': 'F1', 'o': 'F3', 'u': 'FA', 'U': 'FC', '!': 'A1', '?': 'BF'}
-"		" insert using vim utf-8 escape sequence
-"		if has_key(entities, c)
-"			exe 'norm "_clu00' . entities[c]
-"		endif
-"		unlet entities
-"	
-"		call setreg('"', oldreg) "preserve my previous yanking
-"	endfunction
+
 function ImageDataUri() range
 	"echoerr if perl -MFile::Type -e 'print 1' != "1"
 	set lz
@@ -1224,6 +1174,7 @@ function SurroundSelection(...) range "leftside, rightside, endcommands, startco
 		"execute "normal \e`>" . ( ( i - 1 ) > 0 ? 2 * ( i - 1 ) . "l" : "" ) . ( a:0 >= 3 ? a:3 : "" ) . "a" . rightside . "\e`<" . ( a:0 >= 4 ? a:4 : "" ) . "i" . leftside  
     execute "normal! " . ( a:0 >= 4 ? a:4 : "" ) . "`>a" . rightside . "\e`<" . "i" . leftside . "\e" . ( a:0 >= 3 ? a:3 : "" )
 endfunction
+
 function SurroundTill(r, ...) range "replace, tilloutside(farther), till, leftside, rightside
 	let tillcmds = ""
 	if a:0 >= 1 && a:1
