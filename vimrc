@@ -164,6 +164,10 @@ filetype off " turn off to load plugins (we turn it on later)
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/vim-easy-align', { 'on': ['EasyAlign', '<Plug>(EasyAlign)'] }
+" ga<motion><num><char>
+nmap ga <Plug>(EasyAlign)
+
 " more powerful % matching?
 "runtime macros/matchit.vim
 
