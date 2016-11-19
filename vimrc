@@ -151,6 +151,9 @@ set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l
 " make it easier to inspect rtp
 command! ShowRunTimePath echo substitute(&rtp, ',', "\n", 'g')
 
+" keep ~/.vim ahead of bundles in the list
+command! -bar FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
+
 " dump misc. downloaded files in here instead of $HOME/.vim
 set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
 
@@ -159,31 +162,28 @@ set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
 
 filetype off " turn off to load plugins (we turn it on later)
 
+call plug#begin('~/.vim/plugged')
+
 " more powerful % matching?
 "runtime macros/matchit.vim
 
-" git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle/
-set rtp +=~/.vim/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle'
-
 " editorconfig {{{
-Bundle 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 " Overwrite filetype.
 autocmd BufWinEnter .editorconfig set filetype=cfg
 " }}}
 
-Bundle 'keith/tmux.vim'
+Plug 'keith/tmux.vim'
 
 " Disable the tmux escape sequence wrapper as it seems unnecessary in my usual env.
 let g:bracketed_paste_tmux_wrap = 0
-Bundle 'ConradIrwin/vim-bracketed-paste'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 " [ vim-tmux-navigatior ] {{{
 let g:tmux_navigator_no_mappings = 1
 " let g:tmux_navigator_save_on_switch = 0
 
-Bundle 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " S-Left S-Down S-Up S-Right
 noremap <silent> [1;2A   :<C-U>TmuxNavigateUp<cr>
@@ -197,11 +197,9 @@ noremap <silent> <C-\>     :<C-U>TmuxNavigatePrevious<cr>
 " but this is also the case for regular C-w commands, so that's fine.
 " }}}
 
-" define some vundle helper commands
-runtime macros/lazy_bundle.vim
-
 " Reopen all "file:line" args as file at line.
-let g:file_line_bundle_cmd = "Bundle 'bogado/file-line'"
+" This seems to conflict with NERDTree (on the first arg).
+let g:file_line_bundle_cmd = "Plug 'bogado/file-line'"
 " Load it automatically if any args contain a colon.
 if match(argv(), ':') >= 0 | exe g:file_line_bundle_cmd | endif
 " Can also be delayed behind a command (add dir to rtp, load plugin, and
@@ -213,39 +211,40 @@ if match(argv(), ':') >= 0 | exe g:file_line_bundle_cmd | endif
 " https://github.com/mutewinter/dot_vim
 " vimscripts: 'L9' + 'FuzzyFinder'
 
-Bundle 'ervandew/supertab'
+Plug 'ervandew/supertab'
 " TODO: supertab config
 
 " i tried delimitmate but it gets in my way more often than it's useful
-"Bundle 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
 
 " enable repeating certain plugin actions with .
-Bundle 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " view images
 " TODO: try this, then lazy-load it
-"Bundle 'tpope/vim-afterimage'
+"Plug 'tpope/vim-afterimage'
 
-" toggle comment state with \\\
-Bundle 'tpope/vim-commentary'
+" toggle comment state with gc<motion>
+Plug 'tpope/vim-commentary'
 " navigate various things back and forth with [x and ]x (t,l,q...)
-Bundle 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 " better management of quotes and paired symbols than i used to do
-Bundle 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " cursor jump selection with \mw or \mf
 let g:EasyMotion_leader_key = 'm'
-Bundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 " custom text objects {{{
 
 " better than just T/vt/ because it works across lines
+" <start>i<char> to operate on text between pairs (`di/`)
 let g:Textobj_defs = [
   \['/',     'Textobj_paired', '/'],
   \['!',     'Textobj_paired', '!'],
   \['<Bar>', 'Textobj_paired', '<Bar>'],
 \]
-Bundle 'doy/vim-textobj'
+Plug 'doy/vim-textobj'
 
 " }}}
 " [ yankring ] save a list of previously yanked text {{{
@@ -267,20 +266,19 @@ function! YRRunAfterMaps()
   xunmap p
 endfunction
 
-Bundle 'YankRing.vim'
+Plug 'YankRing.vim'
 nnoremap <silent> yr :YRShow<CR>
 " switching windows loses the visual selection; this is what i mean:
 xnoremap <silent> YR d:YRShow<CR>
 " TODO: map something to :YRToggle ?
 
 " }}}
-
 " [ gundo ] visual undo browser {{{
 
 " ubu 12.04 includes py2.7 which causes this thing to spew errors
 let g:gundo_prefer_python3 = 1
 
-LazyCommand GundoToggle 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 nnoremap <F12> :GundoToggle<CR>
 
 " }}}
@@ -310,7 +308,7 @@ let g:NERDTreeIgnore = [
   \ '__pycache__',
   \ ]
 
-LazyCommand -nargs=? -complete=dir NERDTree 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
 
 if g:NERDTreeHijackNetrw
   " tell netrw to forget it
@@ -330,38 +328,38 @@ endif
 " [ git ] {{{
 
 " get the latest fixes for vim files
-Bundle 'tpope/vim-git'
+Plug 'tpope/vim-git'
 " powerful git integration
-Bundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 " gitk inside vim (http://www.gregsexton.org/portfolio/gitv/)
-LazyCommand Gitv 'gregsexton/gitv'
+Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
 " }}}
 " [ perl ] {{{
 
 " use ack as &grepprg
-LazyCommand -nargs=* Ack 'mileszs/ack.vim'
-LazyCommand -nargs=* Ag  'rking/ag.vim'
+Plug 'mileszs/ack.vim', { 'on': 'Ack' }
+Plug 'rking/ag.vim', { 'on': 'Ag' }
 
 " syntax and ftplugin files for perl (plus pod, tt2...)
 " include sql for tt2 queries
-FTBundle ft=perl,pod,tt2,tt2html,sql 'vim-perl/vim-perl'
+Plug 'vim-perl/vim-perl', { 'for': ['perl', 'pod', 'tt2', 'tt2html', 'sql'] }
 
 " syntax files for CPAN::Changes
-FTBundle name=Changes 'rwstauner/vim-cpanchanges'
+Plug 'rwstauner/vim-cpanchanges', { 'for': 'cpanchanges' }
 
 " enable :Perldoc command (via Pod::Simple::Vim)
 "let g:Perldoc_path = s:cache . '/perldoc/'
-"Bundle 'PERLDOC2'
+"Plug 'PERLDOC2'
 
 " enable :Perldoc command (via perldoc command plus vim parsing)
-"Bundle 'Perldoc.vim'
+"Plug 'Perldoc.vim'
 
 " prove the current file and put colored results in a special window
-"Bundle 'motemen/tap-vim'
+"Plug 'motemen/tap-vim'
 
 " enable :make to run prove and put test failures in the quickfix
-FTBundle name=*.t 'perlprove.vim'
+Plug 'perlprove.vim', { 'for': 'perl' }
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
 runtime macros/stub_perl_mod.vim
@@ -371,51 +369,51 @@ runtime macros/stub_perl_mod.vim
 " }}}
 " [ filetypes ] {{{
 
-let g:csv_hiGroup = 'CSVHiColumn'
+"let g:csv_hiGroup = 'CSVHiColumn'
 let g:csv_highlight_column = 'y'
-"FTBundle ft=csv 'csv.vim'
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 " More often than not I just want to peek at the file without all the magic.
-command! CSV exe "Bundle 'csv.vim'" | set ft=csv
+"command! CSV setf ft=csv | doautocmd FileType csv
 
 " less css
-FTBundle ft=less,html 'groenewege/vim-less'
+Plug 'groenewege/vim-less', { 'for': ['less', 'html'] }
 
 " coffee script
-FTBundle ft=coffee,html,eco 'kchmck/vim-coffee-script'
-FTBundle ft=eco             'AndrewRadev/vim-eco'
+Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'html', 'eco'] }
+Plug 'AndrewRadev/vim-eco', { 'for': 'eco' }
 
 " elm
-FTBundle ft=elm             'lambdatoast/elm.vim'
+Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 
 " purescript
-FTBundle ft=purescript      'raichoo/purescript-vim'
+Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
 
 " redmine uses textile
-FTBundle ft=textile 'timcharper/textile.vim'
+"Plug 'timcharper/textile.vim', { 'for': 'textile' }
 
 " FIXME: This doesn't work with any syntaxes that are lazily added to &rtp.
 " But it would if we generated a tree with all the files linked into it.
 " FIXME: This seems to load the syntastic check for sh which fails miserably.
 "let g:markdown_fenced_languages = [ 'bash', 'perl', 'ruby', 'sh' ]
-"FTBundle ft=markdown 'tpope/vim-markdown'
+"Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
 " [ python ] {{{
 " python template engine
-FTBundle ft=mako 'sophacles/vim-bundle-mako'
+Plug 'sophacles/vim-bundle-mako', { 'for': 'mako' }
 
 " compiler (makeprg) for nosetests
 " NOTE: pip install git+git://github.com/nvie/nose-machineout.git#egg=nose_machineout
-FTBundle ft=python 'lambdalisue/nose.vim'
+Plug 'lambdalisue/nose.vim', { 'for': 'python' }
 " }}}
 
 " [ ruby ] {{{
-FTBundle ft=ruby,eruby 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'eruby'] }
 " }}}
 
 " [ puppet ] {{{
 " puppet: https://github.com/puppetlabs
 " alternative: 'rodjek/vim-puppet'
-FTBundle ft=puppet 'puppetlabs/puppet-syntax-vim'
+Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }
 
 " TODO: Put this somewhere else.
 let s:puppet_lint_args = '--no-80chars-check --no-arrow_alignment-check'
@@ -439,35 +437,38 @@ if exists('$GOROOT') && isdirectory($GOROOT)
   au FileType go set rtp^=$GOROOT/misc/vim rtp+=$GOROOT/misc/vim/after | FixRunTimePath
 endif
 
-" scala
+" [ scala ] {{{
 " if exists('$SCALA_DIST') && isdirectory($SCALA_DIST)
 "   source $SCALA_DIST/tool-support/src/vim/ftdetect/filetype.vim
 "   " NOTE: Currently there's no 'after' directory.
 "   au FileType scala set rtp^=$SCALA_DIST/tool-support/src/vim | FixRunTimePath
 " endif
 " See also: https://gist.github.com/schmmd/1320359.
-FTBundle ft=scala 'derekwyatt/vim-scala'
-FTBundle ft=sbt.scala 'derekwyatt/vim-sbt'
+Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+Plug 'derekwyatt/vim-sbt', { 'for': 'sbt.scala' }
+" }}}
 
-FTBundle ft=Dockerfile 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " json: better than 'javascript'
-FTBundle ft=json   'elzr/vim-json'
+Plug 'elzr/vim-json', { 'for': 'json' }
+
 
 " fishshell.com
-"FTBundle ft=fish 'aliva/vim-fish'
+"Plug 'aliva/vim-fish', { 'on': 'fish' }
 
 " haxe: see http://haxe.org/com/ide/vim
-"Bundle 'vim-haxe' " requires vim-addon-manager
-"Bundle 'jdonaldson/vaxe'
-" wikidoc: Bundle 'wikidoc.vim'
+"Plug 'vim-haxe' " requires vim-addon-manager
+"Plug 'jdonaldson/vaxe'
+" wikidoc: Plug 'wikidoc.vim'
 
 " TODO: https://github.com/janko-m/vim-test
 
 " xml shortcuts
 let xml_use_xhtml = 1
-FTBundle ft=xml 'sukima/xmledit'
-command! XMLMode exe "LazyBundle 'sukima/xmledit'" | set ft=xml
+Plug 'sukima/xmledit', { 'for': 'xml' }
+"command! XMLMode exe "LazyBundle 'sukima/xmledit'" | set ft=xml
+"command! XMLMode set ft=xml
 
 " }}}
 " [ syntastic ] automatic syntax check into location list {{{
@@ -490,7 +491,7 @@ let g:syntastic_puppet_puppetlint_args = s:puppet_lint_args
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-Bundle 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " }}}
 " [ statline ] override statusline with something more powerful {{{
@@ -508,7 +509,7 @@ let g:statline_mixed_indent = 1
 " could add something similar for perlbrew but I don't know what I'd want yet
 let g:statline_rvm = 0
 let g:statline_rbenv = 0
-Bundle 'millermedeiros/vim-statline'
+Plug 'millermedeiros/vim-statline'
 
 " }}}
 " [ slime ] pass vim text to a repl via terminal multiplexer {{{
@@ -517,15 +518,13 @@ if $MULTIPLEXER != ""
   " do we want to autoload via the mappings?
   "nmap <C-c><C-c> :SlimeREPL<CR>
 
+  Plug 'jpalardy/vim-slime', { 'on': 'SlimeREPL' }
   command SlimeREPL call SlimeREPL()
   function SlimeREPL()
     " configure and load plugin
     if !exists("g:slime_paste_file")
       let g:slime_target = $MULTIPLEXER
       let g:slime_paste_file = tempname() | " my tmux has issues with pipes
-      LazyBundle 'jpalardy/vim-slime'
-      " plugin won't be automatically loaded at this point, so do it manually
-      runtime plugin/slime.vim
     endif
 
     if $MULTIPLEXER == "tmux"
@@ -541,13 +540,14 @@ if $MULTIPLEXER != ""
 endif
 
 " }}}
-
 " [ covim ] {{{
-"Bundle 'FredKSchott/CoVim'
+"Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
 " :CoVim start [port] [name]
 " :CoVim connect host port name
 " :CoVim disconnect
 " }}}
+
+call plug#end()
 
 FixRunTimePath
 " }}}
@@ -671,7 +671,7 @@ au BufReadPost * call matchadd("ToDo", '\c\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERI
 " [ colorscheme ] {{{
 
 if $SOLARIZED > 0
-  Bundle 'altercation/vim-colors-solarized'
+  Plug 'altercation/vim-colors-solarized'
   let g:solarized_termtrans=1
   if $SOLARIZED == 256
     let g:solarized_termcolors=256

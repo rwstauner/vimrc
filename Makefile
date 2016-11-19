@@ -1,24 +1,20 @@
 SHELL = /bin/bash
 VIMRC = vimrc
 
-.PHONY: all vundle bundles
+.PHONY: all plug
 
-# by default just install the bundles that are always enabled
-all: vundle
+all: plug
 
-vundle: bundle/vundle
-bundle/vundle:
-	mkdir -p bundle
-	git clone https://github.com/gmarik/vundle $@
-	vim +BundleInstall +qall
-
-# find all bundles (regular, filetype, lazy, etc) and install them
-INSTALL_SCRIPT = .cache/install-bundles.vim
-bundles: install-bundles
-
-update-bundles install-bundles: vundle
-	perl -lne 'print qq[:Bundle $$1] if /(?:^\s*(?:Bundle|LazyCommand|FTBundle)|LazyBundle)\s+.*?(([\047\042])\S+?\2)/;' \
-		$(VIMRC) > $(INSTALL_SCRIPT)
-	echo $$':BundleInstall$(if $(findstring update,$@),!)\n:wincmd p\n:wincmd c' >> $(INSTALL_SCRIPT)
-	cat    $(INSTALL_SCRIPT)
-	vim -s $(INSTALL_SCRIPT)
+PLUG_DIR=plugged/vim-plug
+PLUG=autoload/plug.vim
+plug: $(PLUG)
+	vim +PlugInstall +qall
+$(PLUG_DIR):
+	mkdir -p $(dir $(PLUG))
+	git clone https://github.com/junegunn/vim-plug $(PLUG_DIR)
+$(PLUG): $(PLUG_DIR)
+	# Use cp instead of ln (hard or soft) so make will acknowledge its existence.
+	/bin/cp -vf $(PLUG_DIR)/plug.vim $(PLUG)
+plug-up: $(PLUG_DIR)
+	(cd $(PLUG_DIR) && git pull)
+	$(MAKE) plug

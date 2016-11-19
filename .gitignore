@@ -1,4 +1,8 @@
 /bundle/*
+
+/autoload/plug.vim
+/plugged/
+
 /macros/local_before.vim
 /tags/ptags
 .cache/install-bundles.vim
