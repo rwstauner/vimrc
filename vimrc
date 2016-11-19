@@ -848,7 +848,7 @@ endif
 map  <F5> :make<CR><CR><C-W>k
 imap <F5> <C-O>:make<CR><CR><C-O><C-W>k
 " }}}
-" Painless spell checking (F11) {{{
+" Painless spell checking {{{
 function! s:spell()
   if !&spell
     echo "Spell check on"
@@ -863,8 +863,9 @@ function! s:spell()
     setlocal nospell
   endif
 endfunction
-map <F11> :call <SID>spell()<CR>
-imap <F11> <C-o>:call <SID>spell()<CR>
+command SpellToggle call <SID>spell()
+map <F9> :SpellToggle<CR>
+imap <F9> <C-o>:SpellToggle<CR>
 " }}}
 " }}}
 
