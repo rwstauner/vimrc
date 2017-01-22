@@ -160,7 +160,11 @@ set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
 " }}}
 " [ plugins ] {{{
 
-filetype off " turn off to load plugins (we turn it on later)
+" [filetype] {{{
+if !exists("*plug#begin")
+  filetype off " turn off to load plugins (we turn it on later)
+endif
+" }}}
 
 call plug#begin('~/.vim/plugged')
 
@@ -724,9 +728,14 @@ elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded |
 
 " }}}
 
+" [filetype / syntax] {{{
 " Do filetype then syntax in case the ftplugin customizes the syntax defs.
-filetype plugin indent on
-syntax enable
+" vim-plug does this so we don't need to do it again.
+if !exists("*plug#end")
+  filetype plugin indent on
+  syntax enable
+endif
+" }}}
 
 " Show me EN SPACE characters when I copy text from hipchat.
 match Error /\%u2002/
