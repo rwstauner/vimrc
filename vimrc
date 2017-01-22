@@ -909,8 +909,23 @@ vnoremap <Leader><Tab> :retab<CR>gv
 " maximize current window
 nmap <C-w>* <C-w>_<C-w>\|
 
+" Change gf and ^W^F to limit their searches to files (ignore directories).
+nnoremap gf :call EditFindCFile("e")<CR>
+nnoremap <C-w>f :call EditFindCFile("sp")<CR>
+nmap <C-w><C-f> <C-w>f
+
+function! EditFindCFile(cmd)
+  let l:cf = expand("<cfile>")
+  let l:ff = findfile(l:cf)
+  if strlen(l:ff)
+    exe a:cmd l:ff
+  else
+    echom l:cf "not found in" &l:path
+  endif
+endfunction
+
 "goto file by adding it to the argument list
-nmap <Leader>f 			:call ArgeCfile()<CR>
+nmap <Leader>gf gf:$arge %<CR>
 nmap <Leader>F 			:99arge <cfile><CR>
 
 map <Leader>o :call <SID>SpaceLines()<CR>
@@ -986,32 +1001,6 @@ vnoremap <leader>un :!perl -MURI::Escape -e 'print URI::Escape::uri_unescape(do 
 " }}}
 
 " [ functions ] {{{
-
-function ArgeCfile() "open filename under cursor at the end of the current argument list.
-	let edit_cmd = ":99arge "
-	"allow all the coolness of the gf command, but don't go losing files
-	norm gf
-	exe edit_cmd . "%"
-	return
-"	"find cursor file relative to current file
-"	let adddir = fnamemodify( expand("%"), ":p:.:h")
-"	if adddir != ""
-"		let adddir = adddir . "/"
-"	endif
-"	let addfile = simplify( adddir . expand("<cfile>") )
-"
-"	if filereadable(addfile)
-"		execute edit_cmd . addfile
-"	else
-"		let addfile = simplify( expand("<cfile>:p:.") )
-"		"let addfile = simplify( expand("%:p:h") . "/" . expand("<cfile>") )
-"		if filereadable(addfile)
-"			execute edit_cmd . addfile
-"		else
-"			echoe "File Not Found"
-"		endif
-"	endif
-endfunction
 
 function CleanupWordPaste() range
 "	'<,'>s/–/.../g
