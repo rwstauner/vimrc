@@ -43,11 +43,13 @@ exe "autocmd  FileType " . join(s:styled_types, ',') . " SourceCodeStyle"
 
 " Turn spell check on for documents.
 let s:spell_types = [
+  \ 'css',
   \ 'cpanchanges',
   \ 'gitcommit',
   \ 'html',
   \ 'markdown',
   \ 'rst',
+  \ 'scss',
 \ ]
 exe "autocmd  FileType " . join(s:spell_types, ',') . " setlocal spell spelllang=en_us"
 
