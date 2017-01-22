@@ -168,6 +168,30 @@ Plug 'junegunn/vim-easy-align', { 'on': ['EasyAlign', '<Plug>(EasyAlign)'] }
 " ga<motion><num><char>
 nmap ga <Plug>(EasyAlign)
 
+" [ projectionist ] {{{
+" Read .projections.json for file type metadata.
+Plug 'tpope/vim-projectionist'
+
+" Projectionist lets us append to 'path', but it makes the entries absolute.
+" If we leave "./" vim will treat that as relative to the open file rather than
+" cwd, which seems much more useful.  So circumvent projectionist by faking a
+" protocol ("relative:./foo") and then fixing that up.
+
+function! s:followProjectionist()
+  " join/uniq/map/split since FileType (or other events) may fire more than once
+  " and projectionist's own unique check won't work (since we're modifying it).
+  let &l:path = join(uniq(map(split(&l:path, ','), "s:fixProjectionistRelativePath(v:val)")), ',')
+endfunction
+
+function! s:fixProjectionistRelativePath(s)
+  let l:prefix = 'relative:'
+  if stridx(a:s, l:prefix) == 0
+    return substitute(strpart(a:s, strlen(l:prefix)), ';./', ';' . projectionist#path() . '/', 'g')
+  endif
+  return a:s
+endfunction
+" }}}
+
 " more powerful % matching?
 "runtime macros/matchit.vim
 
@@ -569,7 +593,11 @@ endif
 
 call plug#end()
 
+" Fix up things that need to be done after the plugins are loaded.
+
 FixRunTimePath
+
+autocmd User ProjectionistActivate call s:followProjectionist()
 " }}}
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
