@@ -497,9 +497,11 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 
 " [ javascript ] {{{
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-" Not a fan of the highlight changes but it does trigger spell check in jsx.
+
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+
+Plug 'tmcw/vim-eslint-compiler', { 'for': 'javascript' }
 " }}}
 
 " fishshell.com
