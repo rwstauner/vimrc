@@ -918,19 +918,51 @@ vnoremap <Leader><Tab> :retab<CR>gv
 " maximize current window
 nmap <C-w>* <C-w>_<C-w>\|
 
+
 " Change gf and ^W^F to limit their searches to files (ignore directories).
 nnoremap gf :call EditFindCFile("e")<CR>
 nnoremap <C-w>f :call EditFindCFile("sp")<CR>
 nmap <C-w><C-f> <C-w>f
 
 function! EditFindCFile(cmd)
-  let l:cf = expand("<cfile>")
-  let l:ff = findfile(l:cf)
-  if strlen(l:ff)
-    exe a:cmd l:ff
+  return EditFindFile(a:cmd, expand("<cfile>"))
+endfunction
+
+function! EditFindFile(cmd, file)
+  let l:file = FindFileHarder(a:file)
+  if strlen(l:file)
+    exe a:cmd l:file
   else
-    echom l:cf "not found in" &l:path
+    echom a:file "not found in" &path
   endif
+endfunction
+
+function! FindFileHarder(file)
+  let l:done = {}
+  let l:exprs = [
+    \ 'a:file',
+    \ 'substitute(a:file, "^\./", "", "")',
+    \ 'eval(substitute(&includeexpr, "\\<v:fname\\>", "a:file", ""))',
+  \ ]
+
+  for l:expr in l:exprs
+    let l:file = eval(l:expr)
+
+    " Ignore duplicates.
+    if has_key(l:done, l:file)
+      continue
+    endif
+
+    let l:ff = findfile(l:file)
+    if strlen(l:ff)
+      return l:ff
+    endif
+
+    let l:done[l:file] = 1
+  endfor
+
+  " Emulate return of a single findfile() call.
+  return ''
 endfunction
 
 "goto file by adding it to the argument list
