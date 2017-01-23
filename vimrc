@@ -190,7 +190,9 @@ endfunction
 function! s:fixProjectionistRelativePath(s)
   let l:prefix = 'relative:'
   if stridx(a:s, l:prefix) == 0
-    return substitute(strpart(a:s, strlen(l:prefix)), ';./', ';' . projectionist#path() . '/', 'g')
+    " Use strpart to remove the fake protocol, then resolve any ';./'
+    " to absolute paths since vim expects stop-dirs to be absolute.
+    return substitute(strpart(a:s, strlen(l:prefix)), ';\.\([\/]\)', ';' . projectionist#path() . '\1', 'g')
   endif
   return a:s
 endfunction
