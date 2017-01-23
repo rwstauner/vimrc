@@ -184,7 +184,7 @@ Plug 'tpope/vim-projectionist'
 function! s:followProjectionist()
   " join/uniq/map/split since FileType (or other events) may fire more than once
   " and projectionist's own unique check won't work (since we're modifying it).
-  let &l:path = join(uniq(map(split(&l:path, ','), "s:fixProjectionistRelativePath(v:val)")), ',')
+  let &l:path = join(UniqAll(map(split(&l:path, ','), "s:fixProjectionistRelativePath(v:val)")), ',')
 endfunction
 
 function! s:fixProjectionistRelativePath(s)
@@ -1273,6 +1273,18 @@ function SurroundTill(r, ...) range "replace, tilloutside(farther), till, leftsi
 	endif
 endfunction
 
+" The builtin uniq() expects sorted lists.
+function! UniqAll(list)
+  let l:seen = {}
+  let l:new = []
+  for l:item in a:list
+    if !has_key(l:seen, l:item)
+      call add(l:new, l:item)
+      let l:seen[l:item] = 1
+    endif
+  endfor
+  return l:new
+endfunction
 " }}}
 
 " [ diff ] {{{
