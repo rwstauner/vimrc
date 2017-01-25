@@ -36,6 +36,7 @@ set   colorcolumn=+0 " highlight the column at &textwidth
 set   completeopt=menuone,preview " show menu even with only one match
 set   confirm      " prompt yes/no/cancel instead of denying :q with changes
 set   display=lastline,uhex " show partial if lastline is too long, <xx> instead of ^x
+set nofileignorecase " DWIM (pretend mac is case sensitive to limit undesired results)
 set   foldcolumn=2 " width
 set   foldopen +=insert,jump " auto-open folds when inserting or jumping far
 set noequalalways  " don't resize windows when i split, just split
