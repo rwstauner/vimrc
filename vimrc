@@ -159,6 +159,12 @@ command! -bar FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
 set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
 
 " }}}
+command! -nargs=+ MapCommand call MapCommand(<f-args>)
+function MapCommand(key, cmd)
+  exe "nnoremap <Leader>;" . a:key . " :" . a:cmd . "<CR>"
+endfunction
+
+MapCommand m make
 " [ plugins ] {{{
 
 " [filetype] {{{
@@ -172,6 +178,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align', { 'on': ['EasyAlign', '<Plug>(EasyAlign)'] }
 " ga<motion><num><char>
 nmap ga <Plug>(EasyAlign)
+
+" [ dispatch ] {{{
+" `:Make` => tmux split-window of :compiler into quickfix
+" `:Make!` => background, no auto :copen
+" `:Dispatch cmd ...` uses &compiler for cmd or just capture output
+" `:Focus cmd ...` to set defaults for `:Dispatch` (also b:dispatch)
+" `:Focus!` resets default
+" `:Start ...` tmux new-window ...
+" `:Start! ...` tmux new-window -d ...
+Plug 'tpope/vim-dispatch', { 'on': ['Dispatch', 'Focus', 'Make', 'Start'] }
+MapCommand d Dispatch
+MapCommand s Start
+" }}}
 
 " [ projectionist ] {{{
 " Read .projections.json for file type metadata.
