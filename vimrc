@@ -503,9 +503,11 @@ Plug 'derekwyatt/vim-sbt', { 'for': 'sbt.scala' }
 " }}}
 
 " [ clojure ] {{{
+"let g:rbpt_loadcmd_toggle = 1
+Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
+
 "Plug 'vim-scripts/VimClojure'
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " tpope/vim-classpath
 " guns/vim-clojure-static
@@ -760,6 +762,9 @@ if !exists("*plug#end")
   syntax enable
 endif
 " }}}
+
+" Now setup autocommands to match file types.
+au FileType clojure exe "RainbowParenthesesLoadRound" | RainbowParenthesesActivate
 
 " Show me EN SPACE characters when I copy text from hipchat.
 match Error /\%u2002/
