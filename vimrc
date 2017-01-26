@@ -32,6 +32,7 @@ set   autowrite    " write before :make or jumping to another file
 set noautowriteall " i should probably turn this on
 set   backspace=indent,start " allow backspacing over indent and start of insert (but not eol)
 set   background=dark
+set   cedit=     " key sequence to open the command line window when already in command mode
 set   colorcolumn=+0 " highlight the column at &textwidth
 set   completeopt=menuone,preview " show menu even with only one match
 set   confirm      " prompt yes/no/cancel instead of denying :q with changes
@@ -264,6 +265,25 @@ if match(argv(), ':') >= 0 | exe g:file_line_bundle_cmd | endif
 " https://github.com/zaiste/vimified
 " https://github.com/mutewinter/dot_vim
 " vimscripts: 'L9' + 'FuzzyFinder'
+
+" [fzf] {{{
+let g:fzf_buffers_jump = 1
+" The '' key is for "enter".
+let g:fzf_action = { '': 'split', 'ctrl-t': 'tab split', 'ctrl-x': 'edit',  'ctrl-v': 'vsplit' }
+let g:fzf_command_prefix = 'FZF'
+
+"set rtp+=~/homebrew/opt/fzf
+"Plug '~/homebrew/opt/fxf'
+Plug 'junegunn/fzf', { 'dir': '~/usr/fzf', 'do': './install --key-bindings --completion < /dev/null' }
+Plug 'junegunn/fzf.vim'
+
+nnoremap <Leader><Tab> :FZF<CR>
+nnoremap <C-t> :FZF<CR>
+nmap <leader><C-f> <plug>(fzf-maps-n)
+xmap <leader><C-f> <plug>(fzf-maps-x)
+omap <leader><C-f> <plug>(fzf-maps-o)
+cmap <C-F> <C-U>FZF<CR>
+" }}}
 
 Plug 'ervandew/supertab'
 " TODO: supertab config
