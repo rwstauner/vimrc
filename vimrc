@@ -1193,9 +1193,10 @@ function LoadSyntax(...)
 endfunction
 
 function MatchPair( character ) "find the complement to a given character (or return given character)
-	let symbol = stridx( "([{<>}])", a:character )
-	return symbol > -1 ? strpart( ")]}><{[(", symbol, 1 ) : a:character
+  let l:idx = stridx(          "()[]{}<>«»", a:character )
+  return l:idx > -1 ? strpart( ")(][}{><»«", l:idx, strlen(a:character) ) : a:character
 endfunction
+
 function PerlDo(pl) range
   "let l:oldpaste = &paste
   set paste
