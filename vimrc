@@ -60,6 +60,7 @@ set   modeline     " ensure modelines are honored
 set nomore         " don't give more-style prompts, i use tmux
 set   nrformats=octal,hex,alpha
 set   number       " show line numbers
+"set   path+=./**   " search for files anywhere below current file's parent dir
 set   report=0     " show number of lines changed by a command
 set   scrolloff=2  " show lines of context around cursor at top or bottom of screen
 set nostartofline  " keep column position when jumping
