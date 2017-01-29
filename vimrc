@@ -885,6 +885,7 @@ command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e 
 
 " [ mappings ] {{{
 " <Leader> == 'mapleader' (default: "\")
+let mapleader = '\'
 " TODO: mapping for :tabedit ?
 
 " Create shortcuts for common % modifier operations.
