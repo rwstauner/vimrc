@@ -305,6 +305,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 " better management of quotes and paired symbols than i used to do
 Plug 'tpope/vim-surround'
+" Don't make me reach for `y`.
+nmap S ys
 
 " cursor jump selection with \mw or \mf
 let g:EasyMotion_leader_key = 'm'
