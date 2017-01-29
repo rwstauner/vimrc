@@ -544,7 +544,9 @@ Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " tpope/vim-classpath
 " guns/vim-clojure-static
-" kovisoft/paredit
+com! ParEditToggle let g:paredit_mode = abs(g:paredit_mode - 1)
+let g:paredit_leader = ','
+Plug 'kovisoft/paredit', { 'for': 'clojure' }
 " }}}
 
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
