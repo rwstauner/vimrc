@@ -308,6 +308,16 @@ Plug 'tpope/vim-surround'
 " Don't make me reach for `y`.
 nmap S ys
 
+" [multiple cursors] {{{
+" Setup additional characters for the plugin to recognize.
+" The last line is the default list.
+let g:multi_cursor_normal_maps = {'~':1,
+  \ '!':1, '@':1, '=':1, 'q':1, 'r':1, 't':1, 'T':1, 'y':1, '[':1, ']':1, '\':1, 'd':1, 'f':1, 'F':1, 'g':1, '"':1, 'z':1, 'c':1, 'm':1, '<':1, '>':1}
+let g:multi_cursor_visual_maps = {'~':1,
+  \ 'i':1, 'a':1, 'f':1, 'F':1, 't':1, 'T':1}
+Plug 'terryma/vim-multiple-cursors'
+" }}}
+
 " cursor jump selection with \mw or \mf
 let g:EasyMotion_leader_key = 'm'
 Plug 'Lokaltog/vim-easymotion'
