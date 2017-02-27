@@ -197,27 +197,6 @@ MapCommand s Start
 " [ projectionist ] {{{
 " Read .projections.json for file type metadata.
 Plug 'tpope/vim-projectionist'
-
-" Projectionist lets us append to 'path', but it makes the entries absolute.
-" If we leave "./" vim will treat that as relative to the open file rather than
-" cwd, which seems much more useful.  So circumvent projectionist by faking a
-" protocol ("relative:./foo") and then fixing that up.
-
-function! s:followProjectionist()
-  " join/uniq/map/split since FileType (or other events) may fire more than once
-  " and projectionist's own unique check won't work (since we're modifying it).
-  let &l:path = join(UniqAll(map(split(&l:path, ','), "s:fixProjectionistRelativePath(v:val)")), ',')
-endfunction
-
-function! s:fixProjectionistRelativePath(s)
-  let l:prefix = 'relative:'
-  if stridx(a:s, l:prefix) == 0
-    " Use strpart to remove the fake protocol, then resolve any ';./'
-    " to absolute paths since vim expects stop-dirs to be absolute.
-    return substitute(strpart(a:s, strlen(l:prefix)), ';\.\([\/]\)', ';' . projectionist#path() . '\1', 'g')
-  endif
-  return a:s
-endfunction
 " }}}
 
 " more powerful % matching?
@@ -661,8 +640,6 @@ call plug#end()
 " Fix up things that need to be done after the plugins are loaded.
 
 FixRunTimePath
-
-autocmd User ProjectionistActivate call s:followProjectionist()
 " }}}
 
 command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
@@ -1382,6 +1359,9 @@ command! -bar DiffToggle windo if &diff | diffoff | DiffHelpers | else |
 nmap <Leader>dt :DiffToggle<CR>
 
 " }}}
+
+" Remove duplicate entries that end up in path.
+let &path = join(UniqAll(split(&path, ',')), ',')
 
 " [ see also ] {{{
 " http://vim.wikia.com/wiki/Vim_Tips_Wiki
