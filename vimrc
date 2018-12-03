@@ -573,6 +573,12 @@ let g:syntastic_loc_list_height=5
 "g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
+let g:syntastic_javascript_checkers = ['eslint']
+"let g:syntastic_javascript_eslint_exec = substitute(system("npm bin"), '\n$', '', '') . '/eslint'
+let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
+
+let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
+
 let g:syntastic_python_checkers = [ 'pylint', 'python' ]
 let g:syntastic_puppet_puppetlint_args = s:puppet_lint_args
 
