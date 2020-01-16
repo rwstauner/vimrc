@@ -3,7 +3,10 @@ VIMRC = vimrc
 
 .PHONY: all plug
 
-all: plug
+all: dirs plug
+
+dirs:
+	mkdir -p ~/.cache/vim-{cache,tmp,undo}
 
 PLUG_DIR=plugged/vim-plug
 PLUG=autoload/plug.vim
