@@ -1,9 +1,10 @@
 " vim: set ts=2 sts=2 sw=2 expandtab smarttab fdm=marker:
-"this file works with unix.  you should too.
-"
-" TODO: learn more about tabs, tags, quickfix, loc list, plugins...
 
-set nocompatible   " set this first as it can change other things
+if &compatible
+  set nocompatible " set this first but only if needed to avoid side effects.
+endif
+
+let s:nvim = has('nvim')
 
 if version < 700
   echoerr "this vimrc requires vim 7"
@@ -42,7 +43,9 @@ set nofileignorecase " DWIM (pretend mac is case sensitive to limit undesired re
 set   foldcolumn=2 " width
 set   foldopen +=insert,jump " auto-open folds when inserting or jumping far
 set noequalalways  " don't resize windows when i split, just split
-set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
+if exists('&esckeys')
+  set   esckeys      " allow arrow keys to work in insert mode (adjust timeoutlen if necessary)
+endif
 set nogdefault     " if enabled s///gg will disable but that's too unintuitive to make me want it atm
 set   hidden       " when closing a window hide it instead of unloading it
 set   history=500  " number of items to rememeber for ex commands and searches
@@ -90,6 +93,12 @@ set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x secon
 let &shell="env PATH=" . expand('$PATH') . ' ' . &shell
 
 " TODO: investigate 'cpoptions'
+
+if s:nvim
+  set scrollback=50000 " default is 10k, max is 100k
+  let $VISUAL = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  let $EDITOR = $VISUAL
+endif
 
 " }}}
 
@@ -193,6 +202,7 @@ nmap ga <Plug>(EasyAlign)
 Plug 'tpope/vim-dispatch', { 'on': ['Dispatch', 'Focus', 'Make', 'Start'] }
 MapCommand d Dispatch
 MapCommand s Start
+" radenling/vim-dispatch-neovim
 " }}}
 
 " [ projectionist ] {{{
@@ -222,10 +232,17 @@ let g:tmux_navigator_no_mappings = 1
 Plug 'christoomey/vim-tmux-navigator'
 
 " S-Left S-Down S-Up S-Right
-noremap <silent> [1;2A   :<C-U>TmuxNavigateUp<cr>
-noremap <silent> [1;2B   :<C-U>TmuxNavigateDown<cr>
-noremap <silent> [1;2C   :<C-U>TmuxNavigateRight<cr>
-noremap <silent> [1;2D   :<C-U>TmuxNavigateLeft<cr>
+if s:nvim
+  noremap <silent> <S-Up>    :<C-U>TmuxNavigateUp<cr>
+  noremap <silent> <S-Down>  :<C-U>TmuxNavigateDown<cr>
+  noremap <silent> <S-Right> :<C-U>TmuxNavigateRight<cr>
+  noremap <silent> <S-Left>  :<C-U>TmuxNavigateLeft<cr>
+else
+  noremap <silent> [1;2A   :<C-U>TmuxNavigateUp<cr>
+  noremap <silent> [1;2B   :<C-U>TmuxNavigateDown<cr>
+  noremap <silent> [1;2C   :<C-U>TmuxNavigateRight<cr>
+  noremap <silent> [1;2D   :<C-U>TmuxNavigateLeft<cr>
+end
 " This one doesn't fit :/
 noremap <silent> <C-\>     :<C-U>TmuxNavigatePrevious<cr>
 
@@ -685,8 +702,13 @@ set t_%i=[1;5C
 " Arrow keys: UDRL => ABCD
 
 " <C-Up> <C-Down> (like ctrl-e/y but with one hand)
-nnoremap [1;5A <C-y>
-nnoremap [1;5B <C-e>
+if s:nvim
+  nnoremap <C-Up> <C-y>
+  nnoremap <C-Down> <C-e>
+else
+  nnoremap [1;5A <C-y>
+  nnoremap [1;5B <C-e>
+endif
 
 " compatibility with shell movement (and/or when i wrongfully hold shift)
 " Ctrl-arrow (C-Left C-Right) moves across words.
@@ -862,10 +884,17 @@ command -nargs=1 -complete=dir -complete=file Arge 99arge <args>
 command SynStack for id in synstack(line("."), col(".")) | echo synIDattr(id, "name") . " => " . synIDattr(synIDtrans(id), "name") | endfor
 
 command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e '$t = Text::ASCIITable->new; $t->setCols(split(/\t/, scalar <STDIN>)); $t->addRow(split(/\t/)) for <STDIN>; print $t'
+
+if s:nvim
+  for prefix in ['', 'v']
+    exe 'command -nargs=* '.toupper(prefix).'Term exe "'.prefix.'new | terminal " . <q-args>'
+  endfor
+  au TermOpen * setlocal foldcolumn=0
+endif
 " }}}
 
 " [ mappings ] {{{
-" <Leader> == 'mapleader' (default: "\")
+" <Leader> == 'mapleader' (default: "\") (other good choices: [, ])
 let mapleader = '\'
 " TODO: mapping for :tabedit ?
 
@@ -1084,6 +1113,11 @@ nmap <leader>1 :!git log --reverse -p -S<cword> %<cr>
 " Ovid: handy if hacking urls
 " http://twitter.com/OvidPerl/status/28076709865586688
 vnoremap <leader>un :!perl -MURI::Escape -e 'print URI::Escape::uri_unescape(do { local $/; <STDIN> })'<cr>
+
+if s:nvim
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-v><Esc> <Esc>
+endif
 
 " }}}
 
