@@ -6,6 +6,8 @@ VIMRC = vimrc
 all: dirs plug
 
 dirs:
+	test -d ~/.vim   || ln -s run_control/vimrc ~/.vim
+	test -f ~/.vimrc || ln -s .vim/vimrc ~/.vimrc
 	mkdir -p ~/.cache/vim-{cache,tmp,undo}
 
 PLUG_DIR=plugged/vim-plug
