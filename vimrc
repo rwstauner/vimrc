@@ -333,7 +333,7 @@ function! YRRunAfterMaps()
   xunmap p
 endfunction
 
-Plug 'YankRing.vim'
+Plug 'vim-scripts/YankRing.vim'
 nnoremap <silent> yr :YRShow<CR>
 " switching windows loses the visual selection; this is what i mean:
 xnoremap <silent> YR d:YRShow<CR>
@@ -426,7 +426,7 @@ Plug 'rwstauner/vim-cpanchanges', { 'for': 'cpanchanges' }
 "Plug 'motemen/tap-vim'
 
 " enable :make to run prove and put test failures in the quickfix
-Plug 'perlprove.vim', { 'for': 'perl' }
+Plug 'vim-scripts/perlprove.vim', { 'for': 'perl' }
   au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
 
 runtime macros/stub_perl_mod.vim
