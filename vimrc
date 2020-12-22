@@ -499,10 +499,7 @@ endfunction
 " }}}
 
 " go
-if exists('$GOROOT') && isdirectory($GOROOT)
-  source $GOROOT/misc/vim/ftdetect/gofiletype.vim
-  au FileType go set rtp^=$GOROOT/misc/vim rtp+=$GOROOT/misc/vim/after | FixRunTimePath
-endif
+Plug 'fatih/vim-go', { 'for': 'go' }
 
 " [ scala ] {{{
 " if exists('$SCALA_DIST') && isdirectory($SCALA_DIST)
