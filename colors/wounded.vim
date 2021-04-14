@@ -84,3 +84,8 @@ hi link User1   Identifier
 hi link User2   Statement
 hi link User3   Error
 hi link User4   Special
+
+if has('nvim')
+  hi link TermCursor Cursor
+  hi TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
+endif
