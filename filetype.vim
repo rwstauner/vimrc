@@ -5,8 +5,11 @@ autocmd  FileType make     setlocal ts=8 sts=8 sw=8 noexpandtab
 autocmd  FileType markdown setlocal ts=4 sts=4 sw=4   expandtab
 autocmd  FileType go       setlocal noexpandtab
 
+" hugo
+autocmd BufRead layouts/*.html setfiletype gohtmltmpl
+" autocmd BufRead content/*.md setfiletype gomarkdown
 
-" Turn spell check on for documents.
+" Turn spell check on for documents (and code comments).
 let s:spell_types = [
   \ 'css',
   \ 'cpanchanges',
@@ -14,6 +17,7 @@ let s:spell_types = [
   \ 'html',
   \ 'markdown',
   \ 'rst',
+  \ 'ruby',
   \ 'scss',
 \ ]
 exe "autocmd  FileType " . join(s:spell_types, ',') . " setlocal spell spelllang=en_us"
@@ -21,26 +25,45 @@ exe "autocmd  FileType " . join(s:spell_types, ',') . " setlocal spell spelllang
 " }}}
 " custom file types {{{
 
-autocmd  BufNewFile,BufRead *.as                                        setf actionscript           " instead of setf atlas
-autocmd  BufNewFile,BufRead *.bashrc,.bashrc*                           call SetFileTypeSH("bash")
-autocmd  BufNewFile,BufRead .bash_completion*,bash_completion           call SetFileTypeSH("bash")
-autocmd  BufNewFile,BufRead *.bsh                                       setf java                   " BeanShell
+autocmd  BufNewFile,BufRead *.bb                                        setf clojure       " babashka
+autocmd  BufNewFile,BufRead *.csv                                       setf csv
 autocmd  BufNewFile,BufRead .env.*                                      setf sh
 autocmd  BufNewFile,BufRead .gitignore                                  setf gitignore
 autocmd  BufNewFile,BufRead *.hx                                        setf haxe
+autocmd  BufReadPost        Jenkinsfile*                                setf groovy
+autocmd  BufNewFile,BufRead *.joke,.joker                               setf joker
 autocmd  BufNewFile,BufRead *.imap                                      setf mail
 autocmd  BufNewFile,BufRead *.inputrc,.inputrc*                         setf readline
-autocmd  BufNewFile         *.md                                        echoe ".md is not markdown"
 autocmd             BufRead *.md                                        setf markdown
+autocmd             BufRead *.npmrc                                     setf dosini
 autocmd  BufNewFile,BufRead *.pshrc,*.psgi                              setf perl
-autocmd             BufRead *.cgi                                       if getline(1) =~ "/plackup" | setf perl | endif
 autocmd  BufNewFile,BufRead *.porklog                                   setf porklog
 autocmd  BufNewFile,BufRead *.rxml,*.rake,*.irbrc,.irbrc,.irb_history   setf ruby
 autocmd  BufNewFile,BufRead Vagrantfile,_Vagrantfile                    setf ruby
 autocmd  BufNewFile,BufRead *.sc                                        setf scala
 autocmd  BufNewFile,BufRead *.screenrc,.screenrc*                       setf screen
 autocmd  BufNewFile,BufRead tox.ini                                     setf cfg
+autocmd  BufNewFile,BufRead *.tsx                                       setf typescript
 autocmd  BufNewFile,BufRead *.wsgi                                      setf python
+autocmd             BufRead *                                           call SetFiletypeFromShebang(getline(1))
+
+if !exists("g:filetypeFromShebang")
+  let g:filetypeFromShebang = {
+    \ 'bb': 'clojure',
+    \ 'joker': 'joker',
+    \ 'plackup': 'perl',
+    \ }
+  function SetFiletypeFromShebang(line)
+    let l:parts = split(a:line, " ")
+    if len(l:parts) > 1 && l:parts[0] == "#!/usr/bin/env"
+      let l:base = fnamemodify(l:parts[1], ":t")
+      let l:ft = get(g:filetypeFromShebang, l:base, "")
+      if l:ft != ""
+        exe "setf " l:ft
+      end
+    end
+  endfunction
+endif
 
 " fake one, just color it a little bit
 autocmd  BufNewFile,BufRead CHANGELOG,HACKING,INSTALL,README,README.txt,TODO        call s:setfReadme()
