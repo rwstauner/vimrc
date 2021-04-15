@@ -670,6 +670,12 @@ Plug 'sukima/xmledit', { 'for': 'xml' }
 "command! XMLMode exe "LazyBundle 'sukima/xmledit'" | set ft=xml
 "command! XMLMode set ft=xml
 
+" Plug 'ingydotnet/yaml-vim', { 'as': 'yaml-ingy' }
+" Plug 'mrk21/yaml-vim', { 'as': 'yaml-mrk21' }
+" Plug 'hhys/yaml-vim', { 'as': 'yaml-hhys' }
+" Plug 'lucdew/vim-yaml', { 'as': 'yaml-lucdew' }
+" Plug 'chase/vim-ansible-yaml'
+
 " }}}
 " [ ale ] Asynchronous Lint Engine {{{
 
