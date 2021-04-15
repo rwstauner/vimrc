@@ -25,6 +25,10 @@ set termencoding=utf-8
 setglobal fileencodings=ucs-bom,utf-8,default,latin1
 
 " }}}
+" [ whitespace defaults ] {{{
+" Adjustments can be tuned in `filetype.vim` or `after/ftplugin/*`.
+set ts=2 sts=2 sw=2 expandtab smarttab
+" }}}
 " [ options ] {{{
 
 set   autoread     " re-read file if it was changed externally and there are no changes in vim
@@ -86,7 +90,6 @@ set   winminwidth=3  " ditto for columns: show more than foldcolumn
 set   viminfo +=!,f1 " global (uppercase) vars, file marks
 
 " combo options
-set noexpandtab nosmarttab " off by default, enabled by filetype plugins
 set ignorecase smartcase " searching for lowercase is case-insensitive (use \c \C to override)
 set noshowmatch matchtime=1 " on insert highlight matching bracket for 0.x seconds
 
@@ -662,8 +665,6 @@ call plug#end()
 
 FixRunTimePath
 " }}}
-
-command SourceCodeStyle setlocal ts=2 sts=2 sw=2 expandtab smarttab
 
 " [ tags ] {{{
 

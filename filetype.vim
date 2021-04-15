@@ -3,43 +3,8 @@
 " defined by language
 autocmd  FileType make     setlocal ts=8 sts=8 sw=8 noexpandtab
 autocmd  FileType markdown setlocal ts=4 sts=4 sw=4   expandtab
+autocmd  FileType go       setlocal noexpandtab
 
-" personal preference
-let s:styled_types = [
-  \ 'awk',
-  \ 'cfg',
-  \ 'css',
-  \ 'cpanchanges',
-  \ 'coffee',
-  \ 'Dockerfile',
-  \ 'eco',
-  \ 'haskell',
-  \ 'html',
-  \ 'mako',
-  \ 'java',
-  \ 'javascript',
-  \ 'json',
-  \ 'less',
-  \ 'perl',
-  \ 'php',
-  \ 'puppet',
-  \ 'pod',
-  \ 'python',
-  \ 'ruby',
-  \ 'eruby',
-  \ 'rst',
-  \ 'scala',
-  \ 'scss',
-  \ 'sh',
-  \ 'sql',
-  \ 'text',
-  \ 'tmux',
-  \ 'typescript',
-  \ 'vim',
-  \ 'xhtml',
-  \ 'zsh'
-\ ]
-exe "autocmd  FileType " . join(s:styled_types, ',') . " SourceCodeStyle"
 
 " Turn spell check on for documents.
 let s:spell_types = [
