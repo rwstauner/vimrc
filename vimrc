@@ -956,9 +956,15 @@ cmap d <A-D>
 " }}}
 " [ commands ] {{{
 
+" Useful for any function that takes args (expands after pressing space).
+function! SetupCommandAlias(input, output)
+  exec 'cabbrev <expr> '.a:input
+    \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:input.'")'
+    \ .'? ("'.a:output.'") : ("'.a:input.'"))'
+endfunction
 " stupid fingers (either too fast or too slow...)
-command -nargs=? -complete=dir -complete=file W w <args>
-command -nargs=+ -complete=dir -complete=file Grep grep <args>
+call SetupCommandAlias("W", "w")
+call SetupCommandAlias("Grep", "grep")
 command -bang Q q<bang>
 command -bang Qall qall<bang>
 command Wq wq
@@ -966,7 +972,7 @@ command WQ wq
 command Wn wn
 command WN wN
 command Args args
-command -nargs=? -complete=dir -complete=file Sp sp <args>
+call SetupCommandAlias("Sp", "sp")
 
 command! Mkpath call mkdir(expand("%:h"), 'p')
 
@@ -979,8 +985,8 @@ command! ModeLine exe "norm O" . substitute(&cms, ' \?%s', " vim: set ts=2 sts=2
 "command! -nargs=1 -bang -complete=expression Put let @p = <args> | put<bang> p
 command! -nargs=1 -bang -complete=expression Put call append(line(".") - ('<bang>' == '!' ? 1 : 0), <args>)
 
-command -nargs=1 -complete=option 	Set 	set <args>
-command -nargs=1 -complete=expression   Echo  echo <q-args>
+call SetupCommandAlias("Set", "set")
+call SetupCommandAlias("Echo", "echo")
 command -nargs=1 -range				PerlDo 	call PerlDo(<q-args>)
 command -nargs=1 -complete=file 	Rename 	call RenameCurrent(<q-args>)
 command -nargs=+ -range 			CommentSection call CommentSection(<f-args>)
