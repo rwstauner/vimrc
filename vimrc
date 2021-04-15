@@ -356,7 +356,7 @@ Plug 'terryma/vim-multiple-cursors'
 " }}}
 
 " cursor jump selection with \mw or \mf
-let g:EasyMotion_leader_key = 'm'
+let g:EasyMotion_leader_key = '<leader>m'
 Plug 'Lokaltog/vim-easymotion'
 
 " custom text objects {{{
