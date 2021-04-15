@@ -1042,6 +1042,9 @@ map <silent> ][ /}<CR>:noh<CR>b99]}
 map <silent> ]] j0[[%/{<CR>:noh<CR>
 map <silent> [] k$][%?}<CR>:noh<CR>
 
+" Let me use y} to yank the end of the paragraph but include the whole line.
+onoremap } V}
+
 " thanks to sartak for these (https://github.com/sartak/conf/blob/master/vimrc): {{{
 
 " Hit <C-a> in insert mode after a bad paste (thanks absolon) {{{
