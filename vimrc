@@ -1239,7 +1239,7 @@ function Highlight(hl)
   let s:dynamicHighlight = s:dynamicHighlight + 1
   let l:dhlmatch = "dynamicHighlight" . s:dynamicHighlight
   let l:hl = (&ignorecase ? "\\c" : "") . a:hl
-  exe "highlight " . l:dhlmatch . " cterm=bold,underline ctermbg=white ctermfg=" . s:dynamicHighlight
+  exe "highlight " . l:dhlmatch . " cterm=bold,underline ctermbg=black ctermfg=" . s:dynamicHighlight
   call matchadd(l:dhlmatch, l:hl)
 endfunction
 
