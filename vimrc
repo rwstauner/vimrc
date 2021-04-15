@@ -226,6 +226,7 @@ Plug 'tpope/vim-projectionist'
 "runtime macros/matchit.vim
 
 " editorconfig {{{
+" alternative: sgur/vim-editorconfig
 Plug 'editorconfig/editorconfig-vim'
 " Overwrite filetype.
 autocmd BufWinEnter .editorconfig set filetype=cfg
@@ -329,6 +330,7 @@ Plug 'tpope/vim-repeat'
 " view images
 " TODO: try this, then lazy-load it
 "Plug 'tpope/vim-afterimage'
+"Plug 'tpope/tpope-vim-abolish'
 
 " toggle comment state with gc<motion>
 Plug 'tpope/vim-commentary'
@@ -451,8 +453,11 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 " gitk inside vim (http://www.gregsexton.org/portfolio/gitv/)
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
+" Diff signs in the gutter.
+"Plug 'airblade/vim-gitgutter'
 
 " }}}
+
 " :grep
 let &grepprg = "rg -H --no-heading --vimgrep $*"
 " Add :Grepper for async
@@ -489,11 +494,18 @@ runtime macros/stub_perl_mod.vim
 " }}}
 " [ filetypes ] {{{
 
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+Plug 'fatih/vim-go', { 'for': ['go', 'gohtmltmpl', 'gomarkdown'] } " v1.15
+
+Plug 'vim-scripts/bats.vim', { 'for': 'bats' }
+
 "let g:csv_hiGroup = 'CSVHiColumn'
-let g:csv_highlight_column = 'y'
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+" let g:csv_highlight_column = 'y'
+Plug 'chrisbra/csv.vim', { 'on': 'CSVMode' }
 " More often than not I just want to peek at the file without all the magic.
 "command! CSV setf ft=csv | doautocmd FileType csv
+Plug 'mechatroner/rainbow_csv' " does not contain ftdetect
 
 " less css
 Plug 'groenewege/vim-less', { 'for': ['less', 'html'] }
@@ -513,13 +525,13 @@ Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
 
 " FIXME: This doesn't work with any syntaxes that are lazily added to &rtp.
 " But it would if we generated a tree with all the files linked into it.
-" FIXME: This seems to load the syntastic check for sh which fails miserably.
 "let g:markdown_fenced_languages = [ 'bash', 'perl', 'ruby', 'sh' ]
 "Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
 " [ python ] {{{
 " python template engine
 Plug 'sophacles/vim-bundle-mako', { 'for': 'mako' }
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " compiler (makeprg) for nosetests
 " NOTE: pip install git+git://github.com/nvie/nose-machineout.git#egg=nose_machineout
@@ -528,7 +540,13 @@ Plug 'lambdalisue/nose.vim', { 'for': 'python' }
 
 " [ ruby ] {{{
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'eruby'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby'] }
+
+" let g:rufo_auto_formatting = 1
+" Plug 'ruby-formatter/rufo-vim'
 " }}}
+
+" Plug 'pearofducks/ansible-vim'
 
 " [ puppet ] {{{
 " puppet: https://github.com/puppetlabs
@@ -565,6 +583,8 @@ Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'derekwyatt/vim-sbt', { 'for': 'sbt.scala' }
 " }}}
 
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+
 " [ clojure ] {{{
 "let g:rbpt_loadcmd_toggle = 1
 Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
@@ -579,7 +599,7 @@ let g:paredit_leader = ','
 Plug 'kovisoft/paredit', { 'for': 'clojure' }
 " }}}
 
-Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
+Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
 
 " json: better than 'javascript'
 Plug 'elzr/vim-json', { 'for': 'json' }
@@ -589,19 +609,12 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-
-Plug 'tmcw/vim-eslint-compiler', { 'for': 'javascript' }
 " }}}
-
-" fishshell.com
-"Plug 'aliva/vim-fish', { 'on': 'fish' }
 
 " haxe: see http://haxe.org/com/ide/vim
 "Plug 'vim-haxe' " requires vim-addon-manager
 "Plug 'jdonaldson/vaxe'
 " wikidoc: Plug 'wikidoc.vim'
-
-" TODO: https://github.com/janko-m/vim-test
 
 " xml shortcuts
 let xml_use_xhtml = 1
@@ -639,6 +652,11 @@ set statusline+=%*
 Plug 'scrooloose/syntastic'
 
 " }}}
+
+" :TestSuite, :TestFile, :TestNearest
+" let test#strategy = "dispatch" " use quickfix
+Plug 'janko/vim-test'
+
 " [ statline ] override statusline with something more powerful {{{
 
 " TODO: compare to https://github.com/Lokaltog/vim-powerline
@@ -650,8 +668,6 @@ let g:statline_no_encoding_string = 'ascii'
 let g:statline_filename_relative = 1
 let g:statline_trailing_space = 1
 let g:statline_mixed_indent = 1
-" someday i might actually want these (for $work) but we're not using them yet
-" could add something similar for perlbrew but I don't know what I'd want yet
 let g:statline_rvm = 0
 let g:statline_rbenv = 0
 Plug 'millermedeiros/vim-statline'
@@ -1198,6 +1214,7 @@ function FoldComments(singleline) "Create folds of consecutive commented lines b
 endfunction
 
 " highlight arbitrary matches in the file with a different color each time
+" TODO: consider 'inkarkat/vim-mark'
 command -nargs=+  Highlight  call Highlight(<q-args>)
 let s:dynamicHighlight=0
 function Highlight(hl)
