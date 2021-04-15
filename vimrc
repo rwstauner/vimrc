@@ -453,11 +453,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 
 " }}}
-" [ perl ] {{{
+" :grep
+let &grepprg = "rg -H --no-heading --vimgrep $*"
+" Add :Grepper for async
+" let g:grepper.tools = ['rg', 'git', 'grep']
+" Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
-" use ack as &grepprg
-Plug 'mileszs/ack.vim', { 'on': 'Ack' }
-Plug 'rking/ag.vim', { 'on': 'Ag' }
+" [ perl ] {{{
 
 " syntax and ftplugin files for perl (plus pod, tt2...)
 " include sql for tt2 queries
