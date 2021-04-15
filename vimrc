@@ -723,6 +723,7 @@ Plug 'janko/vim-test'
 
 " TODO: compare to https://github.com/Lokaltog/vim-powerline
 let g:statline_fugitive = 1
+let g:statline_show_charcode = 0
 let g:statline_show_n_buffers = 1
 let g:statline_show_encoding = 1
 let g:statline_no_encoding_string = 'ascii'
