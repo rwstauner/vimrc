@@ -940,6 +940,10 @@ command! -bang QuickFixThis let &l:modified = !strlen("<bang>") | cbuffer | cope
 
 "autocmd  BufWinEnter * if !empty(getloclist(0)) | lwindow | endif
 
+" Don't leave the location list open after i quit the buffer.
+" But don't if the window being quit is the quickfix or it will segfault.
+autocmd QuitPre * if &buftype != 'quickfix' | lclose | endif
+
 " simulate readline in command mode {{{
 
 cnoremap <C-A> <Home>
