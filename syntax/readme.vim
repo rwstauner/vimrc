@@ -3,7 +3,6 @@ if exists("b:current_syntax")
 endif
 let b:current_syntax = "readme"
 
-call SetFileTypeSH("bash")
 syn include @readmeShell syntax/sh.vim
 
 syn match   readmeChars     /\v[-=*]+/
