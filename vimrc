@@ -71,6 +71,7 @@ set   number       " show line numbers
 "set   path+=./**   " search for files anywhere below current file's parent dir
 set   report=0     " show number of lines changed by a command
 set   scrolloff=2  " show lines of context around cursor at top or bottom of screen
+"set   swapfile     " default on
 set nostartofline  " keep column position when jumping
 set   shiftround   " >> to even numbered columns
 set   shortmess=atToO " shorten file info messages
@@ -947,7 +948,7 @@ autocmd QuitPre * if &buftype != 'quickfix' | lclose | endif
 " simulate readline in command mode {{{
 
 cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
+"cnoremap <C-E> <End> " default
 " make alt-D delete the next word by moving over and then deleting back
 cnoremap <A-D> <C-Right><C-W>
 " my terminal makes it an escape
@@ -955,6 +956,9 @@ cmap d <A-D>
 
 " }}}
 " [ commands ] {{{
+
+" needs to be ft specific... or can we use 'commentstring' ?
+" command! CopyOneLine :w ! tr '\n' ' ' | clip
 
 " Useful for any function that takes args (expands after pressing space).
 function! SetupCommandAlias(input, output)
@@ -1474,7 +1478,8 @@ nmap <Leader>dt :DiffToggle<CR>
 " }}}
 
 " Remove duplicate entries that end up in path.
-let &path = join(UniqAll(split(&path, ',')), ',')
+" NOTE: This will remove the "current dir" element of `,,`.
+"let &path = join(UniqAll(split(&path, ',', 1)), ',')
 
 " [ see also ] {{{
 " http://vim.wikia.com/wiki/Vim_Tips_Wiki
