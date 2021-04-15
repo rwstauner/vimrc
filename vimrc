@@ -190,6 +190,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'rwstauner/vim-write-plus'
+
 Plug 'junegunn/vim-easy-align', { 'on': ['EasyAlign', '<Plug>(EasyAlign)'] }
 " ga<motion><num><char>
 nmap ga <Plug>(EasyAlign)
@@ -814,8 +816,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " open the fold if the initial position is inside one
 au BufWinEnter * if !exists("b:did_zv") | exe "normal zv" | let b:did_zv = 1 | endif
-
-runtime macros/new_file_autocommands.vim
 
 " open (or close) the quickfix window after make/grep commands
 autocmd  QuickFixCmdPost *make*,*grep* cwindow
