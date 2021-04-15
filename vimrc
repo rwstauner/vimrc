@@ -271,21 +271,49 @@ Plug 'wsdjeg/vim-fetch'
 " vimscripts: 'L9' + 'FuzzyFinder'
 
 " [fzf] {{{
+" Can fzf anything with call fzf#run(fzf#wrap({'source': 'shell cmd', 'sink': 'vim cmd', 'options': ['fzf args like -m']}))
+" [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
-" The '' key is for "enter".
-let g:fzf_action = { '': 'split', 'ctrl-t': 'tab split', 'ctrl-x': 'edit',  'ctrl-v': 'vsplit' }
+function! s:fzf_quickfix(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+" The '' key is for "enter". '': 'split',
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:fzf_quickfix'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'edit',
+  \ 'ctrl-v': 'vsplit' }
+
 let g:fzf_command_prefix = 'FZF'
+" FZFRg ... " Use rg to populate FZF list.
+" :FZFCommands " To see all availble lists.
+
+" In FZF use <C-n> / <C-p> for next/prev search history.
+let g:fzf_history_dir = '~/.local/cache/vim-fzf-history'
+let map_prefixes = ["n", "c", "o", "x", "s", "v", "l"]
+if s:nvim
+  call add(map_prefixes, "t")
+endif
+for map_type in map_prefixes
+  exe 'command! -bar -bang ' . g:fzf_command_prefix . 'Maps' . map_type . ' call fzf#vim#maps("' . map_type . '", <bang>0)'
+endfor
+" if s:nvim && !exists('g:fzf_layout')
+"   autocmd FileType fzf setl ...
+"     \| autocmd BufLeave <buffer> setl back...
+" endif
 
 "set rtp+=~/homebrew/opt/fzf
 "Plug '~/homebrew/opt/fxf'
 Plug 'junegunn/fzf', { 'dir': '~/usr/fzf', 'do': './install --key-bindings --completion < /dev/null' }
 Plug 'junegunn/fzf.vim'
 
-nnoremap <Leader><Tab> :FZF<CR>
-nnoremap <C-t> :FZF<CR>
+nnoremap <C-t> :FZFBLines<CR>
 nmap <leader><C-f> <plug>(fzf-maps-n)
 xmap <leader><C-f> <plug>(fzf-maps-x)
 omap <leader><C-f> <plug>(fzf-maps-o)
+" TODO: is there a FZF that will just insert into command line?
 cmap <C-F> <C-U>FZF<CR>
 " }}}
 
