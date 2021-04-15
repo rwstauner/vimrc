@@ -594,13 +594,57 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
 
 "Plug 'vim-scripts/VimClojure'
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+"https://github.com/clojure-vim
+"https://github.com/clojure-vim/clj-refactor.nvim
+"https://github.com/clojure-lsp/clojure-lsp
+"https://github.com/liquidz/vim-iced
+
+let g:clojure_syntax_keywords = {
+    \ 'clojureDefine': ["defproject", "deftask", "deftesttask"],
+    \ }
+" let g:clojure_special_indent_words = 'boot/with-pass-thru'
+let g:clojure_fuzzy_indent = 1
+" For things like (boot/with- it only looks at "boot", so go with it.
+let g:clojure_fuzzy_indent_patterns = [
+  \ '^with', '^def', '^let',
+  \ '^boot$',
+  \ ]
+Plug 'clojure-vim/clojure.vim', { 'for': 'clojure' }
+" Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+
+Plug 'guns/vim-sexp', { 'for': ['clojure', 'joker'] }
+
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-" tpope/vim-classpath
-" guns/vim-clojure-static
+
+if !filereadable(".no-cljfmt")
+  Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
+  command DisableCljFmt exe "aug vim-cljfmt | au! | aug END"
+endif
+
+" Plug 'rwstauner/vim-clojure-auto-repl', { 'for': 'clojure' }
+
+"Plug 'fbeline/kibit-vim', { 'on': 'Kibit' }
+
+" Plug 'tpope/vim-salve'
+" Plug 'tpope/vim-classpath', { 'for': 'clojure' }
+
 com! ParEditToggle let g:paredit_mode = abs(g:paredit_mode - 1)
 let g:paredit_leader = ','
-Plug 'kovisoft/paredit', { 'for': 'clojure' }
+Plug 'kovisoft/paredit', { 'for': ['clojure', 'joker'] }
+
+" TODO: use getcwd() to make g:projectionist_file relative
+autocmd User ProjectionistDetect
+  \ if &filetype == "clojure" && len(b:projectionist) == 0 |
+  \   call projectionist#append(substitute(g:projectionist_file, "/\\(src\\|test\\)/.\\{-}\\.clj$", "", ""), {
+  \     "src/*.clj": {"alternate": "test/{}_test.clj"},
+  \     "test/*_test.clj": {"alternate": "src/{}.clj"},
+  \   }) |
+  \ elseif &filetype == "go" && len(b:projectionist) == 0 |
+  \   call projectionist#append(substitute(g:projectionist_file, "/[^/]\\{-}$", "", ""), {
+  \     "*.go": {"alternate": "{}_test.go"},
+  \     "*_test.go": {"alternate": "{}.go"},
+  \   }) |
+  \ endif
 " }}}
 
 Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
@@ -863,7 +907,7 @@ endif
 " }}}
 
 " Now setup autocommands to match file types.
-au FileType clojure exe "RainbowParenthesesLoadRound" | RainbowParenthesesActivate
+au FileType clojure,joker exe "RainbowParenthesesLoadRound" | RainbowParenthesesActivate
 
 " Show me EN SPACE characters when I copy text from hipchat.
 match Error /\%u2002/
