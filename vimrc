@@ -627,33 +627,40 @@ Plug 'sukima/xmledit', { 'for': 'xml' }
 "command! XMLMode set ft=xml
 
 " }}}
-" [ syntastic ] automatic syntax check into location list {{{
+" [ ale ] Asynchronous Lint Engine {{{
 
-let g:syntastic_check_on_open=0 " avoid start-up delay; check on save, not open
-let g:syntastic_check_on_wq = 0 " If I issue :wq just let me leave.
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_jump=0
-let g:syntastic_auto_loc_list=1
-let g:syntastic_enable_balloons = 0
-"let g:syntastic_ignore_files = ['^/usr/include/', '\c\.h$']
-let g:syntastic_loc_list_height=5
-"let g:syntastic_mode_map = { 'mode': 'active', \ 'active_filetypes': ['ruby', 'php'], \ 'passive_filetypes': ['puppet'] }
-"g:syntastic_quiet_messages = {'level': 'warnings'}
-let g:syntastic_stl_format='[Syntax: %E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:ale_lint_on_enter        = 0 " The linter runs constantly if this is on.
+let g:ale_lint_on_save         = 1
+let g:ale_lint_on_text_changed = 0
+"let g:ale_lint_delay           = 200 " millisecond delay before checking
+"let g:ale_set_loclist = 0
+"let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_statusline_format = ['✖ %d', '⚠ %d', '\o/']
+" let g:ale_sign_column_always = 1
 
-let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_javascript_eslint_exec = substitute(system("npm bin"), '\n$', '', '') . '/eslint'
-let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
+let g:ale_linters = {
+  \   'clojure': ['clj-kondo'],
+  \   'ruby': ['rubocop'],
+  \ }
 
-let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
-let g:syntastic_python_checkers = [ 'pylint', 'python' ]
-let g:syntastic_puppet_puppetlint_args = s:puppet_lint_args
+nmap <silent> [w <Plug>(ale_previous_wrap)
+nmap <silent> ]w <Plug>(ale_next_wrap)
+
+" augroup PostALE
+"     autocmd!
+"     autocmd User ALELint call YourFunction()
+" augroup END
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{ale#statusline#Status()}
+"set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
-Plug 'scrooloose/syntastic'
+
+Plug 'w0rp/ale'
 
 " }}}
 
@@ -664,7 +671,6 @@ Plug 'janko/vim-test'
 " [ statline ] override statusline with something more powerful {{{
 
 " TODO: compare to https://github.com/Lokaltog/vim-powerline
-let g:statline_syntastic = 1
 let g:statline_fugitive = 1
 let g:statline_show_n_buffers = 1
 let g:statline_show_encoding = 1
@@ -674,6 +680,7 @@ let g:statline_trailing_space = 1
 let g:statline_mixed_indent = 1
 let g:statline_rvm = 0
 let g:statline_rbenv = 0
+let g:statline_syntastic = 0
 Plug 'millermedeiros/vim-statline'
 
 " }}}
