@@ -262,14 +262,8 @@ noremap <silent> <C-\>     :<C-U>TmuxNavigatePrevious<cr>
 " but this is also the case for regular C-w commands, so that's fine.
 " }}}
 
-" Reopen all "file:line" args as file at line.
-" This seems to conflict with NERDTree (on the first arg).
-let g:file_line_bundle_cmd = "Plug 'bogado/file-line'"
-" Load it automatically if any args contain a colon.
-if match(argv(), ':') >= 0 | exe g:file_line_bundle_cmd | endif
-" Can also be delayed behind a command (add dir to rtp, load plugin, and
-" trigger autocommand that the plugin listens for (no api is exposed)).
-"command! FileLine exe g:file_line_bundle_cmd | runtime plugin/file_line.vim | silent doautocmd <nomodeline> VimEnter *
+" Open "file:line" as file at line.
+Plug 'wsdjeg/vim-fetch'
 
 " TODO: consider these:
 " https://github.com/zaiste/vimified
