@@ -887,8 +887,8 @@ end
 
 " highlight conflict markers
 au BufReadPost * call matchadd("ErrorMsg", '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$')
-" highlight todo messages in any syntax
-au BufReadPost * call matchadd("ToDo", '\c\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)')
+" highlight todo messages in any syntax (but not "doToDonut")
+au BufReadPost * call matchadd("ToDo", '\c[a-z]\@<!\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)')
 
 " [ colorscheme ] {{{
 
