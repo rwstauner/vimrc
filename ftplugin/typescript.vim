@@ -1,4 +1,5 @@
 setl suffixesadd=.ts
+setl commentstring=//\ %s
 
 autocmd User ProjectionistDetect
   \ if len(b:projectionist) == 0 |
