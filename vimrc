@@ -633,21 +633,6 @@ com! ParEditToggle let g:paredit_mode = abs(g:paredit_mode - 1)
 let g:paredit_leader = ','
 Plug 'kovisoft/paredit', { 'for': ['clojure', 'joker'] }
 
-" TODO: use getcwd() to make g:projectionist_file relative
-autocmd User ProjectionistDetect
-  \ if &filetype == "clojure" && len(b:projectionist) == 0 |
-  \   call projectionist#append(substitute(g:projectionist_file, "/\\(src\\|test\\)/.\\{-}\\.clj$", "", ""), {
-  \     "src/*.clj": {"alternate": "test/{}_test.clj"},
-  \     "test/*_test.clj": {"alternate": "src/{}.clj"},
-  \   }) |
-  \ elseif &filetype == "go" && len(b:projectionist) == 0 |
-  \   call projectionist#append(substitute(g:projectionist_file, "/[^/]\\{-}$", "", ""), {
-  \     "*.go": {"alternate": "{}_test.go"},
-  \     "*_test.go": {"alternate": "{}.go"},
-  \   }) |
-  \ endif
-" }}}
-
 Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
 
 " json: better than 'javascript'
