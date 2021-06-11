@@ -28,6 +28,7 @@ exe "autocmd  FileType " . join(s:spell_types, ',') . " setlocal spell spelllang
 autocmd  BufNewFile,BufRead *.bb                                        setf clojure       " babashka
 autocmd  BufNewFile,BufRead *.csv                                       setf csv
 autocmd  BufNewFile,BufRead .env.*                                      setf sh
+autocmd  BufNewFile,BufRead *.fnl                                       setf lisp          " fennel
 autocmd  BufNewFile,BufRead .gitignore                                  setf gitignore
 autocmd  BufNewFile,BufRead *.hx                                        setf haxe
 autocmd  BufReadPost        Jenkinsfile*                                setf groovy
