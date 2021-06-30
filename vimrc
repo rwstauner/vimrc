@@ -193,7 +193,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'rwstauner/vim-write-plus'
 
-Plug 'kana/vim-gf-user'
+"Plug 'kana/vim-gf-user'
 
 "Plug 'rwstauner/vim-gfff', { 'dir': '~/Dropbox/src/vim-gfff' }
 
