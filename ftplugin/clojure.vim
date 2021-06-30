@@ -1,3 +1,10 @@
+function! ClojureNsToPath(ns)
+  return substitute( substitute(a:ns, '-', '_', 'g'), '\.', '/', 'g')
+endfunction
+setl includeexpr=ClojureNsToPath(v:fname)
+setl suffixesadd=.cljc,.clj,.cljs
+setl path+=src
+
 setl formatprg=cljstyle\ pipe
 
 autocmd User ProjectionistDetect
