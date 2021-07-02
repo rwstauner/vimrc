@@ -5,6 +5,8 @@ setl includeexpr=ClojureNsToPath(v:fname)
 setl suffixesadd=.cljc,.clj,.cljs
 setl path+=src
 
+iabbr <buffer> timbre taoensso.timbre
+
 setl formatprg=cljstyle\ pipe
 
 autocmd User ProjectionistDetect
