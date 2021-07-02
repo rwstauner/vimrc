@@ -598,7 +598,6 @@ Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
 "https://github.com/clojure-vim
 "https://github.com/clojure-vim/clj-refactor.nvim
 "https://github.com/clojure-lsp/clojure-lsp
-"https://github.com/liquidz/vim-iced
 
 let g:clojure_syntax_keywords = {
     \ 'clojureDefine': ["defproject", "deftask", "deftesttask"],
@@ -615,7 +614,15 @@ Plug 'clojure-vim/clojure.vim', { 'for': 'clojure' }
 
 Plug 'guns/vim-sexp', { 'for': ['clojure', 'joker'] }
 
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" let g:iced_enable_default_key_mappings = v:true
+" Plug 'liquidz/vim-iced', { 'for': 'clojure' }
+if s:nvim
+  Plug 'Olical/conjure', { 'tag': 'v4.18.0', 'for': 'clojure' }
+  autocmd FileType clojure command! Shadow exe ":ConjureShadowSelect dev | :ConjureEval (add-tap prn)"
+  vmap \ev \E
+else
+  Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+endif
 
 if !filereadable(".no-cljfmt")
   Plug 'venantius/vim-cljfmt', { 'for': 'clojure' }
@@ -898,8 +905,7 @@ if !exists("*plug#end")
   syntax enable
 endif
 " }}}
-
-" Now setup autocommands to match file types.
+" Do this late to avoid being overwritten.
 au FileType clojure,joker exe "RainbowParenthesesLoadRound" | RainbowParenthesesActivate
 
 " Show me EN SPACE characters when I copy text from hipchat.
