@@ -531,7 +531,7 @@ Plug 'raichoo/purescript-vim', { 'for': 'purescript' }
 " FIXME: This doesn't work with any syntaxes that are lazily added to &rtp.
 " But it would if we generated a tree with all the files linked into it.
 "let g:markdown_fenced_languages = [ 'bash', 'perl', 'ruby', 'sh' ]
-"Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 
 " [ python ] {{{
 " python template engine
