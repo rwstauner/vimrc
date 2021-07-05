@@ -622,6 +622,8 @@ if s:nvim
   vmap \ev \E
 else
   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+  " Use cljstyle instead.
+  autocmd User FireplaceActivate setl formatexpr=
 endif
 
 if !filereadable(".no-cljfmt")
