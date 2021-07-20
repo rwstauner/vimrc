@@ -979,7 +979,7 @@ command -nargs=? MaxLineLength call MaxLineLength(<f-args>)
 
 command! ModeLine exe "norm O" . substitute(&cms, ' \?%s', " vim: set ts=2 sts=2 sw=2 expandtab smarttab:", '')
 
-command! GitUrl exe "! git url '" . expand("%") . "' " . line('.') . " | clip"
+command! -range GitUrl exe "! git url '" . expand("%") . "' " . <line1> . " " . <line2> . " | clip"
 command! GitCleanupCommitMsg :%! perl -pe 'exit 0 if /^\#/'
 command! GitCommitMsgHook exe "GitCleanupCommitMsg" | Git maybe commit-msg-hook %
 
