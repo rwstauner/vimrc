@@ -1105,7 +1105,7 @@ imap <F9> <C-o>:SpellToggle<CR>
 " }}}
 " }}}
 
-nmap <C-l> <C-l>:syntax sync fromstart<CR>
+nmap <C-l> <C-l>:nohl<CR>:syntax sync fromstart<CR>
 
 " re-highlight last search without moving cursor
 nmap <Leader>/h :set hlsearch<CR>
