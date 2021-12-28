@@ -7,7 +7,9 @@ endfun
 let s:sid = '<SNR>' . s:SID() . '_'
 
 call NERDTreeAddKeyMap({ 'key': '<Tab>', 'callback': s:sid."DirTab",  'scope': 'DirNode' })
+call NERDTreeAddKeyMap({ 'key':'<Space>','callback': s:sid."DirTab",  'scope': 'DirNode' })
 call NERDTreeAddKeyMap({ 'key': '<Tab>', 'callback': s:sid."Tab",     'scope': 'FileNode' })
+call NERDTreeAddKeyMap({ 'key':'<Space>','callback': s:sid."Tab",     'scope': 'FileNode' })
 call NERDTreeAddKeyMap({ 'key':     '-', 'callback': s:sid."Split",   'scope': 'FileNode' })
 call NERDTreeAddKeyMap({ 'key': '<Bar>', 'callback': s:sid."Bar",     'scope': 'FileNode' })
 
