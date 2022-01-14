@@ -20,3 +20,23 @@ autocmd User ProjectionistDetect
   \     "test/*_test.cljs": {"alternate": "src/{}.cljs"},
   \   }) |
   \ endif
+
+" Use "format whole file" as a signal to enable it automatically on write.
+" function! ClojuregqG()
+"  let g:cljstyle_on_write = 1
+"  norm! gqG
+" endfunction
+" nnoremap gqG :call ClojuregqG()<CR>
+
+" FIXME: a bit jarring, need to configure cljstyle to do less first
+function! CljStyleFile()
+  if !exists("g:cljstyle_on_write")
+    return
+  endif
+  norm! mcgg0gqGg`c
+endfunction
+
+augroup user-clojure
+  autocmd!
+  autocmd BufWritePre * call CljStyleFile()
+augroup END
