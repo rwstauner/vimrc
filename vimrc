@@ -626,7 +626,7 @@ Plug 'guns/vim-sexp', { 'for': ['clojure', 'joker'] }
 " Plug 'liquidz/vim-iced', { 'for': 'clojure' }
 if s:nvim
   Plug 'Olical/conjure', { 'for': 'clojure' }
-  autocmd FileType clojure command! Shadow exe ":ConjureShadowSelect dev | :ConjureEval (add-tap prn)"
+  autocmd FileType clojure command! ShadowCljs exe ":ConjureShadowSelect dev" | exe ":ConjureEval (add-tap prn)" | exe ":norm \\ls" | exe ":set wrap" | exe ":norm! <c-w><c-w>"
   vmap \ev \E
 else
   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
