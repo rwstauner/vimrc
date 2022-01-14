@@ -628,6 +628,7 @@ if s:nvim
   Plug 'Olical/conjure', { 'for': 'clojure' }
   autocmd FileType clojure command! ShadowCljs exe ":ConjureShadowSelect dev" | exe ":ConjureEval (add-tap prn)" | exe ":norm \\ls" | exe ":set wrap" | exe ":norm! <c-w><c-w>"
   vmap \ev \E
+  "Plug 'tami5/lispdocs.nvim' " already a filetype plugin
 else
   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
   " Use cljstyle instead.
