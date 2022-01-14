@@ -106,6 +106,11 @@ endif
 
 " }}}
 
+let s:map_prefixes = ["n", "c", "o", "x", "s", "v", "l", "i"]
+if s:nvim
+  call add(s:map_prefixes, "t")
+endif
+
 " Don't load other language syntax files when editing vim files.
 let g:vimsyn_embed = 0 "  'pP' => p: perl, P: python
 
@@ -251,10 +256,17 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " S-Left S-Down S-Up S-Right
 if s:nvim
-  noremap <silent> <S-Up>    :<C-U>TmuxNavigateUp<cr>
-  noremap <silent> <S-Down>  :<C-U>TmuxNavigateDown<cr>
-  noremap <silent> <S-Right> :<C-U>TmuxNavigateRight<cr>
-  noremap <silent> <S-Left>  :<C-U>TmuxNavigateLeft<cr>
+  let s:tmuxnav_prefixes = {
+    \'c': '',
+    \}
+  for map_type in s:map_prefixes
+    if map_type != "i"
+      exe map_type . 'noremap <silent> <S-Up>    ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateUp<cr>'
+      exe map_type . 'noremap <silent> <S-Down>  ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateDown<cr>'
+      exe map_type . 'noremap <silent> <S-Right> ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateRight<cr>'
+      exe map_type . 'noremap <silent> <S-Left>  ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateLeft<cr>'
+    endif
+  endfor
 else
   noremap <silent> [1;2A   :<C-U>TmuxNavigateUp<cr>
   noremap <silent> [1;2B   :<C-U>TmuxNavigateDown<cr>
@@ -298,11 +310,7 @@ let g:fzf_command_prefix = 'FZF'
 
 " In FZF use <C-n> / <C-p> for next/prev search history.
 let g:fzf_history_dir = '~/.local/cache/vim-fzf-history'
-let map_prefixes = ["n", "c", "o", "x", "s", "v", "l"]
-if s:nvim
-  call add(map_prefixes, "t")
-endif
-for map_type in map_prefixes
+for map_type in s:map_prefixes
   exe 'command! -bar -bang ' . g:fzf_command_prefix . 'Maps' . map_type . ' call fzf#vim#maps("' . map_type . '", <bang>0)'
 endfor
 " if s:nvim && !exists('g:fzf_layout')
