@@ -625,7 +625,7 @@ Plug 'guns/vim-sexp', { 'for': ['clojure', 'joker'] }
 " let g:iced_enable_default_key_mappings = v:true
 " Plug 'liquidz/vim-iced', { 'for': 'clojure' }
 if s:nvim
-  Plug 'Olical/conjure', { 'tag': 'v4.18.0', 'for': 'clojure' }
+  Plug 'Olical/conjure', { 'for': 'clojure' }
   autocmd FileType clojure command! Shadow exe ":ConjureShadowSelect dev | :ConjureEval (add-tap prn)"
   vmap \ev \E
 else
