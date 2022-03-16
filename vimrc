@@ -344,10 +344,6 @@ Plug 'ervandew/supertab'
 
 " toggle comment state with gc<motion>
 Plug 'tpope/vim-commentary'
-" better management of quotes and paired symbols than i used to do
-Plug 'tpope/vim-surround'
-" Don't make me reach for `y`.
-nmap S ys
 
 " [multiple cursors] {{{
 " Setup additional characters for the plugin to recognize.
@@ -1127,34 +1123,10 @@ nmap <C-w>* <C-w>_<C-w>\|
 nmap <Leader>gf gf:$arge %<CR>
 nmap <Leader>F 			:99arge <cfile><CR>
 
-map <Leader>o :call <SID>SpaceLines()<CR>
-
 nmap <Leader>J			gJkgJ
 "CamelCase -> underscore
 nmap <silent> <Leader>_ 	i_gu2l
 vmap <silent> <Leader>_ 	<Esc>:set lz<CR>`>a`<i:s/\v([a-z])([A-Z])/\1_\l\2/g<CR>gJkgJ:set nolz<CR>:redraw<CR>:silent noh<CR>
-"mappings for dynamic characters
-" b takes the next character (c, d, x, y, v)
-nmap <silent> <Leader>b 	:call InBetween("",0)<CR>
-nmap <silent> <Leader>B 	:call InBetween("",1)<CR>
-nmap <silent> <Leader>c 	:call InBetween("c",0)<CR>
-nmap <silent> <Leader>C 	:call InBetween("c",1)<CR>
-nmap <silent> <Leader>d 	:call InBetween("d",0)<CR>
-nmap <silent> <Leader>D 	:call InBetween("d",1)<CR>
-nmap <silent> <Leader>x 	:call InBetween("x",1)<CR>
-nmap <silent> <Leader>X 	:call InBetween("x",0)<CR>
-nmap <silent> <Leader>v 	:call InBetween("v",0)<CR>
-nmap <silent> <Leader>V 	:call InBetween("v",1)<CR>
-nmap <silent> <Leader>y 	:call InBetween("y",0)<CR>
-nmap <silent> <Leader>Y 	:call InBetween("y",1)<CR>
-" FIXME: make text objects?
-nmap <silent> <Leader>s 	:<C-U>call SurroundCword(0)<CR>
-nmap <silent> <Leader>S 	:<C-U>call SurroundCword(1)<CR>
-nmap <silent> <Leader>t 	:<C-U>call SurroundTill(0,0)<CR>
-nmap <silent> <Leader>T 	:<C-U>call SurroundTill(0,1)<CR>
-nmap <silent> <Leader>r 	:<C-U>call SurroundTill(1,1)<CR>
-nmap <silent> <Leader>R 	:<C-U>call SurroundTill(1,0)<CR>
-vmap <silent> <Leader>s 	:call SurroundSelection()<CR>
 
 " html paragraph
 nmap <silent> <Leader>hp 	:norm {o<p>}O</p>
@@ -1179,9 +1151,6 @@ nmap <Leader>L 			WguBE
 vmap <Leader>u 			<Esc>`>gUlgU`<
 vmap <Leader>l 			<Esc>`>gulgu`<
 
-"surround character/selection with spaces
-nmap <Leader><space> 		i <Esc>la <Esc>
-vmap <Leader><space> 		`>a <Esc>`<i <Esc>
 "clone(gemini) current character,word,selection
 nmap <Leader>gc			ylp
 nmap <Leader>gw			wbywep
@@ -1213,29 +1182,11 @@ function CleanupWordPaste() range
 	'<,'>s/[“”]/"/g
 endfunction
 
-"Csomething generally means current something
-function Cline(...) "offset (-above or +below cursor)
-	return getline(line(".") + ( a:0 ? a:1 : 0))
-endfunction
-function Cchar(...) "offset (-left or +right of cursor)
-	return getline(line("."))[col(".") - 1 + ( a:0 ? a:1 : 0)]
-endfunction
-function Cword(...) "unrestrictive boundaries
-	return expand( "<c" . ( a:0 && a:1 ? "WORD" : "word" ) . ">" )
-endfunction
-
 " wrap visual selection in a commented [section] block
 function CommentSection(section) range
   let section = "[ " . a:section . " ]"
   exe "norm '>o" . printf(&commentstring, " } " . section)
   exe "norm '<O" . printf(&commentstring, " "   . section . " {")
-endfunction
-
-function <SID>SpaceLines() range
-  let l:pos = getpos(".")
-  exe "norm " . a:firstline . "GO" . (a:lastline + 1) . "Go"
-  let l:pos[1] += 1
-  call setpos(".", l:pos)
 endfunction
 
 function! MaxLineLength(...)
@@ -1290,46 +1241,12 @@ function ImageDataUri() range
 	redraw!
 endfunction
 
-function InBetween(cmd, inclusive, ...) "grab-command ([dxy]), inclusive, leftside, rightside
-	let cmd = ( a:cmd != "" ? a:cmd : nr2char( getchar() ) )
-	if a:inclusive
-		let tillright = "f"
-		let tillleft = "F"
-	else
-		let tillright = "t"
-		let tillleft = "T"
-	endif
-	let startpos = col(".")
-	let leftside = ( a:0 >= 1 ? a:1 : nr2char( getchar() ) )
-	let rightside = ( a:0 >= 2 ? a:2 : MatchPair( leftside ) )
-"	if Cchar() != rightside
-"		execute "normal d" . tillright . rightside
-"		call cursor(0, startpos)
-"	endif
-"	if Cchar() != leftside
-"		execute "normal d" . tillleft . leftside . ( col(".") == startpos - 1 ? "x" : "" )
-"	endif
-	if Cchar() != leftside || ( leftside == rightside && stridx( strpart( Cline(), startpos ), rightside ) == -1 )
-		execute "normal " . tillleft . leftside
-	endif
-		execute "normal " . ( cmd ) . tillright . rightside . ( cmd != "x" ? "" : "x" )
-	if cmd == "c"
-		normal l
-		startinsert
-	endif
-endfunction
-
 function LoadSyntax(...)
 	let l:syn = a:0 > 0 ? a:1 : "tt2"
 	let l:bcs = b:current_syntax
 	unlet b:current_syntax
 	exe "runtime! syntax/" . l:syn . ".vim"
 	let b:current_syntax = l:bcs
-endfunction
-
-function MatchPair( character ) "find the complement to a given character (or return given character)
-  let l:idx = stridx(          "()[]{}<>«»", a:character )
-  return l:idx > -1 ? strpart( ")(][}{><»«", l:idx, strlen(a:character) ) : a:character
 endfunction
 
 function PerlDo(pl) range
@@ -1354,88 +1271,6 @@ function RenameCurrent(name)
 	end
 	call rename(expand("%"), name)
 	exe "edit " . name
-endfunction
-
-function SurroundCword(...) range "unrestrictiveboundaries, leftside, rightside, endcommands, startcommands
-	let leftside = ""
-	let rightside = ""
-	let i = 1
-	while i <= v:count1
-		let thischar = ( a:0 >= 2 ? a:2 : nr2char( getchar() ) )
-		let leftside = leftside . thischar
-		let rightside = ( a:0 >= 3 ? a:3 : MatchPair( thischar ) ) . rightside 
-		let i = ( i + 1 )
-	endwhile
-		if Cchar() !~ "\\s" && Cline() != "\0" 	"if cursor is over a word (not a space or a blank line)
-			let rBounds = ( a:0 >= 1 && a:1 ? 1 : 0 )
-			if rBounds			"and boundaries are relaxed
-				let beginBound = "B"
-				let endBound = "E"
-			else
-				let beginBound = "b"
-				let endBound = "e"
-			endif
-      let surround = "w" . beginBound . "i" . leftside . "\e" . endBound . "a" . rightside . "\e"
-			"add start and end commands if present
-      exe "normal! " . ( a:0 >= 5 ? a:5 : "" ) . surround . ( a:0 >= 4 ? a:4 : beginBound . ( rBounds ? strlen( leftside ) . "l" : "" )  )
-		else
-			let surround = "i" . leftside . rightside . "\e"
-			let rightsidelen = ( strlen( rightside ) - 1 )
-      execute "normal! " . surround . ( rightsidelen ? rightsidelen . "h" : "" )
-		endif
-endfunction
-
-function SurroundSelection(...) range "leftside, rightside, endcommands, startcommands
-	let leftside = ""
-	let rightside = ""
-	let i = 1
-	while i <= v:count1
-		let thischar = ( a:0 >= 1 && a:1 != "" ? a:1 : nr2char( getchar() ) )
-		let leftside = leftside . thischar 
-		let rightside = ( a:0 >= 2 && a:2 != "" ? a:2 : MatchPair( thischar ) ) . rightside
-		let i = ( i + 1 )
-	endwhile
-		"execute "normal \e`>" . ( ( i - 1 ) > 0 ? 2 * ( i - 1 ) . "l" : "" ) . ( a:0 >= 3 ? a:3 : "" ) . "a" . rightside . "\e`<" . ( a:0 >= 4 ? a:4 : "" ) . "i" . leftside  
-    execute "normal! " . ( a:0 >= 4 ? a:4 : "" ) . "`>a" . rightside . "\e`<" . "i" . leftside . "\e" . ( a:0 >= 3 ? a:3 : "" )
-endfunction
-
-function SurroundTill(r, ...) range "replace, tilloutside(farther), till, leftside, rightside
-	let tillcmds = ""
-	if a:0 >= 1 && a:1
-		let tillright = "f"
-		let tillleft = "F"
-	else
-		let tillright = "t"
-		let tillleft = "T"
-	endif
-	let startpos = col(".")
-	let leftside = ""
-	let rightside = ""
-	let tilltoleft = ( a:0 >= 2 ? a:2 : nr2char( getchar() ) )
-	let tilltoright = MatchPair( tilltoleft )
-	let i = 1
-	while i <= v:count1
-		let thischar = ( a:0 >= 3 ? a:3 : nr2char( getchar() ) )
-		let leftside = leftside . thischar 
-		let rightside = ( a:0 >= 4 ? a:4 : MatchPair( thischar ) ) . rightside
-		let i = ( i + 1 )
-	endwhile
-	let tillrightcmd = "normal " . tillright . tilltoright . ( a:r ? "cl" : "a" ) . rightside . "\e"
-	let tillleftcmd = "normal " . tillleft . tilltoleft . ( a:r ? "cl" : "i" ) . leftside . "\e"
-	if Cchar() == tilltoleft || Cchar() == tilltoright
-		if stridx( Cline(), tilltoright ) > col(".")
-			execute "normal " . ( tillright == "t" ? "a" : "i" ) . leftside . "\e"
-			execute tillrightcmd
-		else
-			execute "normal " . ( tillright == "t" ? "i" : "a" ) . rightside . "\e"
-			call cursor(0, startpos)
-			execute tillleftcmd
-		endif
-	else
-		execute tillrightcmd
-		call cursor(0, startpos)
-		execute tillleftcmd
-	endif
 endfunction
 
 " The builtin uniq() expects sorted lists.

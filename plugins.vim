@@ -12,6 +12,9 @@ call minpac#add('tpope/vim-repeat')
 " navigate various things back and forth with [x and ]x (t,l,q...)
 call minpac#add('tpope/vim-unimpaired', {'type': 'opt'})
 
+" better management of quotes and paired symbols than i used to do
+call minpac#add('tpope/vim-surround')
+
 call minpac#clean()
 call minpac#update()
 
