@@ -2,6 +2,7 @@
 
 /autoload/plug.vim
 /plugged/
+/pack
 
 /macros/local_before.vim
 /tags/ptags

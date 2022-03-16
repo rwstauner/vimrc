@@ -337,9 +337,6 @@ Plug 'ervandew/supertab'
 " i tried delimitmate but it gets in my way more often than it's useful
 "Plug 'Raimondi/delimitMate'
 
-" enable repeating certain plugin actions with .
-Plug 'tpope/vim-repeat'
-
 " view images
 " TODO: try this, then lazy-load it
 "Plug 'tpope/vim-afterimage'
@@ -347,8 +344,6 @@ Plug 'tpope/vim-repeat'
 
 " toggle comment state with gc<motion>
 Plug 'tpope/vim-commentary'
-" navigate various things back and forth with [x and ]x (t,l,q...)
-Plug 'tpope/vim-unimpaired'
 " better management of quotes and paired symbols than i used to do
 Plug 'tpope/vim-surround'
 " Don't make me reach for `y`.
