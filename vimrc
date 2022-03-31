@@ -106,9 +106,9 @@ endif
 
 " }}}
 
-let s:map_prefixes = ["n", "c", "o", "x", "s", "v", "l", "i"]
+let g:map_prefixes = ["n", "c", "o", "x", "s", "v", "l", "i"]
 if s:nvim
-  call add(s:map_prefixes, "t")
+  call add(g:map_prefixes, "t")
 endif
 
 " Don't load other language syntax files when editing vim files.
@@ -248,37 +248,6 @@ Plug 'keith/tmux.vim'
 let g:bracketed_paste_tmux_wrap = 0
 Plug 'ConradIrwin/vim-bracketed-paste'
 
-" [ vim-tmux-navigatior ] {{{
-let g:tmux_navigator_no_mappings = 1
-" let g:tmux_navigator_save_on_switch = 0
-
-Plug 'christoomey/vim-tmux-navigator'
-
-" S-Left S-Down S-Up S-Right
-if s:nvim
-  let s:tmuxnav_prefixes = {
-    \'c': '',
-    \}
-  for map_type in s:map_prefixes
-    if map_type != "i"
-      exe map_type . 'noremap <silent> <S-Up>    ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateUp<cr>'
-      exe map_type . 'noremap <silent> <S-Down>  ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateDown<cr>'
-      exe map_type . 'noremap <silent> <S-Right> ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateRight<cr>'
-      exe map_type . 'noremap <silent> <S-Left>  ' . get(s:tmuxnav_prefixes, map_type, "") . ':<C-U>TmuxNavigateLeft<cr>'
-    endif
-  endfor
-else
-  noremap <silent> [1;2A   :<C-U>TmuxNavigateUp<cr>
-  noremap <silent> [1;2B   :<C-U>TmuxNavigateDown<cr>
-  noremap <silent> [1;2C   :<C-U>TmuxNavigateRight<cr>
-  noremap <silent> [1;2D   :<C-U>TmuxNavigateLeft<cr>
-end
-" This one doesn't fit :/
-noremap <silent> <C-\>     :<C-U>TmuxNavigatePrevious<cr>
-
-" Note: In visual mode the selection won't be preserved
-" but this is also the case for regular C-w commands, so that's fine.
-" }}}
 
 " Open "file:line" as file at line.
 Plug 'wsdjeg/vim-fetch'
@@ -310,7 +279,7 @@ let g:fzf_command_prefix = 'FZF'
 
 " In FZF use <C-n> / <C-p> for next/prev search history.
 let g:fzf_history_dir = '~/.local/cache/vim-fzf-history'
-for map_type in s:map_prefixes
+for map_type in g:map_prefixes
   exe 'command! -bar -bang ' . g:fzf_command_prefix . 'Maps' . map_type . ' call fzf#vim#maps("' . map_type . '", <bang>0)'
 endfor
 " if s:nvim && !exists('g:fzf_layout')

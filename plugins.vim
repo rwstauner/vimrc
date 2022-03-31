@@ -20,6 +20,9 @@ Opt tpope/vim-unimpaired
 Add tpope/vim-surround
 
 
+" Enable consistent vim/tmux split navigation keys.
+Opt christoomey/vim-tmux-navigator
+
 call minpac#clean()
 call minpac#update()
 
