@@ -298,9 +298,6 @@ cmap <C-F> <C-U>FZF<CR>
 Plug 'ervandew/supertab'
 " TODO: supertab config
 
-" toggle comment state with gc<motion>
-Plug 'tpope/vim-commentary'
-
 " [multiple cursors] {{{
 " Setup additional characters for the plugin to recognize.
 " The last line is the default list.

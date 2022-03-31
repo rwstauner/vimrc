@@ -21,6 +21,9 @@ Opt tpope/vim-unimpaired
 " better management of quotes and paired symbols than i used to do
 Add tpope/vim-surround
 
+" toggle comment state with gc<motion>
+Opt tpope/vim-commentary
+
 " Open "file:line" as file at line.
 Opt wsdjeg/vim-fetch
 
