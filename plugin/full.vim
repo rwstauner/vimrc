@@ -4,3 +4,6 @@ if g:editor_only
 endif
 
 packadd vim-write-plus
+
+" Open "file:line" as file at line.
+packadd vim-fetch

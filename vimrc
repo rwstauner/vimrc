@@ -252,9 +252,6 @@ let g:bracketed_paste_tmux_wrap = 0
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 
-" Open "file:line" as file at line.
-Plug 'wsdjeg/vim-fetch'
-
 " TODO: consider these:
 " https://github.com/zaiste/vimified
 " https://github.com/mutewinter/dot_vim

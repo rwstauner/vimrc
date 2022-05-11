@@ -21,6 +21,8 @@ Opt tpope/vim-unimpaired
 " better management of quotes and paired symbols than i used to do
 Add tpope/vim-surround
 
+" Open "file:line" as file at line.
+Opt wsdjeg/vim-fetch
 
 " Enable consistent vim/tmux split navigation keys.
 Opt christoomey/vim-tmux-navigator
