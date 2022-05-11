@@ -201,9 +201,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'kana/vim-gf-user'
-
-"Plug 'rwstauner/vim-gfff', { 'dir': '~/Dropbox/src/vim-gfff' }
 
 Plug 'junegunn/vim-easy-align', { 'on': ['EasyAlign', '<Plug>(EasyAlign)'] }
 " ga<motion><num><char>
@@ -244,8 +241,6 @@ Plug 'editorconfig/editorconfig-vim'
 " Overwrite filetype.
 autocmd BufWinEnter .editorconfig set filetype=cfg
 " }}}
-
-Plug 'keith/tmux.vim'
 
 " Disable the tmux escape sequence wrapper as it seems unnecessary in my usual env.
 let g:bracketed_paste_tmux_wrap = 0
@@ -302,14 +297,6 @@ cmap <C-F> <C-U>FZF<CR>
 
 Plug 'ervandew/supertab'
 " TODO: supertab config
-
-" i tried delimitmate but it gets in my way more often than it's useful
-"Plug 'Raimondi/delimitMate'
-
-" view images
-" TODO: try this, then lazy-load it
-"Plug 'tpope/vim-afterimage'
-"Plug 'tpope/tpope-vim-abolish'
 
 " toggle comment state with gc<motion>
 Plug 'tpope/vim-commentary'
@@ -519,45 +506,6 @@ Plug 'tpope/vim-rails', { 'for': ['ruby'] }
 " Plug 'ruby-formatter/rufo-vim'
 " }}}
 
-" Plug 'pearofducks/ansible-vim'
-
-" [ puppet ] {{{
-" puppet: https://github.com/puppetlabs
-" alternative: 'rodjek/vim-puppet'
-Plug 'puppetlabs/puppet-syntax-vim', { 'for': 'puppet' }
-
-" TODO: Put this somewhere else.
-let s:puppet_lint_args = '--no-80chars-check --no-arrow_alignment-check'
-command -nargs=* -complete=file PuppetLint call PuppetLint(<f-args>)
-function PuppetLint(...)
-  let l:makeprg = &makeprg
-  let l:efm = &efm
-
-  let &l:makeprg='find ' . (a:0 ? a:1 : '.') . ' -name \*.pp \| xargs --no-run-if-empty -n 1 puppet-lint ' . s:puppet_lint_args . ' --log-format "\%{path}:\%{linenumber}:\%{kind}:\%{check}:\%{message}"'
-  setl efm=%f:%l:%t%*[a-z]:%m
-  make
-
-  let &efm = l:efm
-  let &makeprg = l:makeprg
-endfunction
-" }}}
-
-" go
-Plug 'fatih/vim-go', { 'for': 'go' }
-
-" [ scala ] {{{
-" if exists('$SCALA_DIST') && isdirectory($SCALA_DIST)
-"   source $SCALA_DIST/tool-support/src/vim/ftdetect/filetype.vim
-"   " NOTE: Currently there's no 'after' directory.
-"   au FileType scala set rtp^=$SCALA_DIST/tool-support/src/vim | FixRunTimePath
-" endif
-" See also: https://gist.github.com/schmmd/1320359.
-Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'derekwyatt/vim-sbt', { 'for': 'sbt.scala' }
-" }}}
-
-Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
-
 " [ clojure ] {{{
 "let g:rbpt_loadcmd_toggle = 1
 Plug 'kien/rainbow_parentheses.vim' ", { 'for': 'clojure' }
@@ -611,8 +559,6 @@ com! ParEditToggle let g:paredit_mode = abs(g:paredit_mode - 1)
 let g:paredit_leader = ','
 Plug 'kovisoft/paredit', { 'for': ['clojure', 'joker'] }
 
-Plug 'ekalinin/Dockerfile.vim', { 'for': ['Dockerfile', 'docker-compose'] }
-
 " json: better than 'javascript'
 Plug 'elzr/vim-json', { 'for': 'json' }
 
@@ -622,11 +568,6 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 " }}}
-
-" haxe: see http://haxe.org/com/ide/vim
-"Plug 'vim-haxe' " requires vim-addon-manager
-"Plug 'jdonaldson/vaxe'
-" wikidoc: Plug 'wikidoc.vim'
 
 " xml shortcuts
 let xml_use_xhtml = 1
@@ -727,12 +668,6 @@ if $MULTIPLEXER != ""
 endif
 
 " }}}
-" [ covim ] {{{
-"Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
-" :CoVim start [port] [name]
-" :CoVim connect host port name
-" :CoVim disconnect
-" }}}
 
 call plug#end()
 
@@ -746,11 +681,6 @@ FixRunTimePath
 "set tags+=~/.vim/tags/ptags " cpan: Vim::Tags
 nmap <Leader>[t :sp +tN<CR>
 nmap <Leader>]t :sp +tn<CR>
-
-" I'd like a plugin that explores my whole tags file, but these only operate
-" on the current buffer (which I haven't found useful yet)
-"Bundle 'taglist.vim'
-"Bundle 'majutsushi/tagbar'
 
 " }}}
 " [ misc ]
