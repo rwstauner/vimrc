@@ -4,6 +4,10 @@ if &compatible
   set nocompatible " set this first but only if needed to avoid side effects.
 endif
 
+if !exists("g:editor_only")
+  let g:editor_only = 0
+endif
+
 let s:nvim = has('nvim')
 
 if version < 700
