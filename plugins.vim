@@ -10,6 +10,8 @@ call minpac#init()
 Opt k-takata/minpac
 
 
+Opt rwstauner/vim-write-plus
+
 " enable repeating certain plugin actions with . (autoloaded)
 Add tpope/vim-repeat
 

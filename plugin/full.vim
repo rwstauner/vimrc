@@ -2,3 +2,5 @@
 if g:editor_only
   finish
 endif
+
+packadd vim-write-plus
