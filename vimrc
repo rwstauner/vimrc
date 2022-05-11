@@ -717,9 +717,6 @@ nnoremap [1;5D b
 nnoremap [1;6C W
 nnoremap [1;6D B
 
-" don't clear the screen (no termcap) when exiting vim or executing external commands
-set t_ti= t_te=
-
 " 256 color detection works
 " (at least with gnome-terminal TERM=xterm-256color tmux TERM=screen-256color)
 " Currently with xfce4-terminal and tmux everything ends up bold.
