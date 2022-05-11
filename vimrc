@@ -14,7 +14,8 @@ if filereadable(expand("$HOME/.vim/macros/local_before.vim"))
   runtime macros/local_before.vim
 endif
 
-let s:cache = expand("$HOME/.cache/vim-cache")
+let g:cache_prefix = expand("$HOME/.cache/" . (has('nvim') ? 'n' : '') . "vim-")
+let s:cache = g:cache_prefix . "cache"
 
 " [ encoding ] {{{
 
@@ -42,7 +43,7 @@ set   colorcolumn=+0 " highlight the column at &textwidth
 set   completeopt=menuone,preview " show menu even with only one match
 set   confirm      " prompt yes/no/cancel instead of denying :q with changes
 set   display=lastline,uhex " show partial if lastline is too long, <xx> instead of ^x
-set   directory=~/.cache/vim-tmp// " Put swapfiles here (// for full path) so that they aren't in project dirs.
+let  &directory = g:cache_prefix . "tmp//" " Put swapfiles here (// for full path) so that they aren't in project dirs.
 set nofileignorecase " DWIM (pretend mac is case sensitive to limit undesired results)
 set   foldcolumn=2 " width
 set   foldopen +=insert,jump " auto-open folds when inserting or jumping far
@@ -121,7 +122,7 @@ let g:vimsyn_embed = 0 "  'pP' => p: perl, P: python
 " :help undo-persistence
 if exists("+undofile")
   set undofile
-  set undodir=~/.cache/vim-undo " dir must already exist
+  let &undodir = g:cache_prefix . "undo" " dir must already exist
   au BufWritePre /tmp/* setlocal noundofile
 endif
 
