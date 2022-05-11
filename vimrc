@@ -782,18 +782,7 @@ au BufReadPost * call matchadd("ErrorMsg", '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$')
 " highlight todo messages in any syntax (but not "doToDonut")
 au BufReadPost * call matchadd("ToDo", '\c[a-z]\@<!\v(TODO|FIXME|NOTE|XXX|HACK|TBD|EXPERIMENTAL|BODGE)')
 
-" [ colorscheme ] {{{
-
-if $SOLARIZED > 0
-  Plug 'altercation/vim-colors-solarized'
-  let g:solarized_termtrans=1
-  if $SOLARIZED == 256
-    let g:solarized_termcolors=256
-  endif
-  colorscheme solarized
-elseif filereadable(expand("~/.vim/colors/wounded.vim")) | colorscheme wounded | endif
-
-" }}}
+colorscheme wounded
 
 " [filetype / syntax] {{{
 " Do filetype then syntax in case the ftplugin customizes the syntax defs.
