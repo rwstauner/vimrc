@@ -202,10 +202,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-Plug 'junegunn/vim-easy-align', { 'on': ['EasyAlign', '<Plug>(EasyAlign)'] }
-" ga<motion><num><char>
-nmap ga <Plug>(EasyAlign)
-
 " [ dispatch ] {{{
 " `:Make` => tmux split-window of :compiler into quickfix
 " `:Make!` => background, no auto :copen

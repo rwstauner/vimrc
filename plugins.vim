@@ -21,6 +21,8 @@ Opt tpope/vim-unimpaired
 " better management of quotes and paired symbols than i used to do
 Add tpope/vim-surround
 
+Opt junegunn/vim-easy-align
+
 " toggle comment state with gc<motion>
 Opt tpope/vim-commentary
 
