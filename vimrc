@@ -257,8 +257,10 @@ function! s:fzf_quickfix(lines)
   copen
   cc
 endfunction
-" The '' key is for "enter". '': 'split',
+
+" The '' key is for "enter".
 let g:fzf_action = {
+  \ '': 'split',
   \ 'ctrl-q': function('s:fzf_quickfix'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'edit',
