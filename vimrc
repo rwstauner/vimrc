@@ -285,6 +285,11 @@ endfor
 Plug 'junegunn/fzf', { 'dir': '~/usr/fzf', 'do': './install --key-bindings --completion < /dev/null' }
 Plug 'junegunn/fzf.vim'
 
+" Insert mode completion of dictionary words.
+inoremap <expr> <c-x><c-w> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
+" Insert mote completion of files.
+inoremap <expr> <c-x><c-g> fzf#vim#complete#path('rg --files')
+
 nnoremap <C-t> :FZFBLines<CR>
 nmap <leader><C-f> <plug>(fzf-maps-n)
 xmap <leader><C-f> <plug>(fzf-maps-x)
