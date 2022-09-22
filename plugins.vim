@@ -12,6 +12,10 @@ Opt k-takata/minpac
 
 Opt rwstauner/vim-write-plus
 
+" Add several commands that utilize FZF to display/choose/autocomplete.
+Opt junegunn/fzf
+Opt junegunn/fzf.vim
+
 " enable repeating certain plugin actions with . (autoloaded)
 Add tpope/vim-repeat
 
