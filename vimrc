@@ -289,8 +289,12 @@ nnoremap <C-t> :FZFBLines<CR>
 nmap <leader><C-f> <plug>(fzf-maps-n)
 xmap <leader><C-f> <plug>(fzf-maps-x)
 omap <leader><C-f> <plug>(fzf-maps-o)
-" TODO: is there a FZF that will just insert into command line?
-cmap <C-F> <C-U>FZF<CR>
+
+function! FZFInsert()
+  return trim(system("fzf-tmux -p -"))
+endfunction
+
+cnoremap <C-F> <C-R>=FZFInsert()<CR>
 " }}}
 
 Plug 'ervandew/supertab'
