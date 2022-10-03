@@ -839,7 +839,7 @@ command -nargs=1 -complete=dir -complete=file Arge 99arge <args>
 
 command SynStack for id in synstack(line("."), col(".")) | echo synIDattr(id, "name") . " => " . synIDattr(synIDtrans(id), "name") | endfor
 
-command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e '$t = Text::ASCIITable->new; $t->setCols(split(/\t/, scalar <STDIN>)); $t->addRow(split(/\t/)) for <STDIN>; print $t'
+command -range=% TabbedToAsciiTable <line1>,<line2>! perl -MText::ASCIITable -e '$t = Text::ASCIITable->new({hide_FirstLine => 1, hide_LastLine => 1}); $t->setCols(split(/\t/, scalar <STDIN>)); $t->addRow(split(/\t/)) for <STDIN>; $line = [qw(| | - |)]; $row = [qw(| | |)]; print $t->draw($line, $row, $line, $row, $line);'
 
 if s:nvim
   for prefix in ['', 'v']
