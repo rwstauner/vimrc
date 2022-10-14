@@ -369,7 +369,7 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 " }}}
 
 " :grep
-let &grepprg = "rg -H --no-heading --vimgrep $*"
+let &grepprg = "rg -H --no-heading --vimgrep $* \\| sort"
 " Add :Grepper for async
 " let g:grepper.tools = ['rg', 'git', 'grep']
 " Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
