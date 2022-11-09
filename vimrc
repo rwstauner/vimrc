@@ -369,7 +369,7 @@ Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 " }}}
 
 " :grep
-let &grepprg = "rg -H --no-heading --vimgrep $* \\| sort"
+let &grepprg = "rg -H --no-heading --vimgrep $* \\| perl -e 'sub _ { $_[0] =~ s/\e\[[0-9;]+[a-z]//gr } print map { join(q[:], @$_) } sort { $a->[0] cmp $b->[0] \\|\\| _($a->[1]) <=> _($b->[1]) } map { [split /:/] } <>'"
 " Add :Grepper for async
 " let g:grepper.tools = ['rg', 'git', 'grep']
 " Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
