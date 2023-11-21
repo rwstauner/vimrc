@@ -313,15 +313,6 @@ nnoremap <F12> :GundoToggle<CR>
 
 " }}}
 " [ file browser ] {{{
-" [ netrw ] (built-in) {{{
-
-let g:netrw_home         = s:cache
-let g:netrw_liststyle    = 3  " Use tree-mode as default view
-let g:netrw_browse_split = 2  " vsplit
-let g:netrw_preview      = 1  " preview window shown in a vertical split
-let g:netrw_winsize      = 20 " inital size of new browser
-
-" }}}
 " [ nerdtree ] {{{
 
 let g:NERDTreeCasadeOpenSingleChildDir  = 1
