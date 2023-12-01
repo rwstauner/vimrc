@@ -9,6 +9,9 @@ endif
 let g:netrw_alto         = 0  " open preview at top-left
 let g:netrw_browse_split = 2  " 1 h, 2 vsplit
 
+" default                  "noma nomod nonu nowrap ro nobl"
+let g:netrw_bufsettings  = "noma nomod   nu nowrap ro nobl winfixwidth foldcolumn=0"
+
 let g:netrw_fastbrowse   = 2 " only obtain dir when not previously seen
 let g:netrw_home         = g:cache_prefix . "netrw"
 let g:netrw_liststyle    = 3  " Use tree-mode as default view
@@ -71,12 +74,6 @@ let g:Netrw_UserMaps = [
   \ ["<S-Up>", "NetrwShiftUp"],
   \ ]
 
-fun! NetrwBufEnter()
-  if &ft == "netrw"
-    setl winfixwidth
-  endif
-endfun
-
 " Keep explorer window open at specified width. {{{
 let s:netrw_width = 30
 
@@ -98,6 +95,5 @@ fun! NetrwWinResized()
   endfor
 endfun
 
-au BufEnter * call NetrwBufEnter()
 au WinResized * call NetrwWinResized()
 " }}}
