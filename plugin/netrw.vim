@@ -3,11 +3,12 @@ if g:editor_only
 endif
 
 " CR shrinks other windows (wincmd |), v does not.
+" Instead use the "preview" functionality to emulate NERDTree.
 
 " Netrw Browser Control
 
 let g:netrw_alto         = 0  " open preview at top-left
-let g:netrw_browse_split = 2  " 1 h, 2 vsplit
+let g:netrw_browse_split = 4  " 1 h, 2 vsplit, 4 preview (with g:netrw_preview=1 to vsplit)
 
 " default                  "noma nomod nonu nowrap ro nobl"
 let g:netrw_bufsettings  = "noma nomod   nu nowrap ro nobl winfixwidth foldcolumn=0"
@@ -27,16 +28,16 @@ fun! NetrwPostOpen()
     "wincmd J
   "endif
 endfun
-let g:Netrw_funcref      = function("NetrwPostOpen") " func ref to call after opening a file
+"let g:Netrw_funcref      = function("NetrwPostOpen") " func ref to call after opening a file
 
 " Make tab work like p (reuse preview window).
 fun! NetrwTab(isLocal)
-  norm p
-endfun
-
-fun! NetrwCR(isLocal)
-  norm p
-  wincmd p
+  exe "normal \<cr>"
+  " If this was not a directory
+  if getline(".") !~ "/$"
+    " We just switched focus to the new window, so switch it back to the explorer.
+    wincmd w
+  endif
 endfun
 
 fun! NetrwI(isLocal)
@@ -68,7 +69,6 @@ endfun
 
 let g:Netrw_UserMaps = [
   \ ["<tab>", "NetrwTab"],
-  \ ["<cr>", "NetrwCR"],
   \ ["i", "NetrwI"],
   \ ["<S-Down>", "NetrwShiftDown"],
   \ ["<S-Up>", "NetrwShiftUp"],
