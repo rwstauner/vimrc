@@ -75,25 +75,27 @@ let g:Netrw_UserMaps = [
   \ ]
 
 " Keep explorer window open at specified width. {{{
-let s:netrw_width = 30
+if exists('##WinResized')
+  let s:netrw_width = 30
 
-fun! NetrwWinResized()
-  for item in v:event.windows
-    let l:winnr = item['winnr']
-    if getwinvar(l:winnr, "&ft") == "netrw"
-      let l:width = winwidth(l:winnr)
-      " Don't save if it's too large (or too small).
-      if l:width < (&columns/4) && l:width > 10
-        let s:netrw_width = l:width
-      else
-        let l:ei = &ei
-        let &ei = 'WinResized'
-        exe "vertical " . l:winnr . "resize " . s:netrw_width
-        let &ei = l:ei
+  fun! NetrwWinResized()
+    for item in v:event.windows
+      let l:winnr = item['winnr']
+      if getwinvar(l:winnr, "&ft") == "netrw"
+        let l:width = winwidth(l:winnr)
+        " Don't save if it's too large (or too small).
+        if l:width < (&columns/4) && l:width > 10
+          let s:netrw_width = l:width
+        else
+          let l:ei = &ei
+          let &ei = 'WinResized'
+          exe "vertical " . l:winnr . "resize " . s:netrw_width
+          let &ei = l:ei
+        endif
       endif
-    endif
-  endfor
-endfun
+    endfor
+  endfun
 
-au WinResized * call NetrwWinResized()
+  au WinResized * call NetrwWinResized()
+endif
 " }}}
