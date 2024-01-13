@@ -1,3 +1,16 @@
+if exists("g:vscode")
+  " vim/tmux nav
+  nmap <S-Left>  <c-w>h
+  nmap <S-Right> <c-w>l
+  nmap <S-Up>    <c-w>k
+  nmap <S-Down>  <c-w>j
+
+  " nmap <c-e><Cmd-e>
+  " nmap <c-y><Cmd-y>
+
+  finish
+endif
+
 " [ vim-tmux-navigatior ] {{{
 
 let g:tmux_navigator_no_mappings = 1
