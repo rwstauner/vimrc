@@ -153,7 +153,7 @@ function SurroundTill(r, ...) range
   endif
 endfunction
 
-function <SID>SpaceLines() range
+function SpaceLines() range
   let l:pos = getpos(".")
   exe "norm " . a:firstline . "GO" . (a:lastline + 1) . "Go"
   let l:pos[1] += 1
@@ -187,4 +187,4 @@ nnoremap <silent> <Leader>V   :call InBetween("v",1)<CR>
 nnoremap <silent> <Leader>y   :call InBetween("y",0)<CR>
 nnoremap <silent> <Leader>Y   :call InBetween("y",1)<CR>
 
-nnoremap <Leader>o :call <SID>SpaceLines()<CR>
+nnoremap <Leader>o :call SpaceLines()<CR>
