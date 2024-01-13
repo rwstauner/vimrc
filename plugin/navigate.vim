@@ -9,6 +9,9 @@ if exists("g:vscode")
   " nmap <c-y><Cmd-y>
 
   finish
+elseif exists("g:idea")
+  " TODO: something, probably
+  finish
 endif
 
 " [ vim-tmux-navigatior ] {{{

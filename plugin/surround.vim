@@ -2,6 +2,10 @@
 
 " For 'tpope/vim-surround':
 
+if exists("g:idea")
+  set surround
+endif
+
 " Don't make me reach for `y`.
 nmap S ys
 
