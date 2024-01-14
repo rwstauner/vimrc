@@ -36,6 +36,9 @@ Opt wsdjeg/vim-fetch
 " Enable consistent vim/tmux split navigation keys.
 Opt christoomey/vim-tmux-navigator
 
+" Use .editorconfig files.  Not necessary for neovim.
+Opt editorconfig/editorconfig-vim
+
 call minpac#clean()
 call minpac#update()
 

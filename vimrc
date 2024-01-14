@@ -231,13 +231,6 @@ Plug 'tpope/vim-projectionist'
 " more powerful % matching?
 "runtime macros/matchit.vim
 
-" editorconfig {{{
-" alternative: sgur/vim-editorconfig
-Plug 'editorconfig/editorconfig-vim'
-" Overwrite filetype.
-autocmd BufWinEnter .editorconfig set filetype=cfg
-" }}}
-
 " Disable the tmux escape sequence wrapper as it seems unnecessary in my usual env.
 let g:bracketed_paste_tmux_wrap = 0
 Plug 'ConradIrwin/vim-bracketed-paste'
