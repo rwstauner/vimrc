@@ -1,16 +1,10 @@
-if exists("g:vscode")
+if exists("g:vscode") || exists("g:idea")
   " vim/tmux nav
   nmap <S-Left>  <c-w>h
   nmap <S-Right> <c-w>l
   nmap <S-Up>    <c-w>k
   nmap <S-Down>  <c-w>j
 
-  " nmap <c-e><Cmd-e>
-  " nmap <c-y><Cmd-y>
-
-  finish
-elseif exists("g:idea")
-  " TODO: something, probably
   finish
 endif
 
