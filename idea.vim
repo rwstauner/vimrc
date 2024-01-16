@@ -7,6 +7,8 @@ endif
 
 let g:editor_only = exists("g:idea")
 
+source ~/.vimrc
+
 " There is no runtimepath so we source these directly.
 fun! HomePlug(name)
   exe "source ~/.vim/plugin/" . a:name . ".vim"

@@ -116,6 +116,10 @@ if s:nvim
   call add(g:map_prefixes, "t")
 endif
 
+if exists("g:idea")
+  finish
+endif
+
 " Don't load other language syntax files when editing vim files.
 let g:vimsyn_embed = 0 "  'pP' => p: perl, P: python
 
