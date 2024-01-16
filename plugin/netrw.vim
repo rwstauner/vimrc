@@ -1,7 +1,3 @@
-if exists("g:idea")
-  set NERDTree
-endif
-
 if g:editor_only
   finish
 endif

@@ -18,5 +18,7 @@ command! -nargs=1 HomePlug :call HomePlug(<q-args>)
 
 HomePlug comments
 HomePlug navigate
-HomePlug netrw
 HomePlug surround
+
+" Running :NERDTree will activate additional key navigation in the file explorer bar.
+set NERDTree
