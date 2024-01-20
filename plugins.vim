@@ -30,6 +30,9 @@ Opt junegunn/vim-easy-align
 " toggle comment state with gc<motion>
 Opt tpope/vim-commentary
 
+" Read .projections.json for file type metadata.
+Opt tpope/vim-projectionist
+
 " Open "file:line" as file at line.
 Opt wsdjeg/vim-fetch
 
