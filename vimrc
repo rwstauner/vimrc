@@ -223,11 +223,6 @@ MapCommand s Start
 " more powerful % matching?
 "runtime macros/matchit.vim
 
-" Disable the tmux escape sequence wrapper as it seems unnecessary in my usual env.
-let g:bracketed_paste_tmux_wrap = 0
-Plug 'ConradIrwin/vim-bracketed-paste'
-
-
 " TODO: consider these:
 " https://github.com/zaiste/vimified
 " https://github.com/mutewinter/dot_vim
