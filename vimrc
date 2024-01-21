@@ -604,26 +604,6 @@ let use_xhtml = 1
 let html_use_css = 1
 let html_no_pre = 1
 
-" load man pages in another window {{{
-
-"give me the Man command (but I'll just use the one that comes with)
-if exists(":Man") != 2
-	com -nargs=+ Man call ManDelay(<f-args>)
-	function ManDelay (cmd)
-		let manplugin = expand("$VIMRUNTIME/ftplugin/man.vim")
-		if filereadable(manplugin)
-			echo "loading Man plugin..."
-			delcommand Man
-			exe "source " . manplugin
-			exe "Man " . a:cmd
-		else
-			echoe "Man plugin not found"
-		endif
-	endfunction
-end
-
-" }}}
-
 " highlight conflict markers
 au BufReadPost * call matchadd("ErrorMsg", '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$')
 " highlight todo messages in any syntax (but not "doToDonut")
