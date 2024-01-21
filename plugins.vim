@@ -42,6 +42,9 @@ Opt christoomey/vim-tmux-navigator
 " Use .editorconfig files.  Not necessary for neovim.
 Opt editorconfig/editorconfig-vim
 
+" More advanced status line.
+Opt millermedeiros/vim-statline
+
 call minpac#clean()
 call minpac#update()
 

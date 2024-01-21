@@ -170,11 +170,13 @@ autocmd BufWinEnter * setlocal formatoptions -=o
 " }}}
 " [ statusline ] {{{
 
-function! StatusLineFileAttr()
-  return "(ft=" . &filetype . " fenc=" . &fileencoding . (&fileformat != "unix" ? " ff=" . &fileformat : "") . ")"
-endfunction
-" don't want stl=%!func() b/c it re-evaluates with each C-W (and vars get confused)
-set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(%l/%L,%c%V%)\ %P
+if !g:editor_only
+  function! StatusLineFileAttr()
+    return "(ft=" . &filetype . " fenc=" . &fileencoding . (&fileformat != "unix" ? " ff=" . &fileformat : "") . ")"
+  endfunction
+  " don't want stl=%!func() b/c it re-evaluates with each C-W (and vars get confused)
+  set statusline=%<%f\ \ %{StatusLineFileAttr()}\ \ %h%m%r\ %=\ buf#%n\ \ %-14.(L%l/%L:C%c%V%)\ %P
+endif
 
 " }}}
 " [ runtimepath ] {{{
@@ -544,23 +546,6 @@ Plug 'w0rp/ale'
 " let test#strategy = "dispatch" " use quickfix
 Plug 'janko/vim-test'
 
-" [ statline ] override statusline with something more powerful {{{
-
-" TODO: compare to https://github.com/Lokaltog/vim-powerline
-let g:statline_fugitive = 1
-let g:statline_show_charcode = 0
-let g:statline_show_n_buffers = 1
-let g:statline_show_encoding = 1
-let g:statline_no_encoding_string = 'ascii'
-let g:statline_filename_relative = 1
-let g:statline_trailing_space = 1
-let g:statline_mixed_indent = 1
-let g:statline_rvm = 0
-let g:statline_rbenv = 0
-let g:statline_syntastic = 0
-Plug 'millermedeiros/vim-statline'
-
-" }}}
 " [ slime ] pass vim text to a repl via terminal multiplexer {{{
 
 if $MULTIPLEXER != ""
