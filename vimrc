@@ -187,9 +187,6 @@ command! ShowRunTimePath echo substitute(&rtp, ',', "\n", 'g')
 " keep ~/.vim ahead of bundles in the list
 command! -bar FixRunTimePath set rtp -=$HOME/.vim rtp ^=$HOME/.vim
 
-" dump misc. downloaded files in here instead of $HOME/.vim
-set rtp ^=$HOME/.vim/unbundled rtp +=$HOME/.vim/unbundled/after
-
 " }}}
 command! -nargs=+ MapCommand call MapCommand(<f-args>)
 function MapCommand(key, cmd)
