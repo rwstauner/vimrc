@@ -344,34 +344,6 @@ let &grepprg = "rg -H --no-heading --vimgrep $* \\| perl -e 'sub _ { $_[0] =~ s/
 " let g:grepper.tools = ['rg', 'git', 'grep']
 " Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
-" [ perl ] {{{
-
-" syntax and ftplugin files for perl (plus pod, tt2...)
-" include sql for tt2 queries
-Plug 'vim-perl/vim-perl', { 'for': ['perl', 'pod', 'tt2', 'tt2html', 'sql'] }
-
-" syntax files for CPAN::Changes
-Plug 'rwstauner/vim-cpanchanges', { 'for': 'cpanchanges' }
-
-" enable :Perldoc command (via Pod::Simple::Vim)
-"let g:Perldoc_path = s:cache . '/perldoc/'
-"Plug 'PERLDOC2'
-
-" enable :Perldoc command (via perldoc command plus vim parsing)
-"Plug 'Perldoc.vim'
-
-" prove the current file and put colored results in a special window
-"Plug 'motemen/tap-vim'
-
-" enable :make to run prove and put test failures in the quickfix
-Plug 'vim-scripts/perlprove.vim', { 'for': 'perl' }
-  au BufRead,BufNewFile *.t set filetype=perl | compiler perlprove
-
-runtime macros/stub_perl_mod.vim
-
-" https://github.com/yko/mojo.vim
-
-" }}}
 " [ filetypes ] {{{
 
 let g:go_def_mode='gopls'
@@ -683,7 +655,6 @@ command! -nargs=1 -bang -complete=expression Put call append(line(".") - ('<bang
 
 call SetupCommandAlias("Set", "set")
 call SetupCommandAlias("Echo", "echo")
-command -nargs=1 -range				PerlDo 	call PerlDo(<q-args>)
 command -nargs=1 -complete=file 	Rename 	call RenameCurrent(<q-args>)
 command -nargs=+ -range 			CommentSection call CommentSection(<f-args>)
 
@@ -941,21 +912,6 @@ function LoadSyntax(...)
 	unlet b:current_syntax
 	exe "runtime! syntax/" . l:syn . ".vim"
 	let b:current_syntax = l:bcs
-endfunction
-
-function PerlDo(pl) range
-  "let l:oldpaste = &paste
-  set paste
-	norm `>ak
-	let l2 = line('.') + 1 " next we'll drop them all down by one
-	norm `<i
-	let l1 = line('.')
-	exe l1 . "," . l2 . "perldo " . a:pl
-	exe l2
-	norm gJ
-	exe l1
-	norm kgJ
-  set nopaste
 endfunction
 
 function RenameCurrent(name)

@@ -45,6 +45,11 @@ Opt editorconfig/editorconfig-vim
 " More advanced status line.
 Opt millermedeiros/vim-statline
 
+" perl
+"Add vim-perl/vim-perl
+Add rwstauner/vim-cpanchanges
+Add vim-scripts/perlprove.vim
+
 call minpac#clean()
 call minpac#update()
 
