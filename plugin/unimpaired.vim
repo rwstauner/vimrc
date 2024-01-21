@@ -3,3 +3,7 @@ if g:editor_only
 endif
 
 packadd vim-unimpaired
+
+" With <Leader> open a split for the next tag.
+nmap <Leader>[t :sp +tN<CR>
+nmap <Leader>]t :sp +tn<CR>

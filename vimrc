@@ -597,13 +597,6 @@ call plug#end()
 FixRunTimePath
 " }}}
 
-" [ tags ] {{{
-
-"set tags+=~/.vim/tags/ptags " cpan: Vim::Tags
-nmap <Leader>[t :sp +tN<CR>
-nmap <Leader>]t :sp +tn<CR>
-
-" }}}
 " [ misc ]
 
 "for TOhtml
