@@ -17,15 +17,6 @@ set t_%i=[1;5C
 
 " Arrow keys: UDRL => ABCD
 
-" <C-Up> <C-Down> (like ctrl-e/y but with one hand)
-if has('nvim')
-  nnoremap <C-Up> <C-y>
-  nnoremap <C-Down> <C-e>
-else
-  nnoremap [1;5A <C-y>
-  nnoremap [1;5B <C-e>
-endif
-
 " compatibility with shell movement (and/or when i wrongfully hold shift)
 " Ctrl-arrow (C-Left C-Right) moves across words.
 nnoremap [1;5C w

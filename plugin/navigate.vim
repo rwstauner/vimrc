@@ -1,3 +1,12 @@
+" <C-Up> <C-Down> (like ctrl-e/y but with one hand)
+if has('nvim') || has('ide')
+  nnoremap <C-Up> <C-y>
+  nnoremap <C-Down> <C-e>
+else
+  nnoremap [1;5A <C-y>
+  nnoremap [1;5B <C-e>
+endif
+
 if exists("g:vscode") || exists("g:idea")
   " vim/tmux nav
   nmap <S-Left>  <c-w>h
