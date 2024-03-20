@@ -1,6 +1,6 @@
 " Read .projections.json for file type metadata.
 
-if !filereadable('.projections.json')
+if !filereadable('.projections.json') && empty(g:projectionist_heuristics)
   finish
 endif
 

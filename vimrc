@@ -192,6 +192,16 @@ endfunction
 MapCommand m make
 " [ plugins ] {{{
 
+" [ projectionist ] {{{
+
+" Setup the global var once so that any other files can just call extend().
+if !exists("g:projectionist_heuristics")
+  let g:projectionist_heuristics = {}
+endif
+" The rest is done in plugin/projectionist.vim
+
+" }}}
+
 " [filetype] {{{
 if !exists("*plug#begin")
   filetype off " turn off to load plugins (we turn it on later)
