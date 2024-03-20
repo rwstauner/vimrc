@@ -4,7 +4,7 @@
 /plugged/
 /pack
 
-/macros/local_before.vim
+/local.vim
 /tags/ptags
 
 .netrwhist

@@ -14,9 +14,11 @@ if version < 700
   echoerr "this vimrc requires vim 7"
 endif
 
-if filereadable(expand("$HOME/.vim/macros/local_before.vim"))
-  runtime macros/local_before.vim
+let local_vimrc = expand("$HOME/.vim/local.vim")
+if filereadable(local_vimrc)
+  exe "source " . local_vimrc
 endif
+unlet local_vimrc
 
 let g:cache_prefix = expand("$HOME/.cache/" . (has('nvim') ? 'n' : '') . "vim-")
 let s:cache = g:cache_prefix . "cache"
