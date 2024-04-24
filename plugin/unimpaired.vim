@@ -1,3 +1,8 @@
+if exists("g:vscode")
+  nmap [a :call VSCodeNotify("workbench.action.previousEditor")<CR>
+  nmap ]a :call VSCodeNotify("workbench.action.nextEditor")<CR>
+endif
+
 if g:editor_only
   finish
 endif
