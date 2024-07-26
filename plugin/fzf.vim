@@ -45,10 +45,12 @@ inoremap <expr> <c-x><c-w> fzf#vim#complete#word({'window': { 'width': 0.2, 'hei
 " Insert mote completion of files.
 inoremap <expr> <c-x><c-g> fzf#vim#complete#path('rg --files')
 
-nnoremap <C-t> :FZFBLines<CR>
-nmap <leader><C-f> <plug>(fzf-maps-n)
-xmap <leader><C-f> <plug>(fzf-maps-x)
-omap <leader><C-f> <plug>(fzf-maps-o)
+nnoremap <leader><C-b> :FZFBLines<CR>
+nnoremap <leader><C-l> :FZFLines<CR>
+nnoremap <leader><C-t> :exe "FZFTags " expand("<cword>")<CR>
+nmap <leader><C-m> <plug>(fzf-maps-n)
+xmap <leader><C-m> <plug>(fzf-maps-x)
+omap <leader><C-m> <plug>(fzf-maps-o)
 
 function! FZFInsert()
   return trim(system("fzf-tmux -p -"))
