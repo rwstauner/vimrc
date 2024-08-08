@@ -66,7 +66,7 @@ set   listchars=tab:▸\ ,extends:⇢,precedes:⇠,nbsp:▣,trail:▫ "eol:¬, "
 set   magic        " too bad there's no set verymagic (but good for compatibility)
 set   matchpairs+=<:>
 set   modeline     " ensure modelines are honored
-let &more = has('nvim') " vim and tmux get along, but with nvim+tmux i can't scroll, need the prompts to see the top
+set   more         " page large output so that the top doesn't drop off the alternate screen
 set   nrformats=octal,hex,alpha
 set   number       " show line numbers
 "set   path+=./**   " search for files anywhere below current file's parent dir
