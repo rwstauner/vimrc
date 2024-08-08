@@ -10,5 +10,5 @@ setlocal display -=uhex
 let g:vim_indent_cont = &sw
 
 " execute command(s) under cursor
-nnoremap <Leader>: yyq:p<CR>
-vnoremap <Leader>: "vy:exe getreg('v')<CR>
+nnoremap <buffer> <Leader>: yyq:p<CR>
+vnoremap <buffer> <Leader>: "vy:exe getreg('v')<CR>
