@@ -67,6 +67,7 @@ set   magic        " too bad there's no set verymagic (but good for compatibilit
 set   matchpairs+=<:>
 set   modeline     " ensure modelines are honored
 set   more         " page large output so that the top doesn't drop off the alternate screen
+set   mouse=       " disable mouse
 set   nrformats=octal,hex,alpha
 set   number       " show line numbers
 "set   path+=./**   " search for files anywhere below current file's parent dir
