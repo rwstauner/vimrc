@@ -45,6 +45,9 @@ Opt editorconfig/editorconfig-vim
 " More advanced status line.
 Opt millermedeiros/vim-statline
 
+" Common configurations for various LSP's,
+Opt neovim/nvim-lspconfig
+
 " perl
 "Add vim-perl/vim-perl
 Add rwstauner/vim-cpanchanges
