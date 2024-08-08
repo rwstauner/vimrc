@@ -38,7 +38,7 @@ function MatchPair( character )
 endfunction
 
 " Find text between characters and perform command on it.
-" args: grab-command ([dxy]), inclusive, leftside, rightside
+" args: grab-command ([cdvxy]), inclusive, leftside, rightside
 function InBetween(cmd, inclusive, ...)
   let cmd = ( a:cmd != "" ? a:cmd : nr2char( getchar() ) )
   if a:inclusive
@@ -176,15 +176,5 @@ vnoremap <silent> <Leader>s   :call SurroundSelection()<CR>
 " b takes the next character (c, d, x, y, v)
 nnoremap <silent> <Leader>b   :call InBetween("",0)<CR>
 nnoremap <silent> <Leader>B   :call InBetween("",1)<CR>
-nnoremap <silent> <Leader>c   :call InBetween("c",0)<CR>
-nnoremap <silent> <Leader>C   :call InBetween("c",1)<CR>
-nnoremap <silent> <Leader>d   :call InBetween("d",0)<CR>
-nnoremap <silent> <Leader>D   :call InBetween("d",1)<CR>
-nnoremap <silent> <Leader>x   :call InBetween("x",1)<CR>
-nnoremap <silent> <Leader>X   :call InBetween("x",0)<CR>
-nnoremap <silent> <Leader>v   :call InBetween("v",0)<CR>
-nnoremap <silent> <Leader>V   :call InBetween("v",1)<CR>
-nnoremap <silent> <Leader>y   :call InBetween("y",0)<CR>
-nnoremap <silent> <Leader>Y   :call InBetween("y",1)<CR>
 
 nnoremap <Leader>o :call SpaceLines()<CR>

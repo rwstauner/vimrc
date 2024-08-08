@@ -815,12 +815,12 @@ nmap <Leader>h! 		A --><Esc>I<!-- <Esc>l
 
 " TODO: fix these to use text objects
 "upper and lower case current word or selection
-nmap <Leader>u 			wgUbe
-nmap <Leader>l 			wgube
-nmap <Leader>U 			WgUBE
-nmap <Leader>L 			WguBE
-vmap <Leader>u 			<Esc>`>gUlgU`<
-vmap <Leader>l 			<Esc>`>gulgu`<
+nmap <Leader>cu wgUbe
+nmap <Leader>cl wgube
+nmap <Leader>cU WgUBE
+nmap <Leader>cL WguBE
+vmap <Leader>cu <Esc>`>gUlgU`<
+vmap <Leader>cl <Esc>`>gulgu`<
 
 "clone(gemini) current character,word,selection
 nmap <Leader>gc			ylp
