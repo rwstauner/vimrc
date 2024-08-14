@@ -34,7 +34,8 @@ hi Todo         gui=bold cterm=bold  guifg=white ctermfg=white  guibg=#9595fb ct
 " regular highlight groups
 
 " 'colorcolumn'
-hi ColorColumn  guibg=#262626 ctermbg=235
+" set cterm=none to undo cterm=reverse
+hi ColorColumn  guibg=#262626 ctermbg=235 cterm=none
 
 "hi Cursor      the character under the cursor
 "hi CursorIM
