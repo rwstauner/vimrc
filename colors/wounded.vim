@@ -49,6 +49,9 @@ hi DiffText     guibg=#87005f ctermbg=89
 
 hi ErrorMsg     gui=bold cterm=bold  guifg=white ctermfg=white  guibg=#ff5555 ctermbg=red
 "hi VertSplit   the column separating vertically split windows
+"
+hi FloatBorder  guifg=#55ffff ctermfg=cyan  guibg=#3a3a3a ctermbg=237
+
 hi Folded       guifg=black ctermfg=black  guibg=#64caca ctermbg=darkcyan
 
 hi FoldColumn   guifg=#55ffff ctermfg=cyan  guibg=#3a3a3a ctermbg=237
