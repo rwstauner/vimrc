@@ -53,6 +53,8 @@ Opt neovim/nvim-lspconfig
 Add rwstauner/vim-cpanchanges
 Add vim-scripts/perlprove.vim
 
+Add hashivim/vim-terraform
+
 call minpac#clean()
 call minpac#update()
 
