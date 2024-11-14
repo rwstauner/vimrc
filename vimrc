@@ -106,6 +106,10 @@ if s:nvim
   let $EDITOR = $VISUAL
 endif
 
+" Need to put this in the front so that it is checked before the "%f:%l:%c" in
+" the middle.
+let &errorformat = '%+G%.%#\ at\ %f:%l:%c,%+G%.%#\ at\ %f:%l,' . &errorformat
+
 " }}}
 
 let g:map_prefixes = ["n", "c", "o", "x", "s", "v", "l", "i"]
