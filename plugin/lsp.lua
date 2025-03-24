@@ -1,3 +1,7 @@
+if vim.g.editor_only == 1 then
+  return
+end
+
 vim.api.nvim_command('packadd nvim-lspconfig')
 
 local lspconfig = require('lspconfig')
