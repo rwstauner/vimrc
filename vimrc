@@ -827,13 +827,10 @@ nmap <Leader>cL WguBE
 vmap <Leader>cu <Esc>`>gUlgU`<
 vmap <Leader>cl <Esc>`>gulgu`<
 
-"clone(gemini) current character,word,selection
-nmap <Leader>gc			ylp
-nmap <Leader>gw			wbywep
-nmap <Leader>gW			WByWEp
-vmap <Leader>g 			y`>p
-"search for the current selection ('as is')
-vmap <Leader>/ 			yq/p0i\V
+" search buffer for the current selection ('as is')
+vmap <Leader>/ yq/p0i\V
+" :grep for the current selection
+vmap <Leader>g yq:igrep <Esc>p
 
 " Ovid: show first commit where term under cursor was added
 " http://twitter.com/OvidPerl/status/28395223746875392
