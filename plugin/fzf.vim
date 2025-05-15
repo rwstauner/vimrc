@@ -28,10 +28,11 @@ let g:fzf_command_prefix = 'FZF'
 " In FZF use <C-n> / <C-p> for next/prev search history.
 let g:fzf_history_dir = '~/.local/cache/vim-fzf-history'
 
-" if have('nvim') && !exists('g:fzf_layout')
-"   autocmd FileType fzf setl ...
-"     \| autocmd BufLeave <buffer> setl back...
-" endif
+if has('nvim') && !exists('g:fzf_layout')
+  " autocmd FileType fzf setl ...
+  "   \| autocmd BufLeave <buffer> setl back...
+  autocmd FileType fzf tnoremap <buffer> <Esc> <c-c>
+endif
 
 " After global settings.
 packadd fzf
