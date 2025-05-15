@@ -22,39 +22,41 @@ let g:fzf_action = {
 
 let g:fzf_command_prefix = 'FZF'
 
-" FZFRg ... " Use rg to populate FZF list.
-" :FZFCommands " To see all available lists.
-
 " In FZF use <C-n> / <C-p> for next/prev search history.
 let g:fzf_history_dir = '~/.local/cache/vim-fzf-history'
 
-if has('nvim') && !exists('g:fzf_layout')
-  " autocmd FileType fzf setl ...
-  "   \| autocmd BufLeave <buffer> setl back...
-  autocmd FileType fzf tnoremap <buffer> <Esc> <c-c>
-endif
-
 " After global settings.
-packadd fzf
-packadd fzf.vim
+try
+  packadd fzf
+  packadd fzf.vim
 
-if exists(":" . g:fzf_command_prefix . "Maps")
+  " FZFRg ... " Use rg to populate FZF list.
+  " :FZFCommands " To see all available lists.
+
+  if has('nvim') && !exists('g:fzf_layout')
+    " autocmd FileType fzf setl ...
+    "   \| autocmd BufLeave <buffer> setl back...
+    autocmd FileType fzf tnoremap <buffer> <Esc> <c-c>
+  endif
+
   for map_type in g:map_prefixes
     exe 'command! -bar -bang ' . g:fzf_command_prefix . 'Maps' . map_type . ' call fzf#vim#maps("' . map_type . '", <bang>0)'
   endfor
-endif
 
-" Insert mode completion of dictionary words.
-inoremap <expr> <c-x><c-w> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
-" Insert mote completion of files.
-inoremap <expr> <c-x><c-g> fzf#vim#complete#path('rg --files')
+  " Insert mode completion of dictionary words.
+  inoremap <expr> <c-x><c-w> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
+  " Insert mote completion of files.
+  inoremap <expr> <c-x><c-g> fzf#vim#complete#path('rg --files')
 
-nnoremap <leader>fb :FZFBLines<CR>
-nnoremap <leader>fl :FZFLines<CR>
-nnoremap <leader>ft :exe "FZFTags " expand("<cword>")<CR>
-nmap <leader>fm <plug>(fzf-maps-n)
-xmap <leader>fm <plug>(fzf-maps-x)
-omap <leader>fm <plug>(fzf-maps-o)
+  nnoremap <leader>fb :FZFBLines<CR>
+  nnoremap <leader>fl :FZFLines<CR>
+  nnoremap <leader>ft :exe "FZFTags " expand("<cword>")<CR>
+  nmap <leader>fm <plug>(fzf-maps-n)
+  xmap <leader>fm <plug>(fzf-maps-x)
+  omap <leader>fm <plug>(fzf-maps-o)
+catch /:E919:/ " plugin not found
+  " ignore
+endtry
 
 " Poor man's :FZFFiles
 if exists("*termopen")
