@@ -56,8 +56,36 @@ nmap <leader>fm <plug>(fzf-maps-n)
 xmap <leader>fm <plug>(fzf-maps-x)
 omap <leader>fm <plug>(fzf-maps-o)
 
-function! FZFInsert()
-  return trim(system("fzf-tmux -p -"))
-endfunction
+" Poor man's :FZFFiles
+if exists("*termopen")
+  function! FZFSplit()
+    let $VIM_FZF_OUT = tempname()
+    new
+    setlocal nonu foldcolumn=0
+    au! TermClose <buffer> call FZFSplitFinish()
+    call termopen("fzf" . &shellpipe . " " . $VIM_FZF_OUT)
+    startinsert
+  endfunction
 
-cnoremap <C-F> <C-R>=FZFInsert()<CR>
+  function! FZFSplitFinish()
+    let out = readfile($VIM_FZF_OUT)
+    call delete($VIM_FZF_OUT)
+    let $VIM_FZF_OUT = v:null
+    exe "edit " out[0]
+    filetype detect
+  endfunction
+
+  command! FZFSplit call FZFSplit()
+endif
+
+" The fzf-tmux popup window is very nice but not always available.
+if exists("$TMUX") && system("command -v fzf-tmux") != ""
+  function! FZFInsert()
+    return trim(system("fzf-tmux -p -"))
+  endfunction
+  cnoremap <C-F> <C-R>=FZFInsert()<CR>
+else
+  " This will delete any prefix on the command line (like "sp ")
+  " but it's the way I'm used to activating it.
+  cnoremap <C-F> <C-U>call FZFSplit()<CR>
+endif
