@@ -27,9 +27,6 @@ let g:fzf_command_prefix = 'FZF'
 
 " In FZF use <C-n> / <C-p> for next/prev search history.
 let g:fzf_history_dir = '~/.local/cache/vim-fzf-history'
-for map_type in g:map_prefixes
-  exe 'command! -bar -bang ' . g:fzf_command_prefix . 'Maps' . map_type . ' call fzf#vim#maps("' . map_type . '", <bang>0)'
-endfor
 
 " if have('nvim') && !exists('g:fzf_layout')
 "   autocmd FileType fzf setl ...
@@ -39,6 +36,12 @@ endfor
 " After global settings.
 packadd fzf
 packadd fzf.vim
+
+if exists(":" . g:fzf_command_prefix . "Maps")
+  for map_type in g:map_prefixes
+    exe 'command! -bar -bang ' . g:fzf_command_prefix . 'Maps' . map_type . ' call fzf#vim#maps("' . map_type . '", <bang>0)'
+  endfor
+endif
 
 " Insert mode completion of dictionary words.
 inoremap <expr> <c-x><c-w> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
