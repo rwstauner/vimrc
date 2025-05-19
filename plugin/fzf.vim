@@ -65,7 +65,7 @@ if exists("*termopen")
     new
     setlocal nonu foldcolumn=0
     au! TermClose <buffer> call FZFSplitFinish()
-    call termopen("fzf" . &shellpipe . " " . $VIM_FZF_OUT)
+    call termopen("fzf " . &shellpipe . " " . $VIM_FZF_OUT)
     startinsert
   endfunction
 
