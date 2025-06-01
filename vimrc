@@ -20,8 +20,6 @@ let s:cache = g:cache_prefix . "cache"
 " [ encoding ] {{{
 
 set     encoding=utf-8
-set termencoding=utf-8
-
 " this should be the default (with LANG=en_US.utf-8)
 setglobal fileencodings=ucs-bom,utf-8,default,latin1
 
