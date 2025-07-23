@@ -21,4 +21,4 @@ update-minpac:
 	(cd $(MINPAC) && git pull)
 
 plugins: $(MINPAC)
-	vim -c 'source plugins.vim' +qall
+	vim -c 'source plugins.vim'
