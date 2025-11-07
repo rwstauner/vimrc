@@ -5,7 +5,13 @@ end
 vim.api.nvim_command('packadd nvim-lspconfig')
 
 local lspconfig = require('lspconfig')
-lspconfig.clangd.setup({})
+lspconfig.clangd.setup({
+  on_attach = function(client, bufnr)
+    if vim.tbl_contains({'proto'}, vim.bo.filetype) then
+      client.stop()
+    end
+  end
+})
 lspconfig.ruby_lsp.setup({})
 lspconfig.rust_analyzer.setup({})
 
