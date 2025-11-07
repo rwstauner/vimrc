@@ -828,7 +828,9 @@ vmap <Leader>cl <Esc>`>gulgu`<
 " search buffer for the current selection ('as is')
 vmap <Leader>/ yq/p0i\V
 " :grep for the current selection
-vmap <Leader>g yq:igrep <Esc>p
+vmap <Leader>gg yq:igrep <Esc>p
+" when not selected grep for current word
+nmap <Leader>gg viw<Leader>gg
 
 " Ovid: show first commit where term under cursor was added
 " http://twitter.com/OvidPerl/status/28395223746875392
