@@ -654,7 +654,11 @@ command -nargs=? MaxLineLength call MaxLineLength(<f-args>)
 
 command! ModeLine exe "norm O" . substitute(&cms, ' \?%s', " vim: set ts=2 sts=2 sw=2 expandtab smarttab:", '')
 
-command! -range GitUrl exe "! git url '" . expand("%") . "' " . <line1> . " " . <line2> . " | clip"
+function! GitUrl(...) range
+  let cmd = a:0 == 1 ? "url-of " . a:1 : "url"
+  exe "! git " cmd " '" . expand("%:p") . "' " . a:firstline . " " . a:lastline . " | clip"
+endfunction
+command! -range -nargs=? GitUrl <line1>,<line2>call GitUrl(<f-args>)
 command! GitCleanupCommitMsg :%! perl -pe 'exit 0 if /^\#/'
 command! GitCommitMsgHook exe "GitCleanupCommitMsg" | Git maybe commit-msg-hook %
 
